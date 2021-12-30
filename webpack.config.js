@@ -1,73 +1,78 @@
+// const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-  entry: './client/index.tsx',
+const config = {
+  entry: ['react-hot-loader/patch', './src/index.tsx'],
   output: {
-    path: path.join(__dirname, 'public'),
-    // publicPath: '/public/',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
-  resolve:{
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
-  },
-  plugins: [
-    new HtmlWebpackPlugin(
-    {
-      template: './index.html',
-      inject: true
-    }),
-  ],
-  mode: "development",
   module: {
     rules: [
       {
-        test: /\.(t|j)sx?$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'ts-loader',
-        },
-          // options: {
-          //   presets: ['@babel/preset-env', '@babel/preset-react']
-          // }
-        //}
+        test: /\.(js|jsx)$/,
+        use: 'babel-loader',
+        exclude: /node_modules/,
       },
       {
-        enforce: "pre", test: /|.js$/,
-        exclude: /node_modules/, 
-        loader: "source-map-loader" 
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.s[ac]ss$/i,
-        exclude: /(node_modules)/,
-        use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
-        ]
+        test: /\.ts(x)?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.svg$/,
+        use: 'file-loader',
+      },
+      {
+        test: /\.png$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
+            options: {
+              mimetype: 'image/png',
+            },
           },
         ],
       },
-    ]
+    ],
   },
-  devtool: "source-map",
   devServer: {
     host: 'localhost',
     port: 8080,
-    static: './public/',
     proxy: {
-      '/': 'http://localhost:3000'
+      '/': 'http://localhost:3000',
     },
-    compress: true,
-    hot: true
+    static: {
+      directory: './dist',
+    },
+  },
+  devtool: 'source-map',
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     templateContent: ({ htmlWebpackPlugin }) =>
+  //       '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' +
+  //       htmlWebpackPlugin.options.title +
+  //       '</title></head><body><div id="app"></div></body></html>',
+  //     filename: 'index.html',
+  //   }),
+  // ],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      inject: true,
+    }),
+  ],
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
 };
+
+module.exports = config;
