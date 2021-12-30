@@ -1,0 +1,57 @@
+{
+  "name": "reactrix",
+  "description": "A webapp prototyping performance analytics tool for optimizations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=production node server/server.js",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack serve --open --hot\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/Reactrix.git"
+  },
+  "keywords": [],
+  "author": "Jay Heo, Tyke Lee, Jonathan Tam, Kevin Chung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/Reactrix/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/Reactrix#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "concurrently": "^6.4.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.5.1",
+    "dotenv": "^10.0.0",
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb": "^19.0.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "express": "^4.17.1",
+    "file-loader": "^6.2.0",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack-dev-server": "^4.7.2"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "pg": "^8.7.1",
+    "postgresql": "^0.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
+    "react-redux": "^7.2.6",
+    "recoil": "^0.5.2",
+    "sass": "^1.45.1",
+    "sass-loader": "^12.4.0"
+  }
+}
