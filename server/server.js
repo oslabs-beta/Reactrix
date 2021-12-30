@@ -21,7 +21,7 @@ app.get('/', (req,res) => {
         .status(200)
         .sendFile(path.resolve(__dirname, '../index.html'));
 });
-
+// app.use('/public', express.static(path.join(__dirname, '../public')));
 
 app.use('/api', apiRouter);
 

@@ -12,12 +12,13 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   plugins: [
-    // new HtmlWebpackPlugin(
-    // {
-    //   template: './index.html'
-    // }),
+    new HtmlWebpackPlugin(
+    {
+      template: './index.html',
+      inject: true
+    }),
   ],
-  mode: process.env.NODE_ENV,
+  mode: "development",
   module: {
     rules: [
       {
@@ -25,7 +26,7 @@ module.exports = {
         exclude: /(node_modules)/,
         use: {
           loader: 'ts-loader',
-        }
+        },
           // options: {
           //   presets: ['@babel/preset-env', '@babel/preset-react']
           // }
@@ -62,6 +63,7 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: 8080,
+    static: './public/',
     proxy: {
       '/': 'http://localhost:3000'
     },

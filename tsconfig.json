@@ -9,6 +9,9 @@
       "allowJs": true             // allow a partial TypeScript and JavaScript codebase
 
   },
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
       "./client/", "./server"
   ]
