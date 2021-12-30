@@ -2,30 +2,39 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './client/index.js',
+  entry: './client/index.tsx',
   output: {
     path: path.join(__dirname, 'public'),
     // publicPath: '/public/',
     filename: 'bundle.js',
   },
+  resolve:{
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
+  },
   plugins: [
-    new HtmlWebpackPlugin(
-    {
-      template: './index.html'
-    }),
+    // new HtmlWebpackPlugin(
+    // {
+    //   template: './index.html'
+    // }),
   ],
   mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
-        test: /\.jsx?/,
+        test: /\.(t|j)sx?$/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
+          loader: 'ts-loader',
         }
+          // options: {
+          //   presets: ['@babel/preset-env', '@babel/preset-react']
+          // }
+        //}
+      },
+      {
+        enforce: "pre", test: /|.js$/,
+        exclude: /node_modules/, 
+        loader: "source-map-loader" 
       },
       {
         test: /\.s[ac]ss$/i,
@@ -49,6 +58,7 @@ module.exports = {
       },
     ]
   },
+  devtool: "source-map",
   devServer: {
     host: 'localhost',
     port: 8080,
