@@ -4,3 +4,7 @@
     height: 300px;
     border-radius: 5px;
 }
+#componentLibrary {
+  border: 1px solid black;
+  border-radius: 5px;
+}
