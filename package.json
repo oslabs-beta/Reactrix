@@ -5,9 +5,9 @@
   "main": "./client/index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=production node server/server.js",
+    "start": "cross-env NODE_ENV=production node src/server/server.ts",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development concurrently \"node server/server.js\" \"webpack serve --open --hot\""
+    "dev": "cross-env NODE_ENV=development concurrently \"node src/server/server.ts\" \"webpack serve --open --hot\""
   },
   "repository": {
     "type": "git",
