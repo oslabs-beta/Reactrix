@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader/root';
-import Button from '@material-ui/core/Button';
+import ComponentTree from './containers/ComponentTree';
 import ComponentLibrary from './containers/ComponentLibrary';
 
 import ComponentDetails from './containers/ComponentDetails';
