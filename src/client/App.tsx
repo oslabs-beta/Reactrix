@@ -3,6 +3,8 @@ import { hot } from 'react-hot-loader/root';
 import Button from '@material-ui/core/Button';
 import ComponentLibrary from './containers/ComponentLibrary';
 
+import ComponentDetails from './containers/ComponentDetails';
+
 interface Props {
   message: string;
 }
@@ -13,6 +15,8 @@ const App = ({ message }: Props) => (
       {message}
     </Button>
     <ComponentLibrary message='Hi'/>
+    
+    <ComponentDetails message='theDEETS'/>
   </div>
 );
 

@@ -2,3 +2,18 @@
   border: 1px solid black;
   border-radius: 5px;
 }
+
+
+
+
+
+
+
+#componentDetails{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 300px;
+  height: 500px;
+  position: absolute;
+  right: 10px;
+}
