@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
       color: 'white',
+      fontWeight: 'bold',
     },
     navLinks: {
       marginLeft: theme.spacing(10),
@@ -23,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
     link: {
       textDecoration: 'none',
       color: 'white',
-      fontSize: '20px',
-      marginLeft: theme.spacing(5),
+      fontSize: '14px',
+      marginLeft: theme.spacing(3),
       '&:hover': {
         borderBottom: '0px solid white',
       },
@@ -38,7 +39,7 @@ export default function Navbar(): any {
     <AppBar position='static'>
       <CssBaseline />
       <Toolbar>
-        <Typography variant='h4' className={classes.title}>
+        <Typography variant='h5' className={classes.title}>
           Reactrix
         </Typography>
         <div className={classes.navLinks}>
