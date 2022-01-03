@@ -37,6 +37,7 @@ export default function ComponentLibrary(): any {
   }));
 
   const classes = useStyles();
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer variant='permanent' className={classes.drawer}>
