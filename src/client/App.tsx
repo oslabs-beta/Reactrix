@@ -1,21 +1,23 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader/root';
-import ComponentTree from './containers/ComponentTree';
-import ComponentLibrary from './containers/ComponentLibrary';
-import ComponentDetails from './containers/ComponentDetails';
+import { theme } from './styles/theme';
+import { ThemeProvider } from '@material-ui/core';
+
+import './styles/styles.css';
 
 import Navbar from './components/Navbar';
+import ComponentLibrary from './containers/ComponentLibrary';
+import ComponentTree from './containers/ComponentTree';
+import ComponentDetails from './containers/ComponentDetails';
 
-interface Props {
-  message: string;
-}
-
-const App = ({ message }: Props) => (
+const App = () => (
   <div>
-    <Navbar />
-    <ComponentTree message='Bye' />
-    <ComponentLibrary message='Hi' />
-    <ComponentDetails message='theDEETS'/>
+    <ThemeProvider theme={theme}>
+      <Navbar />
+      <ComponentLibrary />
+      {/* <ComponentTree /> */}
+      {/* <ComponentDetails /> */}
+    </ThemeProvider>
   </div>
 );
 

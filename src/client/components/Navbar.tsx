@@ -12,22 +12,22 @@ import {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+    },
     title: {
       flexGrow: 1,
       color: 'white',
+      fontWeight: 'bold',
     },
     navLinks: {
-      marginLeft: theme.spacing(10),
-      display: 'flex',
+      marginLeft: theme.spacing(3),
     },
     link: {
       textDecoration: 'none',
       color: 'white',
-      fontSize: '20px',
-      marginLeft: theme.spacing(5),
-      '&:hover': {
-        borderBottom: '0px solid white',
-      },
+      fontSize: '14px',
+      marginLeft: theme.spacing(3),
     },
   })
 );
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Navbar(): any {
   const classes = useStyles();
   return (
-    <AppBar position='static'>
+    <AppBar position='fixed' className={classes.appBar}>
       <CssBaseline />
       <Toolbar>
         <Typography variant='h4' className={classes.title}>
