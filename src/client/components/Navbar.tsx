@@ -38,7 +38,7 @@ export default function Navbar(): any {
     <AppBar position='fixed' className={classes.appBar}>
       <CssBaseline />
       <Toolbar>
-        <Typography variant='h4' className={classes.title}>
+        <Typography variant='h5' className={classes.title}>
           Reactrix
         </Typography>
         <div className={classes.navLinks}>
