@@ -19,8 +19,8 @@ import {
 import ComponentTree from './ComponentTree';
 import NewComponent from '../components/NewComponent';
 import ReusableComponents from '../components/ReusableComponents';
-// import {TreeNode} from 'react-drag-hierarchy-tree/src/components';
-import OrgTreeComponent, { useTree } from 'react-drag-hierarchy-tree';
+// import {TreeNode} from '../tree/components';
+import OrgTreeComponent, { useTree } from '../tree';
 
 
 const useStyles = makeStyles((theme: Theme) =>
