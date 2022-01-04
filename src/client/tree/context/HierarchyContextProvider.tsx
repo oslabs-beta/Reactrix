@@ -195,15 +195,18 @@ export function HierarchyContextProvider({
         };
       }
 
+      // adds a node to an empty tree?
       if (!nestedObjectClone.children)
         return nestedObjectClone as INestedObject;
 
+      // recursively searches tree for the dropItem
       const newChildren: INestedObject[] = nestedObjectClone.children.map(
         (child) => {
           return addChildrenById(id, data, child);
         }
       );
-
+      
+      // returns updated HierarchyData
       return {
         ...nestedObjectClone,
         children: newChildren || [],

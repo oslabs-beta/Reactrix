@@ -138,6 +138,7 @@ export const RenderCard = ({
   };
 
   const onDrop = (drag: INestedObject) => {
+    console.log('this is dragItem', drag);
     const dragItem = findById(drag.id); // returns null if id is not found
     const dropItem = data;
     console.log('this is dropItem:', dropItem);

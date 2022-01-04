@@ -35,8 +35,11 @@ Reactrix/src/client/tree/context/HierarchyContextProvider.tsx
   (line 182): added descriptive comment
   (line 189): added descriptive comment
   (line 190): added descriptive comment
-  (line 306): added console.log to identify ID given to FindByID()
-  (line 307): added console.log to identify hierarchyRef.current
-  (line 376): included addChildrenByID to export
+  (line 198): added descriptive comment
+  (line 202): added descriptive comment
+  (line 209): added descriptive comment
+  (line 309): added console.log to identify ID given to FindByID()
+  (line 310): added console.log to identify hierarchyRef.current
+  (line 379): included addChildrenByID to export
 Reactrix/src/client/tree/interfaces/index.ts
   (line 83-87) included addChildrenByID to IHierarchyContextData export

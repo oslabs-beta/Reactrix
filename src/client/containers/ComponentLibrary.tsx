@@ -41,7 +41,6 @@ export default function ComponentLibrary(): any {
   
   // make a OrgTreeComponent for New Component
   const { treeRef } = useTree();
-  
   const data = {
     id: 777,
     label: 'New Component',
@@ -62,7 +61,7 @@ export default function ComponentLibrary(): any {
               </ListItemText>
             </ListItem>
             <ListItem>
-              {/* <NewComponent /> */}
+              <NewComponent />
               {/* <TreeNode horizontal={true}
               node={{
                 label: 'label',
@@ -73,7 +72,7 @@ export default function ComponentLibrary(): any {
               expandAll={expandAllNodes}
               onClick={(e, nodeData) => onClick && onClick(e, nodeData)}
               {...props}/> */}
-              <OrgTreeComponent data={data} ref={treeRef} horizontal />
+              {/* <OrgTreeComponent data={data} ref={treeRef} horizontal /> */}
             </ListItem>
           </List>
           <List>
