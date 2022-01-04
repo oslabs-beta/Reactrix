@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { nanoid } from 'nanoid';
 
 import { isLastNode } from '..';
 import { useHierarchyData } from '../../context/HierarchyContextProvider';
@@ -177,14 +178,14 @@ export const RenderCard = ({
 
       // invoke addChildrenById passing in a dropItem.id and new component initial data state
       // returns a new DragItemHierarchy
-      const addedNewDragItemHierarchy = addChildrenById(
-        dropItem.id,
-        [{
-          id: 999,
+      const addedNewDragItemHierarchy = addChildrenById(dropItem.id, [
+        {
+          //! Potential bug when using nanoid to generate unique ids (there is a very small change nanoid generates a duplicate id)
+          id: nanoid(),
           label: 'New Component',
           children: [],
-        }]
-      );
+        },
+      ]);
 
       // update context with new DragItemHierarchy
       setHierarchy(addedNewDragItemHierarchy);
