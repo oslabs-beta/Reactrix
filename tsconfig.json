@@ -3,6 +3,7 @@
         "outDir": "./dist/",
         "sourceMap": true,
         "strict": true,
+        "allowSyntheticDefaultImports": true,
         "noImplicitReturns": true,
         "noImplicitAny": true,
         "module": "es6",

@@ -19,6 +19,9 @@ import {
 import ComponentTree from './ComponentTree';
 import NewComponent from '../components/NewComponent';
 import ReusableComponents from '../components/ReusableComponents';
+// import {TreeNode} from '../tree/components';
+import OrgTreeComponent, { useTree } from '../tree';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,10 +35,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ComponentLibrary(): any {
   const [collected, drag, dragPreview] = useDrag(() => ({
-    type: 'TREE',
+    type: 'box',
     item: { id: 1 },
   }));
-
+  
+  // make a OrgTreeComponent for New Component
+  const { treeRef } = useTree();
+  const data = {
+    id: 777,
+    label: 'New Component',
+    children: []
+  };
+  
   const classes = useStyles();
 
   return (
@@ -51,6 +62,17 @@ export default function ComponentLibrary(): any {
             </ListItem>
             <ListItem>
               <NewComponent />
+              {/* <TreeNode horizontal={true}
+              node={{
+                label: 'label',
+                expand: 'expand',
+                children: 'children',
+              }}
+              collapsable={true}
+              expandAll={expandAllNodes}
+              onClick={(e, nodeData) => onClick && onClick(e, nodeData)}
+              {...props}/> */}
+              {/* <OrgTreeComponent data={data} ref={treeRef} horizontal /> */}
             </ListItem>
           </List>
           <List>
