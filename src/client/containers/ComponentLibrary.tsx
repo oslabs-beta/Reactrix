@@ -28,6 +28,13 @@ const useStyles = makeStyles((theme: Theme) =>
       flexShrink: 0,
       [`& .MuiDrawer-paper`]: { width: 300, boxSizing: 'border-box' },
     },
+    container: {
+      width: '50%',
+      height: '500px',
+      minWidth: '750px',
+      borderBottom: '0.5px Solid lightgrey',
+      borderRight: '0.5px Solid lightgrey',
+    },
   })
 );
 
@@ -87,9 +94,18 @@ export default function ComponentLibrary(): any {
       <Box component='main' sx={{ flexGrow: 1, p: 2.5 }}>
         <Toolbar />
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item className={classes.container}>
             <Typography variant='h5'>Component Tree</Typography>
             <ComponentTree />
+          </Grid>
+          <Grid item className={classes.container}>
+            <Typography variant='h5'>Component Details</Typography>
+          </Grid>
+          <Grid item className={classes.container}>
+            <Typography variant='h5'>Performance Metrics</Typography>
+          </Grid>
+          <Grid item className={classes.container}>
+            <Typography variant='h5'>Snapshots</Typography>
           </Grid>
         </Grid>
       </Box>
