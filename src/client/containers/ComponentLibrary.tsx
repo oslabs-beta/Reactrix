@@ -18,7 +18,8 @@ import {
 import ComponentTree from './ComponentTree';
 import NewComponent from '../components/NewComponent';
 import ReusableComponents from './ReusableComponents';
-// import {TreeNode} from '../tree/components';
+import PerformanceMetrics from './PerformanceMetrics';
+
 import OrgTreeComponent, { useTree } from '../tree';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -103,6 +104,7 @@ export default function ComponentLibrary(): any {
           </Grid>
           <Grid item className={classes.container}>
             <Typography variant='h5'>Performance Metrics</Typography>
+            <PerformanceMetrics />
           </Grid>
           <Grid item className={classes.container}>
             <Typography variant='h5'>Snapshots</Typography>

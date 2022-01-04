@@ -5,7 +5,7 @@ import { ListItem } from '@material-ui/core';
 
 import SingleReusableComponent from '../components/SingleReusableComponent';
 
-export default function DraggableComponent() {
+export default function ReusableComponent() {
   const reusableComponents = [
     {
       id: nanoid(),
