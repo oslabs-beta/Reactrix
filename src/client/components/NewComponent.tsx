@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 
 export default function DraggableComponent() {
   const [collected, drag, dragPreview] = useDrag(() => ({
-    type: 'TREE',
+    type: 'box',
     collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),

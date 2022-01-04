@@ -19,6 +19,9 @@ import {
 import ComponentTree from './ComponentTree';
 import NewComponent from '../components/NewComponent';
 import ReusableComponents from '../components/ReusableComponents';
+// import {TreeNode} from 'react-drag-hierarchy-tree/src/components';
+import OrgTreeComponent, { useTree } from 'react-drag-hierarchy-tree';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,10 +35,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ComponentLibrary(): any {
   const [collected, drag, dragPreview] = useDrag(() => ({
-    type: 'TREE',
+    type: 'box',
     item: { id: 1 },
   }));
-
+  
+  // make a OrgTreeComponent for New Component
+  const { treeRef } = useTree();
+  
+  const data = {
+    id: 777,
+    label: 'New Component',
+    children: []
+  };
+  
   const classes = useStyles();
 
   return (
@@ -50,7 +62,18 @@ export default function ComponentLibrary(): any {
               </ListItemText>
             </ListItem>
             <ListItem>
-              <NewComponent />
+              {/* <NewComponent /> */}
+              {/* <TreeNode horizontal={true}
+              node={{
+                label: 'label',
+                expand: 'expand',
+                children: 'children',
+              }}
+              collapsable={true}
+              expandAll={expandAllNodes}
+              onClick={(e, nodeData) => onClick && onClick(e, nodeData)}
+              {...props}/> */}
+              <OrgTreeComponent data={data} ref={treeRef} horizontal />
             </ListItem>
           </List>
           <List>
