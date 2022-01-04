@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useDrag } from 'react-dnd';
 import {
   Box,
-  Button,
   Drawer,
   Grid,
   List,
@@ -18,10 +17,9 @@ import {
 
 import ComponentTree from './ComponentTree';
 import NewComponent from '../components/NewComponent';
-import ReusableComponents from '../components/ReusableComponents';
+import ReusableComponents from './ReusableComponents';
 // import {TreeNode} from '../tree/components';
 import OrgTreeComponent, { useTree } from '../tree';
-
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,15 +36,15 @@ export default function ComponentLibrary(): any {
     type: 'box',
     item: { id: 1 },
   }));
-  
+
   // make a OrgTreeComponent for New Component
   const { treeRef } = useTree();
   const data = {
     id: 777,
     label: 'New Component',
-    children: []
+    children: [],
   };
-  
+
   const classes = useStyles();
 
   return (
