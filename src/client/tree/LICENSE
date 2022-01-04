@@ -23,8 +23,20 @@ SOFTWARE.
 Modified:
 Reactrix/src/client/tree/components/RenderCard/index.tsx 
   (line 1): modified for typescript
+  (line 28): included addChildrenByID to import
   (line 140): added descriptive comment
   (line 144): added descriptive comment
+  (line 146): added console.log
+  (line 148): added descriptive comment
+  (line 173-190): add children if drag item does not exist in tree
 Reactrix/src/client/tree/context/HierarchyContextProvider.tsx 
   (line 1-2): modified for typescript
-  (line 307): added comment to identify ID given to FindByID()
+  (line 181): added descriptive comment
+  (line 182): added descriptive comment
+  (line 189): added descriptive comment
+  (line 190): added descriptive comment
+  (line 306): added console.log to identify ID given to FindByID()
+  (line 307): added console.log to identify hierarchyRef.current
+  (line 376): included addChildrenByID to export
+Reactrix/src/client/tree/interfaces/index.ts
+  (line 83-87) included addChildrenByID to IHierarchyContextData export

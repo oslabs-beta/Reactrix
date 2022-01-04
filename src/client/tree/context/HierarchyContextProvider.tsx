@@ -187,7 +187,7 @@ export function HierarchyContextProvider({
       nestedObjectClone = clone(nestedObjectClone);
 
       // adds the new data to children
-      // what is id targeting?
+      // id should be the dropItem id
       if (nestedObjectClone.id === id) {
         return {
           ...nestedObjectClone,
@@ -304,6 +304,7 @@ export function HierarchyContextProvider({
     nestsObject?: INestedObject
   ) => {
     console.log('ID given to findByID:', id);
+    console.log('this is hierarchyRef.current', hierarchyRef.current);
     let nestedObject = nestsObject
       ? { ...nestsObject }
       : { ...hierarchyRef.current };
@@ -372,6 +373,7 @@ export function HierarchyContextProvider({
         setHierarchy,
         nestedObjectToArray,
         arrayToNestedObject,
+        addChildrenById,
         editById,
         removeById,
         findParentByChildId,

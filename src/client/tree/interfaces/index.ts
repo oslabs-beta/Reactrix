@@ -80,6 +80,11 @@ export interface IHierarchyContextData {
   setHierarchy: Dispatch<SetStateAction<INestedObject>>;
   nestedObjectToArray: (data: INestedObject) => IParsedArray[];
   arrayToNestedObject: (data: IParsedArray[]) => INestedObject;
+  addChildrenById: (
+    id: number | string,
+    data: INestedObject[],
+    nestedObject?: INestedObject | undefined
+  ) => INestedObject;
   editById: (
     id: number | string,
     data: Partial<INestedObject>,

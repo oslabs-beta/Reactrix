@@ -25,6 +25,7 @@ export const RenderCard = ({
   const {
     setHierarchy,
     hierarchyRef,
+    addChildrenById,
     editById,
     isChild,
     findParentByChildId,
@@ -141,9 +142,11 @@ export const RenderCard = ({
     const dropItem = data;
     console.log('this is dropItem:', dropItem);
 
-    // finds parent of the drag item
+    // finds original parent of the drag item if the drag item already existed
     const { parent: parentDragItem } = findParentByChildId(drag.id);
+    console.log('this is parentDragItem:', parentDragItem);
 
+    // if drag item already exists, update Hierarchy
     if (parentDragItem && dragItem) {
       const newParent = {
         ...parentDragItem,
@@ -167,6 +170,24 @@ export const RenderCard = ({
 
       setHierarchy(addedDragItemHierarchy);
       hierarchyRef.current = addedDragItemHierarchy;
+    } else {
+      // else,
+      // add a new node to the the tree
+
+      // invoke addChildrenById passing in a dropItem.id and new component initial data state
+      // returns a new DragItemHierarchy
+      const addedNewDragItemHierarchy = addChildrenById(
+        dropItem.id,
+        [{
+          id: 999,
+          label: 'New Component',
+          children: [],
+        }]
+      );
+
+      // update context with new DragItemHierarchy
+      setHierarchy(addedNewDragItemHierarchy);
+      hierarchyRef.current = addedNewDragItemHierarchy;
     }
   };
 
