@@ -144,7 +144,7 @@ export const RenderCard = ({
     // console.log('this is dragItem', drag);
     const dragItem = findById(drag.id); // returns null if id is not found
 
-    // grab label for the item currently begin dragged to component tree
+    //! grab label for the item currently begin dragged to component tree
     const dragItemLabel = drag.label;
 
     const dropItem = data;
