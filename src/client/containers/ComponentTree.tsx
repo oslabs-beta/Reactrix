@@ -13,7 +13,9 @@ export default function ComponentTree(props: any): any {
   // const [collectedProps, drop] = useDrop(() => ({
   //   accept: 'box',
   //   drop: (item: INestedObject, monitor) => {
-  //     console.log(treeRef.current?.addChildrenById(treeRef.current.data.id,[item]));
+  //     console.log(
+  //       treeRef.current?.addChildrenById(treeRef.current.data.id, [item])
+  //     );
   //   },
   //   collect: (monitor) => ({
   //     isOver: !!monitor.isOver(),

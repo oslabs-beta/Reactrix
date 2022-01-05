@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useDrag } from 'react-dnd';
+import { nanoid } from 'nanoid';
+
 import {
   Box,
   Drawer,
@@ -68,18 +70,7 @@ export default function ComponentLibrary(): any {
               </ListItemText>
             </ListItem>
             <ListItem>
-              <NewComponent />
-              {/* <TreeNode horizontal={true}
-              node={{
-                label: 'label',
-                expand: 'expand',
-                children: 'children',
-              }}
-              collapsable={true}
-              expandAll={expandAllNodes}
-              onClick={(e, nodeData) => onClick && onClick(e, nodeData)}
-              {...props}/> */}
-              {/* <OrgTreeComponent data={data} ref={treeRef} horizontal /> */}
+              <NewComponent label='New Component' />
             </ListItem>
           </List>
           <List>

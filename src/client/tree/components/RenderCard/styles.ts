@@ -32,8 +32,9 @@ export const RenderLabel = styled.div<ICardCard>`
   text-align: center;
   color: black;
   position: relative;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  // box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
+  border: 1px solid lightgrey;
 
   // no break line
   white-space: nowrap;
