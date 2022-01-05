@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
+
 import { Button } from '@material-ui/core';
 
 interface Props {
