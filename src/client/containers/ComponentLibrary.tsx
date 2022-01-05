@@ -19,6 +19,7 @@ import ComponentTree from './ComponentTree';
 import NewComponent from '../components/NewComponent';
 import ReusableComponents from './ReusableComponents';
 import PerformanceMetrics from './PerformanceMetrics';
+import ComponentDetails from './ComponentDetails';
 
 import OrgTreeComponent, { useTree } from '../tree';
 
@@ -101,6 +102,7 @@ export default function ComponentLibrary(): any {
           </Grid>
           <Grid item className={classes.container}>
             <Typography variant='h5'>Component Details</Typography>
+            <ComponentDetails />
           </Grid>
           <Grid item className={classes.container}>
             <Typography variant='h5'>Performance Metrics</Typography>
