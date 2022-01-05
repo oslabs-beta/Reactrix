@@ -205,7 +205,7 @@ export function HierarchyContextProvider({
           return addChildrenById(id, data, child);
         }
       );
-      
+
       // returns updated HierarchyData
       return {
         ...nestedObjectClone,
@@ -301,39 +301,42 @@ export function HierarchyContextProvider({
     []
   );
 
-  const findById = useCallback((
-    // nestedObject: INestedObject,
-    id: number | string,
-    nestsObject?: INestedObject
-  ) => {
-    console.log('ID given to findByID:', id);
-    console.log('this is hierarchyRef.current', hierarchyRef.current);
-    let nestedObject = nestsObject
-      ? { ...nestsObject }
-      : { ...hierarchyRef.current };
-    nestedObject = clone(nestedObject);
+  const findById = useCallback(
+    (
+      // nestedObject: INestedObject,
+      id: number | string,
+      nestsObject?: INestedObject
+    ) => {
+      console.log('ID given to findByID:', id);
+      console.log('this is hierarchyRef.current', hierarchyRef.current);
+      let nestedObject = nestsObject
+        ? { ...nestsObject }
+        : { ...hierarchyRef.current };
+      nestedObject = clone(nestedObject);
 
-    const loop = (nestedObject: INestedObject, itemId: number | string) => {
-      if (nestedObject.id === id) {
-        return nestedObject;
-      }
-      if (!nestedObject?.children) return null;
+      const loop = (nestedObject: INestedObject, itemId: number | string) => {
+        if (nestedObject.id === id) {
+          return nestedObject;
+        }
+        if (!nestedObject?.children) return null;
 
-      let item: INestedObject | null = null;
+        let item: INestedObject | null = null;
 
-      nestedObject.children.map((child) => {
-        const loopItem = loop(child, itemId);
-        if (loopItem !== null) item = loopItem;
-        return;
-      });
+        nestedObject.children.map((child) => {
+          const loopItem = loop(child, itemId);
+          if (loopItem !== null) item = loopItem;
+          return;
+        });
 
-      return item;
-    };
+        return item;
+      };
 
-    const Item = loop(nestedObject, id);
+      const Item = loop(nestedObject, id);
 
-    return Item;
-  }, []);
+      return Item;
+    },
+    []
+  );
 
   const isChild = (parentId: number | string, childId: number | string) => {
     const { path } = findParentByChildId(childId);
