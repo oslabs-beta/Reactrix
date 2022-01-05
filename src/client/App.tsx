@@ -13,10 +13,7 @@ import ComponentLibrary from './containers/ComponentLibrary';
 import ComponentTree from './containers/ComponentTree';
 import ComponentDetails from './containers/ComponentDetails';
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
-
 const App = () => {
-  const [isLightTheme, setTheme] = useState(true);
   return (
     <div>
       <DndProvider backend={HTML5Backend}>

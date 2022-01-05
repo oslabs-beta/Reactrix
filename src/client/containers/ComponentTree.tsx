@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useDrop } from 'react-dnd';
 import OrgTreeComponent, { useTree } from '../tree';
-import { INestedObject } from '../tree/interfaces';
+
+import { Button, createStyles, makeStyles, Theme } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 
 let data = {
   id: 1,
@@ -27,11 +29,17 @@ export default function ComponentTree(props: any): any {
 
   return (
     <div>
-      {/* <div ref={drop}> */}
       <div>
         <OrgTreeComponent data={data} ref={treeRef} horizontal />
+        {/* <Button
+            // onClick={handleClick}
+            startIcon={<SaveIcon />}
+            variant='outlined'
+            className={classes.save}
+          >
+            Save
+          </Button> */}
       </div>
-      {/* </div> */}
     </div>
   );
 }

@@ -9,8 +9,10 @@ interface Props {
 export default function NewComponent({ label }: Props) {
   const [collected, drag, dragPreview] = useDrag(() => ({
     type: 'box',
+    // pass in object containing payload of component label
     item: { label: label },
     collect: (monitor: DragSourceMonitor) => ({
+      // grab the label object for use in tree > components > RenderCard
       item: monitor.getItem(),
       isDragging: monitor.isDragging(),
     }),

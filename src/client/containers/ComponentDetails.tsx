@@ -2,57 +2,93 @@ import * as React from 'react';
 import {
   Box,
   Button,
+  FormControl,
+  FormHelperText,
+  OutlinedInput,
   TextField,
+  createStyles,
+  makeStyles,
+  Theme,
 } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    form: {
+      width: 450,
+      flexShrink: 0,
+
+      ['& .MuiTextField-root']: { m: 1, width: '25ch' },
+    },
+    save: {
+      marginTop: 20,
+    },
+  })
+);
 
 export default function ComponentDetails() {
   function handleClick() {
     // setLoading(true);
   }
-  
+
+  const classes = useStyles();
+
   return (
-    <Box
-      component="form"
-      sx={{
-        m: 1, width: '25ch'
-        // '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      // noValidate=
-      // autoComplete="off"
-    >
+    <Box className={classes.form} component='form' m={2} mt={5}>
       <div>
-        <TextField
-          // required
-          id="outlined-required"
-          label="Component Name"
-          defaultValue="New Component"
-        />
-        <TextField
-          // disabled
-          id="outlined-disabled"
-          label="URL"
-          defaultValue="URL"
-        />
-        <TextField
-          id="outlined-read-only-input"
-          label="State"
-          defaultValue="State"
-          InputProps={{
-            // readOnly: true,
-          }}
-        />
-        <TextField
-          id="outlined-helperText"
-          label="Hooks"
-          defaultValue="Default Value"
-          helperText="Declare a hook that this component will trigger"
-        />
+        <FormControl className={classes.form} variant='outlined'>
+          <OutlinedInput
+            id='outlined-adornment-weight'
+            aria-describedby='outlined-weight-helper-text'
+            inputProps={{
+              'aria-label': 'weight',
+            }}
+          />
+          <FormHelperText id='outlined-weight-helper-text'>Name</FormHelperText>
+        </FormControl>
+        <FormControl className={classes.form} variant='outlined'>
+          <OutlinedInput
+            id='outlined-adornment-weight'
+            aria-describedby='outlined-weight-helper-text'
+            inputProps={{
+              'aria-label': 'weight',
+            }}
+          />
+          <FormHelperText id='outlined-weight-helper-text'>URL</FormHelperText>
+        </FormControl>
+        <FormControl className={classes.form} variant='outlined'>
+          <OutlinedInput
+            id='outlined-adornment-weight'
+            aria-describedby='outlined-weight-helper-text'
+            inputProps={{
+              'aria-label': 'weight',
+            }}
+          />
+          <FormHelperText id='outlined-weight-helper-text'>
+            State
+          </FormHelperText>
+        </FormControl>
+        <FormControl className={classes.form} variant='outlined'>
+          <OutlinedInput
+            id='outlined-adornment-weight'
+            aria-describedby='outlined-weight-helper-text'
+            inputProps={{
+              'aria-label': 'weight',
+            }}
+          />
+          <FormHelperText id='outlined-weight-helper-text'>
+            Hooks
+          </FormHelperText>
+        </FormControl>
+        <Button
+          // onClick={handleClick}
+          startIcon={<SaveIcon />}
+          variant='outlined'
+          className={classes.save}
+        >
+          Save
+        </Button>
       </div>
-      <Button 
-        // onClick={handleClick}
-        startIcon={<SaveIcon />}
-        variant="contained">Save</Button>
     </Box>
   );
 }
