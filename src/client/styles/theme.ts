@@ -2,9 +2,11 @@ import { createTheme } from '@material-ui/core/';
 
 export const theme = createTheme({
   palette: {
-    type: 'light',
     primary: {
-      main: '#CC4125',
+      light: '#78909c',
+      main: '#455a64',
+      dark: '#263238',
+      contrastText: '#000',
     },
   },
   props: {
@@ -17,5 +19,8 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: 'Inter',
+    button: {
+      textTransform: 'none',
+    },
   },
 });

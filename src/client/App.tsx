@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
@@ -13,17 +13,22 @@ import ComponentLibrary from './containers/ComponentLibrary';
 import ComponentTree from './containers/ComponentTree';
 import ComponentDetails from './containers/ComponentDetails';
 
-const App = () => (
-  <div>
-    <DndProvider backend={HTML5Backend}>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <ComponentLibrary />
-        {/* <ComponentTree /> */}
-        {/* <ComponentDetails /> */}
-      </ThemeProvider>
-    </DndProvider>
-  </div>
-);
+const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+
+const App = () => {
+  const [isLightTheme, setTheme] = useState(true);
+  return (
+    <div>
+      <DndProvider backend={HTML5Backend}>
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <ComponentLibrary />
+          {/* <ComponentTree /> */}
+          {/* <ComponentDetails /> */}
+        </ThemeProvider>
+      </DndProvider>
+    </div>
+  );
+};
 
 export default hot(App);

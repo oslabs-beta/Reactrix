@@ -124,9 +124,11 @@ export const RenderCard = ({
   }, [isDragging]);
 
   const onDragEnter = (dropId: string | number) => {
-    let dragLabel = 'Copiar aqui';
+    let dragLabel = 'Copy here';
     if (draggingItemRef.current) {
       const dragItemId = draggingItemRef.current.id;
+      const dragItemLabel = draggingItemRef.current.label;
+      console.log(dragItemId, dragItemLabel);
       const canDrop = dragItemId !== data.id && !isChild(dragItemId, data.id);
       dragLabel = draggingItemRef.current.label;
       if (!canDrop) return;
@@ -139,14 +141,20 @@ export const RenderCard = ({
   };
 
   const onDrop = (drag: INestedObject) => {
-    console.log('this is dragItem', drag);
+    // console.log('this is dragItem', drag);
     const dragItem = findById(drag.id); // returns null if id is not found
+
+    // grab label for the item currently begin dragged to component tree
+    const dragItemLabel = drag.label;
+
     const dropItem = data;
-    console.log('this is dropItem:', dropItem);
+
+    // console.log('this is dropItem:', dropItem);
 
     // finds original parent of the drag item if the drag item already existed
     const { parent: parentDragItem } = findParentByChildId(drag.id);
-    console.log('this is parentDragItem:', parentDragItem);
+
+    // console.log('this is parentDragItem:', parentDragItem);
 
     // if drag item already exists, update Hierarchy
     if (parentDragItem && dragItem) {
@@ -173,23 +181,28 @@ export const RenderCard = ({
       setHierarchy(addedDragItemHierarchy);
       hierarchyRef.current = addedDragItemHierarchy;
     } else {
-      // else,
       // add a new node to the the tree
-
       // invoke addChildrenById passing in a dropItem.id and new component initial data state
       // returns a new DragItemHierarchy
       const addedNewDragItemHierarchy = addChildrenById(dropItem.id, [
         {
-          //! Potential bug when using nanoid to generate unique ids (there is a very small change nanoid generates a duplicate id)
+          //! potential bug when using nanoid to generate unique IDs (there is a very small chance nanoid generates a duplicate ID)
           id: nanoid(),
-          label: 'New Component',
+          label: dragItemLabel,
           children: [],
         },
       ]);
 
+      // console.log(
+      //   'this is addedNewDragItemHierarchy',
+      //   addedNewDragItemHierarchy
+      // );
+
       // update context with new DragItemHierarchy
       setHierarchy(addedNewDragItemHierarchy);
       hierarchyRef.current = addedNewDragItemHierarchy;
+
+      // console.log(hierarchyRef.current);
     }
   };
 
