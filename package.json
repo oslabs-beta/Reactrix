@@ -29,7 +29,6 @@
     "@mui/lab": "^5.0.0-alpha.63",
     "chart.js": "^3.7.0",
     "express": "^4.17.2",
-    "faker": "^5.5.3",
     "nanoid": "^3.1.30",
     "pg": "^8.7.1",
     "postgresql": "^0.0.1",

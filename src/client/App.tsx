@@ -8,20 +8,24 @@ import { ThemeProvider } from '@material-ui/core';
 
 import './styles/styles.css';
 
+import SignIn from './containers/SignIn';
 import Navbar from './components/Navbar';
 import ComponentLibrary from './containers/ComponentLibrary';
 // import ComponentTree from './containers/ComponentTree';
 // import ComponentDetails from './containers/ComponentDetails';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
     <div>
       <DndProvider backend={HTML5Backend}>
         <ThemeProvider theme={theme}>
+          {/* <SignIn /> */}
           <Navbar />
           <ComponentLibrary />
           {/* <ComponentTree /> */}
           {/* <ComponentDetails /> */}
+          <Footer />
         </ThemeProvider>
       </DndProvider>
     </div>

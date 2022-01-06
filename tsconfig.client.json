@@ -1,32 +1,32 @@
 {
-    // "compilerOptions": {
-        //     "module": "es6",
-        //     "target": "es5",
-        //     "jsx": "react",
-        //     "allowSyntheticDefaultImports": true,
-        //     "moduleResolution": "node",
-        //     "strict": true,
-        //     "noImplicitAny": true,
-    //     "outDir": "./dist/",
-    //     "sourceMap": true,
-    //     "noImplicitReturns": true,
-    //     "allowJs": true,
-    // },
-    // "include": [
-    //     "./src/**/*"
-    // ]
-    "include": ["src/client"],
-    "compilerOptions": {
-      "module": "es6", // generate ES modules
-      "target": "es5", // target ES5 API
-      "jsx": "react", // compile JSX to React.createElement statements for browser
-      "allowSyntheticDefaultImports": true,
-      "forceConsistentCasingInFileNames": true,
-      "skipLibCheck": true,
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "strict": true,
-      "strictNullChecks": true,
-      "noImplicitAny": true
-    }
+  // "compilerOptions": {
+  //     "module": "es6",
+  //     "target": "es5",
+  //     "jsx": "react",
+  //     "allowSyntheticDefaultImports": true,
+  //     "moduleResolution": "node",
+  //     "strict": true,
+  //     "noImplicitAny": true,
+  //     "outDir": "./dist/",
+  //     "sourceMap": true,
+  //     "noImplicitReturns": true,
+  //     "allowJs": true,
+  // },
+  // "include": [
+  //     "./src/**/*"
+  // ]
+  "include": ["src/client", "src/custom.d.ts"],
+  "compilerOptions": {
+    "module": "es6", // generate ES modules
+    "target": "es5", // target ES5 API
+    "jsx": "react", // compile JSX to React.createElement statements for browser
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true
+  }
 }

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Button,
   Checkbox,
   FormControlLabel,
   createStyles,
@@ -11,10 +10,9 @@ import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-import { handleUpdateData } from '../helpers/helpers';
-
 type Props = {
   checked?: boolean;
+  handleFirstCheck: any;
   handleCheck: any;
 };
 
@@ -26,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Snapshots({ handleCheck }: Props) {
+export default function Snapshots({ handleFirstCheck, handleCheck }: Props) {
   const classes = useStyles();
 
   return (
@@ -61,7 +59,7 @@ export default function Snapshots({ handleCheck }: Props) {
         <FormControlLabel
           value='start'
           control={<Checkbox />}
-          onClick={handleCheck}
+          onChange={handleFirstCheck}
           label='11/11/2021 Snapshot 2'
         />
         <FormControlLabel

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useDrag } from 'react-dnd';
-
 import {
   Box,
   Drawer,
@@ -13,7 +11,6 @@ import {
   Divider,
   createStyles,
   makeStyles,
-  Theme,
 } from '@material-ui/core';
 
 import ComponentTree from './ComponentTree';
@@ -22,9 +19,9 @@ import ReusableComponents from './ReusableComponents';
 import PerformanceMetrics from './PerformanceMetrics';
 import ComponentDetails from './ComponentDetails';
 import Snapshots from './Snapshots';
-import { handleUpdateData } from '../helpers/helpers';
+import { handleInitialData, handleUpdateData } from '../helpers/helpers';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     drawer: {
       width: 300,
@@ -44,7 +41,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function ComponentLibrary(): any {
+  const [firstSnapshot, setFirstSnapshot] = useState(true);
   const [checked, setChecked] = useState(false);
+
+  function handleFirstCheck() {
+    setFirstSnapshot(!firstSnapshot);
+  }
 
   function handleCheck() {
     setChecked(!checked);
@@ -99,11 +101,18 @@ export default function ComponentLibrary(): any {
           </Grid>
           <Grid item xs={8} className={classes.containerLeft}>
             <Typography variant='h5'>Performance Metrics</Typography>
-            <PerformanceMetrics checked={checked} handleCheck={handleCheck} />
+            <PerformanceMetrics
+              checked={checked}
+              firstSnapshot={firstSnapshot}
+              handleCheck={handleCheck}
+            />
           </Grid>
           <Grid item xs={4} className={classes.containerRight}>
             <Typography variant='h5'>Snapshots</Typography>
-            <Snapshots handleCheck={handleCheck} />
+            <Snapshots
+              handleCheck={handleCheck}
+              handleFirstCheck={handleFirstCheck}
+            />
           </Grid>
         </Grid>
       </Box>
