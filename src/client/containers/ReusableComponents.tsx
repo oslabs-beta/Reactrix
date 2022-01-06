@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 import { nanoid } from 'nanoid';
 import { ListItem } from '@material-ui/core';
@@ -9,22 +9,32 @@ export default function ReusableComponent() {
   const reusableComponents = [
     {
       id: nanoid(),
-      label: 'Container 4',
+      label: 'Container 1',
       children: [],
     },
     {
       id: nanoid(),
-      label: 'Container 5',
+      label: 'Container 2',
       children: [],
     },
     {
       id: nanoid(),
-      label: 'Component 5',
+      label: 'Container 3',
       children: [],
     },
     {
       id: nanoid(),
-      label: 'Component 6',
+      label: 'Component 1',
+      children: [],
+    },
+    {
+      id: nanoid(),
+      label: 'Component 2',
+      children: [],
+    },
+    {
+      id: nanoid(),
+      label: 'Component 3',
       children: [],
     },
   ];

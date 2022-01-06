@@ -1,5 +1,5 @@
 {
-  "include": ["src/server"], // compile TS files in server directory
+  "include": ["src/server", "src/custom.d.ts"], // compile TS files in server directory
   "compilerOptions": {
     "module": "commonjs", // classic format that Node.js understands
     "esModuleInterop": true, // allow imports of modules in ES format

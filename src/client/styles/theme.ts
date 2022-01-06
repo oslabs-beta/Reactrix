@@ -1,11 +1,12 @@
 import { createTheme } from '@material-ui/core/';
+import { grey } from '@mui/material/colors';
 
 export const theme = createTheme({
   palette: {
     primary: {
-      light: '#78909c',
-      main: '#455a64',
-      dark: '#263238',
+      light: grey[400],
+      main: grey[800],
+      dark: grey[800],
       contrastText: '#000',
     },
   },

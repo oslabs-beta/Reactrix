@@ -9,6 +9,7 @@ import {
   makeStyles,
   Theme,
 } from '@material-ui/core';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,6 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       color: 'white',
       fontWeight: 'bold',
+      marginLeft: theme.spacing(1),
+    },
+    logo: {
+      color: 'white',
     },
     navLinks: {
       marginLeft: theme.spacing(3),
@@ -34,10 +39,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Navbar(): any {
   const classes = useStyles();
+
   return (
     <AppBar position='fixed' className={classes.appBar}>
       <CssBaseline />
       <Toolbar>
+        <AccountTreeIcon fontSize='small' className={classes.logo} />
         <Typography variant='h5' className={classes.title}>
           Reactrix
         </Typography>
