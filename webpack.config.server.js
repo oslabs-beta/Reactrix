@@ -1,12 +1,21 @@
 // const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
+const CopyPlugin = require('copy-webpack-plugin') //makes client.ejs template available at a relative location to the resulting JavaScript code
 
 const config = {
-  entry: ['react-hot-loader/patch', './src/index.tsx'],
+  name: 'server',
+  entry: ['react-hot-loader/patch', path.resolve(__dirname, 'src/server/server.ts')],
+  mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
+  },
+  externals: [nodeExternals()],
+  target: 'node',
+  node: {
+    __dirname: false,
   },
   module: {
     rules: [
@@ -23,6 +32,9 @@ const config = {
         test: /\.ts(x)?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
+        options: {
+          configFile: 'tsconfig.server.json',
+        },
       },
       {
         test: /\.svg$/,
@@ -51,7 +63,7 @@ const config = {
       directory: './dist',
     },
   },
-  devtool: 'source-map',
+  // devtool: 'source-map',
   // plugins: [
   //   new HtmlWebpackPlugin({
   //     templateContent: ({ htmlWebpackPlugin }) =>
@@ -61,12 +73,12 @@ const config = {
   //     filename: 'index.html',
   //   }),
   // ],
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html',
-      inject: true,
-    }),
-  ],
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     template: './index.html',
+  //     inject: true,
+  //   }),
+  // ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
