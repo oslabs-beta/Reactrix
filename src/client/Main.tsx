@@ -11,19 +11,20 @@ import ComponentLibrary from './containers/ComponentLibrary';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 // import ComponentTree from './containers/ComponentTree';
 // import ComponentDetails from './containers/ComponentDetails';
-import Main from './Main';
 
-import SignIn from './SignIn';
+const Main = () => {
+    return (
+      <div>
+        <DndProvider backend={HTML5Backend}>
+          <ThemeProvider theme={theme}>
+            <Navbar />
+            <ComponentLibrary />
+            {/* <ComponentTree /> */}
+            {/* <ComponentDetails /> */}
+          </ThemeProvider>
+        </DndProvider>
+      </div>
+    );
+  };
 
-const App = () => {
-  return(
-  <Router>
-    <Routes>
-      <Route path="/" element={<SignIn />}>
-        <Route path="/dashboard" element={ <Main /> }/>
-      </Route>
-    </Routes>
-  </Router>
-  );
-};
-export default hot(App);
+  export default Main;
