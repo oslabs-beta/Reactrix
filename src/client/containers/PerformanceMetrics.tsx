@@ -11,6 +11,13 @@ import {
 import { Bar } from 'react-chartjs-2';
 import faker from 'faker';
 
+import { handleUpdateData } from '../helpers/helpers';
+
+type Props = {
+  checked: boolean;
+  handleCheck: any;
+};
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -47,11 +54,11 @@ const labels = [
   'Total Blocking Time (TBT)',
 ];
 
-export const data = {
+const data = {
   labels,
   datasets: [
     {
-      label: 'Snapshopt 1',
+      label: 'Snapshot 1',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -65,10 +72,16 @@ export const data = {
   ],
 };
 
-export default function PerformanceMetrics() {
+export default function PerformanceMetrics({ checked }: Props) {
   return (
     <div>
-      <Bar options={options} data={data} />
+      <Bar
+        options={options}
+        data={checked ? handleUpdateData() : data}
+        style={{
+          maxHeight: '500px',
+        }}
+      />
     </div>
   );
 }

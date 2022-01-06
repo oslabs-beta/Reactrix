@@ -2,12 +2,13 @@
   "name": "reactrix",
   "version": "1.0.0",
   "description": "",
-  "main": "./client/index.tsx",
+  "main": "./src/index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=production node src/server/server.ts",
-    "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development concurrently \"node src/server/server.ts\" \"webpack serve --open --hot\""
+    "build:client": "webpack --config webpack.config.client.js",
+    "build:server": "webpack --config webpack.config.server.js",
+    "start": "node ./dist/main.js",
+    "dev": "concurrently \"cross-env webpack serve --config webpack.config.server.js --open --hot\" \"cross-env node dev.js\""
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@mui/lab": "^5.0.0-alpha.63",
     "chart.js": "^3.7.0",
     "clone": "^2.1.1",
     "dayjs": "^1.10.7",
@@ -62,8 +64,13 @@
     "@types/react-router-dom": "^5.3.2",
     "@types/superagent": "^4.1.14",
     "axios": "^0.24.0",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "clone": "^2.1.2",
     "concurrently": "^6.4.0",
+    "copy-webpack-plugin": "^10.2.0",
     "cross-env": "^7.0.3",
+    "cross-spawn": "^7.0.3",
     "css-loader": "^6.5.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
@@ -78,6 +85,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.2"
+    "webpack-dev-server": "^4.7.2",
+    "webpack-manifest-plugin": "^4.0.2",
+    "webpack-node-externals": "^3.0.0"
   }
 }

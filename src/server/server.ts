@@ -1,7 +1,7 @@
 import express from "express";
-// import axios from "axios";
+import axios from "axios";
 import config from "config";
-import api from './routes/api';
+// import api from './routes/api';
 import log from './logger';
 
 const port = config.get("port") as number;
@@ -11,22 +11,22 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// // Rules of our API
-// app.use((req, res, next) => {
-//   res.header('Access-Control-ALlow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//   next();
-// });
+// Rules of our API
+app.use((req, res, next) => {
+  res.header('Access-Control-ALlow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
 
-// // Error Handling
-// app.use((req, res, next) => {
-//   const error = new Error('not found');
-//   return res.status(404).json({
-//     message: error.message
-//   });
-// });
+// Error Handling
+app.use((req, res, next) => {
+  const error = new Error('not found');
+  return res.status(404).json({
+    message: error.message
+  });
+});
 
-app.use('/api', api);
+// app.use('/api', api);
 
 // app.get('/', (req, res) => {
 //   return(
@@ -34,26 +34,26 @@ app.use('/api', api);
 //   );
 // });
 
-// app.get('/', (req, res) => {
-//   res.status(200).redirect(`https://github.com/login/oauth/authorize?client_id=d223334a158fd98423d8`)
-// });
+app.get('/login', (req, res) => {
+  res.status(200).redirect(`https://github.com/login/oauth/authorize?client_id=d223334a158fd98423d8&redirect_uri=http://localhost:3000/login/auth?path=/&scope=user:email`)
+});
 
-// app.get('/login/callback', ({ query: { code } }, res) => {
-//   const body = {
-//     client_id: 'd223334a158fd98423d8',
-//     client_secret: '5201648e266bf4a28fc225e84a7d4db9d04cec0316ff85a93ecd5a711d340f35e1d3b69503197ff1',
-//     code,
-//   };
-//   const opts = { headers: { accept: 'application/json' } };
-//   axios
-//     .post('https://github.com/login/oauth/access_token', body, opts)
-//     .then((_res) => _res.data.access_token)
-//     .then((token) => {
-//       res.redirect(`/?token=${token}`);
-//     })
-//     .catch((err) => res.status(500).json({ err: err.message }));
+app.get('/login/callback', ({ query: { code } }, res) => {
+  const body = {
+    client_id: 'd223334a158fd98423d8',
+    client_secret: '5201648e266bf4a28fc225e84a7d4db9d04cec0316ff85a93ecd5a711d340f35e1d3b69503197ff1',
+    code,
+  };
+  const opts = { headers: { accept: 'application/json' } };
+  axios
+    .post('https://github.com/login/oauth/access_token', body, opts)
+    .then((_res) => _res.data.access_token)
+    .then((token) => {
+      res.redirect(`/?token=${token}`);
+    })
+    .catch((err) => res.status(500).json({ err: err.message }));
   
-// })
+})
 
 // app.get('/', (req, res) => {
 //   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));

@@ -1,5 +1,4 @@
-import * as React from 'react';
-import './styles/styles.css';
+import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Link } from 'react-router-dom';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -10,22 +9,24 @@ import { ThemeProvider } from '@material-ui/core';
 
 import Navbar from './components/Navbar';
 import ComponentLibrary from './containers/ComponentLibrary';
-import ComponentTree from './containers/ComponentTree';
-import ComponentDetails from './containers/ComponentDetails';
+// import ComponentTree from './containers/ComponentTree';
+// import ComponentDetails from './containers/ComponentDetails';
 
+const App = () => {
+  return (
+    <div>
+      <DndProvider backend={HTML5Backend}>
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <ComponentLibrary />
+          {/* <ComponentTree /> */}
+          {/* <ComponentDetails /> */}
+        </ThemeProvider>
+      </DndProvider>
+    </div>
+  );
+};
 
-const App = () => (
-  <div>
-    <DndProvider backend={HTML5Backend}>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <ComponentLibrary />
-        {/* <ComponentTree /> */}
-        {/* <ComponentDetails /> */}
-      </ThemeProvider>
-    </DndProvider>
-  </div>
-);
 export default hot(App);
 
 // import React from 'react';
@@ -37,7 +38,6 @@ export default hot(App);
 // import SignIn from './containers/SignIn';
 
 // const App: React.FC = () => {
-//   const [isAuth, setIsAuth] = useState(false);
 // return (
 //   <Router>
 //     <nav>
@@ -45,7 +45,7 @@ export default hot(App);
 //       <Link to="/dashboard">dashboard</Link>
 //     </nav>
 //     <Routes>
-//       <Route path="/login" element={ () => 
+//       <Route path="/" element={ () => 
 //         <SignIn setIsAuth={setIsAuth} />}
 //       />
 //       <Route path="/dashboard" element={ () => 

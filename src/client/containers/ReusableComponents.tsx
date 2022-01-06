@@ -9,31 +9,23 @@ export default function ReusableComponent() {
   const reusableComponents = [
     {
       id: nanoid(),
-      component: {
-        type: 'container',
-        content: 'Container 4',
-      },
+      label: 'Container 4',
+      children: [],
     },
     {
       id: nanoid(),
-      component: {
-        type: 'container',
-        content: 'Container 5',
-      },
+      label: 'Container 5',
+      children: [],
     },
     {
       id: nanoid(),
-      component: {
-        type: 'component',
-        content: 'Child 4',
-      },
+      label: 'Component 5',
+      children: [],
     },
     {
       id: nanoid(),
-      component: {
-        type: 'component',
-        content: 'Child 5',
-      },
+      label: 'Component 6',
+      children: [],
     },
   ];
 
@@ -51,12 +43,9 @@ export default function ReusableComponent() {
     <div ref={dragPreview} />
   ) : (
     <div>
-      {Object.values(reusableComponents).map((ele) => (
+      {Object.values(reusableComponents).map((ele, key) => (
         <ListItem>
-          <SingleReusableComponent
-            key={ele.id}
-            content={ele.component.content}
-          />
+          <SingleReusableComponent label={ele.label} key={key} />
         </ListItem>
       ))}
     </div>
