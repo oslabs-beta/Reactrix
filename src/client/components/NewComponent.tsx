@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
+
 import { Button } from '@material-ui/core';
 
 interface Props {
@@ -9,14 +10,16 @@ interface Props {
 export default function NewComponent({ label }: Props) {
   const [collected, drag, dragPreview] = useDrag(() => ({
     type: 'box',
+    // pass in object containing payload of component label
     item: { label: label },
-    collect: (monitor: DragSourceMonitor) => ({
-      item: monitor.getItem(),
-      isDragging: monitor.isDragging(),
-    }),
     options: {
       dropEffect: 'copy',
     },
+    collect: (monitor: DragSourceMonitor) => ({
+      // grab the label object for use in tree > components > RenderCard
+      item: monitor.getItem(),
+      isDragging: monitor.isDragging(),
+    }),
   }));
 
   return collected.isDragging ? (

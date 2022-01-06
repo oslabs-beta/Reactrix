@@ -43,9 +43,9 @@ export default function ReusableComponent() {
     <div ref={dragPreview} />
   ) : (
     <div>
-      {Object.values(reusableComponents).map((ele) => (
+      {Object.values(reusableComponents).map((ele, key) => (
         <ListItem>
-          <SingleReusableComponent key={ele.id} label={ele.label} />
+          <SingleReusableComponent label={ele.label} key={key} />
         </ListItem>
       ))}
     </div>

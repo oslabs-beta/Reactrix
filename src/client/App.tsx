@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from 'react';
+import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
@@ -10,13 +10,10 @@ import './styles/styles.css';
 
 import Navbar from './components/Navbar';
 import ComponentLibrary from './containers/ComponentLibrary';
-import ComponentTree from './containers/ComponentTree';
-import ComponentDetails from './containers/ComponentDetails';
-
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+// import ComponentTree from './containers/ComponentTree';
+// import ComponentDetails from './containers/ComponentDetails';
 
 const App = () => {
-  const [isLightTheme, setTheme] = useState(true);
   return (
     <div>
       <DndProvider backend={HTML5Backend}>
