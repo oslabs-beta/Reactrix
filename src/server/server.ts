@@ -7,6 +7,8 @@ import { AppContainer } from 'react-hot-loader';
 // const { AppContainer } = require('react-hot-loader');
 // // const cors = require('cors');
 
+
+// node dev.js
 const app = express();
 const PORT = 3000;
 
