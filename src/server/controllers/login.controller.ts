@@ -1,5 +1,5 @@
-// import { Request, Response, NextFunction, request} from 'express';
-// // import { request } from 'http';
+import { Request, Response, NextFunction, request} from 'express';
+// import { request } from 'http';
 // import superagent from 'superagent';
 
 // // https://github.com/login/oauth/authorize?client_id=d223334a158fd98423d8
@@ -7,21 +7,22 @@
 // // const clientId= 'd223334a158fd98423d8';
 // // const clientSecret = '5201648e266bf4a28fc225e84a7d4db9d04cec0316ff85a93ecd5a711d340f35e1d3b69503197ff1';
 
-// const login = (req: Request, res: Response, next: NextFunction) => {
+const login = (req: Request, res: Response, next: NextFunction) => {
     
-//     const { query } = req;
+    const { query } = req;
 
-//     const { code } = query;
+    const { code } = query;
 
-//     if (!code){
-//         return res.send({
-//             success: false,
-//             message: 'Error: no code'
-//         });
-//     }
-// //     return next();
-// // };
+    if (!code){
+        return res.send({
+            success: false,
+            message: 'Error: no code'
+        });
+    }
+    return next();
+};
 
+export default { login };
 // // const auth = (req: Request, res: Response, next: NextFunction) => {
 // //     const { query } = req;
 
@@ -57,5 +58,3 @@
 //     return next();
 // }
 
-
-// export default { login };

@@ -13,29 +13,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 // import ComponentDetails from './containers/ComponentDetails';
 import Main from './Main';
 
-// const main = () => {
-//   return (
-//     <div>
-//       <DndProvider backend={HTML5Backend}>
-//         <ThemeProvider theme={theme}>
-//           <Navbar />
-//           <ComponentLibrary />
-//           {/* <ComponentTree /> */}
-//           {/* <ComponentDetails /> */}
-//         </ThemeProvider>
-//       </DndProvider>
-//     </div>
-//   );
-// };
-
-import SignIn from './containers/SignIn';
+import SignIn from './SignIn';
 
 const App = () => {
   return(
   <Router>
     <Routes>
-      <Route path="/" element={<SignIn />}/>
-      <Route path="/dashboard" element={ <Main /> }/>
+      <Route path="/" element={<SignIn />}>
+        <Route path="/dashboard" element={ <Main /> }/>
+      </Route>
     </Routes>
   </Router>
   );
