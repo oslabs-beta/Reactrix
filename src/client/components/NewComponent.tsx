@@ -12,14 +12,14 @@ export default function NewComponent({ label }: Props) {
     type: 'box',
     // pass in object containing payload of component label
     item: { label: label },
+    options: {
+      dropEffect: 'copy',
+    },
     collect: (monitor: DragSourceMonitor) => ({
       // grab the label object for use in tree > components > RenderCard
       item: monitor.getItem(),
       isDragging: monitor.isDragging(),
     }),
-    options: {
-      dropEffect: 'copy',
-    },
   }));
 
   return collected.isDragging ? (

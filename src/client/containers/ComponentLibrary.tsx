@@ -1,6 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
-import { nanoid } from 'nanoid';
 
 import {
   Box,
@@ -22,8 +21,8 @@ import NewComponent from '../components/NewComponent';
 import ReusableComponents from './ReusableComponents';
 import PerformanceMetrics from './PerformanceMetrics';
 import ComponentDetails from './ComponentDetails';
-
-import OrgTreeComponent, { useTree } from '../tree';
+import Snapshots from './Snapshots';
+import { handleUpdateData } from '../helpers/helpers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,29 +31,32 @@ const useStyles = makeStyles((theme: Theme) =>
       flexShrink: 0,
       [`& .MuiDrawer-paper`]: { width: 300, boxSizing: 'border-box' },
     },
-    container: {
-      width: '50%',
-      height: '500px',
-      minWidth: '750px',
+    containerLeft: {
+      height: 'auto',
       borderBottom: '0.5px Solid lightgrey',
       borderRight: '0.5px Solid lightgrey',
+    },
+    containerRight: {
+      height: 'auto',
+      borderBottom: '0.5px Solid lightgrey',
     },
   })
 );
 
 export default function ComponentLibrary(): any {
-  const [collected, drag, dragPreview] = useDrag(() => ({
-    type: 'box',
-    item: { id: 1 },
-  }));
+  const [checked, setChecked] = useState(false);
 
-  // make a OrgTreeComponent for New Component
-  const { treeRef } = useTree();
-  const data = {
-    id: 777,
-    label: 'New Component',
-    children: [],
-  };
+  function handleCheck() {
+    setChecked(!checked);
+  }
+
+  if (checked) {
+    const newDummyData = handleUpdateData();
+    console.log(
+      'this is dummydata, it should be updating with every truthy return of check',
+      newDummyData
+    );
+  }
 
   const classes = useStyles();
 
@@ -86,21 +88,22 @@ export default function ComponentLibrary(): any {
       </Drawer>
       <Box component='main' sx={{ flexGrow: 1, p: 2.5 }}>
         <Toolbar />
-        <Grid container spacing={2}>
-          <Grid item className={classes.container}>
+        <Grid container spacing={4}>
+          <Grid item xs={8} className={classes.containerLeft}>
             <Typography variant='h5'>Component Tree</Typography>
             <ComponentTree />
           </Grid>
-          <Grid item className={classes.container}>
+          <Grid item xs={4} className={classes.containerRight}>
             <Typography variant='h5'>Component Details</Typography>
             <ComponentDetails />
           </Grid>
-          <Grid item className={classes.container}>
+          <Grid item xs={8} className={classes.containerLeft}>
             <Typography variant='h5'>Performance Metrics</Typography>
-            <PerformanceMetrics />
+            <PerformanceMetrics checked={checked} handleCheck={handleCheck} />
           </Grid>
-          <Grid item className={classes.container}>
+          <Grid item xs={4} className={classes.containerRight}>
             <Typography variant='h5'>Snapshots</Typography>
+            <Snapshots handleCheck={handleCheck} />
           </Grid>
         </Grid>
       </Box>

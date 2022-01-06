@@ -5,7 +5,6 @@ import {
   FormControl,
   FormHelperText,
   OutlinedInput,
-  TextField,
   createStyles,
   makeStyles,
   Theme,
@@ -40,6 +39,7 @@ export default function ComponentDetails() {
           <OutlinedInput
             id='outlined-adornment-weight'
             aria-describedby='outlined-weight-helper-text'
+            placeholder='Add your component name'
             inputProps={{
               'aria-label': 'weight',
             }}
@@ -50,6 +50,7 @@ export default function ComponentDetails() {
           <OutlinedInput
             id='outlined-adornment-weight'
             aria-describedby='outlined-weight-helper-text'
+            placeholder='Add an API call URL'
             inputProps={{
               'aria-label': 'weight',
             }}
@@ -60,6 +61,7 @@ export default function ComponentDetails() {
           <OutlinedInput
             id='outlined-adornment-weight'
             aria-describedby='outlined-weight-helper-text'
+            placeholder='Set state'
             inputProps={{
               'aria-label': 'weight',
             }}
@@ -72,6 +74,7 @@ export default function ComponentDetails() {
           <OutlinedInput
             id='outlined-adornment-weight'
             aria-describedby='outlined-weight-helper-text'
+            placeholder='Add a hook'
             inputProps={{
               'aria-label': 'weight',
             }}

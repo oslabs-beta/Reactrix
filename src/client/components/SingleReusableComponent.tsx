@@ -6,17 +6,17 @@ interface IReusableComponent {
   label: string;
 }
 
-export default function DraggableComponent({ label }: IReusableComponent) {
+export default function SingleReusableComponent({ label }: IReusableComponent) {
   const [collected, drag, dragPreview] = useDrag(() => ({
     type: 'box',
     item: { label: label },
+    options: {
+      dropEffect: 'copy',
+    },
     collect: (monitor: DragSourceMonitor) => ({
       item: monitor.getItem(),
       isDragging: monitor.isDragging(),
     }),
-    options: {
-      dropEffect: 'copy',
-    },
   }));
 
   return collected.isDragging ? (
