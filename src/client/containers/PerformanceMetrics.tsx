@@ -9,11 +9,11 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import faker from 'faker';
 
-import { handleUpdateData } from '../helpers/helpers';
+import { handleInitialData, handleUpdateData } from '../helpers/helpers';
 
 type Props = {
+  firstSnapshot: boolean;
   checked: boolean;
   handleCheck: any;
 };
@@ -59,25 +59,30 @@ const data = {
   datasets: [
     {
       label: 'Snapshot 1',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Snapshot 2',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+      data: labels.map(() =>
+        Math.floor(
+          Math.random() * (Math.floor(1000) - Math.ceil(200) + 1) +
+            Math.ceil(1000)
+        )
+      ),
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-export default function PerformanceMetrics({ checked }: Props) {
+export default function PerformanceMetrics({ firstSnapshot, checked }: Props) {
   return (
     <div>
       <Bar
         options={options}
-        data={checked ? handleUpdateData() : data}
+        data={
+          firstSnapshot && checked
+            ? data
+            : checked && !firstSnapshot
+            ? handleUpdateData()
+            : handleInitialData()
+        }
         style={{
           maxHeight: '500px',
         }}
