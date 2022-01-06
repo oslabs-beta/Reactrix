@@ -57,7 +57,6 @@
         "@types/dotenv": "^8.2.0",
         "@types/express": "^4.17.13",
         "@types/express-session": "^1.17.4",
-        "@types/faker": "^5.5.9",
         "@types/node": "^17.0.8",
         "@types/passport": "^1.0.7",
         "@types/passport-github": "^1.1.7",
