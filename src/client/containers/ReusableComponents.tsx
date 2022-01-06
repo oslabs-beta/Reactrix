@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 import { nanoid } from 'nanoid';
 import { ListItem } from '@material-ui/core';

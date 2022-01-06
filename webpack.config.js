@@ -10,11 +10,11 @@ const config = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        exclude: /node_modules/,
-      },
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   use: 'babel-loader',
+      //   exclude: /node_modules/,
+      // },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
@@ -24,28 +24,28 @@ const config = {
         loader: 'ts-loader',
         exclude: /node_modules/,
       },
-      {
-        test: /\.svg$/,
-        use: 'file-loader',
-      },
-      {
-        test: /\.png$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              mimetype: 'image/png',
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.svg$/,
+      //   use: 'file-loader',
+      // },
+      // {
+      //   test: /\.png$/,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: {
+      //         mimetype: 'image/png',
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
   devServer: {
     host: 'localhost',
     port: 8080,
     proxy: {
-      '/': 'http://localhost:3000',
+      '/*': 'http://localhost:3000',
     },
     static: {
       directory: './dist',
