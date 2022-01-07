@@ -1,7 +1,10 @@
 import postgress from 'pg';
+import dotenv from 'dotenv'
 const {Pool} = postgress;
 
-const PG_URI = 'postgres://cvynjnqp:UeqiAkUctJ3-AvnF_NlRF5dI03oDRIwi@kashin.db.elephantsql.com/cvynjnqp'
+
+dotenv.config()
+const PG_URI = process.env.PG_URI
 
 const pool = new Pool({
   connectionString: PG_URI
