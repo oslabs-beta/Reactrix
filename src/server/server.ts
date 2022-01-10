@@ -1,20 +1,33 @@
 import express from 'express';
 import session from 'express-session';
-import fs from 'fs';
+// import fs from 'fs';
 import path from 'path';
-import { AppContainer } from 'react-hot-loader';
 import cors from "cors";
-import apiRouter from "./routes/api"
 // import dotenv from '.env';
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
+import authRoute from "./routes/auth";
 
 const app = express();
 const PORT = 3000;
 
 // // enable all CORS requests
- app.use(cors());
+ app.use(cors({
+  origin: "http://localhost:3000",
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
+ }
+ ));
 
+import ReactDOMServer from 'react-dom/server';
+
+
+
+// parse incoming requests
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// -------------------------- GITHUB -------------------------------//
 // Below is where we introduce encrypted sessions
 // Make sure your app secret is unique and
 // defined by cryptographic random generator.
@@ -24,13 +37,6 @@ app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: fals
 // persistent login sessions (recommended).
 app.use(passport.initialize());
 app.use(passport.session());
-
-  
-// parse incoming requests
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-  
-// -------------------------- GITHUB -------------------------------//
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -60,6 +66,10 @@ passport.use(
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
     console.log('profile: ',profile);
     console.log('this is done', done);
+    // const user = {
+    //   username: profile.login,
+    //   avatar: profile.avatar_url
+    // }
     process.nextTick(function () {
       // To keep the example simple, the user's GitHub profile is returned to
       // represent the logged-in user.  In a typical application, you would want
@@ -70,60 +80,23 @@ passport.use(
     });
   }
 ));
-// GET /auth/github
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  The first step in GitHub authentication will involve redirecting
-//   the user to github.com.  After authorization, GitHub will redirect the user
-//   back to this application at /auth/github/callback
-app.get('/auth/github',
-  passport.authenticate('github', { scope: [ `user:email` ] }),
-  
-  function(req, res){
-    // The request will be redirected to GitHub for authentication, so this
-    // function will not be called.
-    console.log('app.get(/auth/github) is working')
-    return;
-  });
 
-// GET /auth/github/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function will be called,
-//   which, in this example, will redirect the user to the home page.
-app.get('/auth/github/callback', 
-  (req: any, res: any, next: any) => {
-    console.log(`i'm here`);
-    return next();
-  },
-  passport.authenticate('github', { successRedirect: '/dashboard', failureRedirect: '/' })
-);
+app.use("/auth", authRoute);
 
 
 // -------------------------- GITHUB -------------------------------//
-
-
-
-
-
-// const apiRouter = require('./routes/api');
 
 
 // statically serve everything in the build folder on the route '/dist'
 // app.use('/dist', express.static(path.join(__dirname, '../../dist')));
 app.use('/', express.static(path.join(__dirname, 'static')))
 
-app.use('/api', apiRouter);
 
 
 app.get('/', (req: any, res: any) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
-// app.get('/dashboard', (req: any, res: any) => {
-//   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
-// });
-
-// app.use('/api', apiRouter);
 
 // catch-all route handler for any requests to an unknown route
 app.use((req: any, res: any) => res.sendStatus(404));
