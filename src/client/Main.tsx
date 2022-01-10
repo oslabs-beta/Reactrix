@@ -11,6 +11,8 @@ import ComponentLibrary from './containers/ComponentLibrary';
 // import ComponentDetails from './containers/ComponentDetails';
 import Footer from './components/Footer';
 
+//DnDProvider is wrapped around all containers for dragging and dropping across containers
+//ThemeProvider is wrapped around all containers for a consistent theme
 const Main = () => {
     return (
         <div>

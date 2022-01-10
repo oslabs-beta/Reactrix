@@ -1,9 +1,8 @@
-// const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
-const CopyPlugin = require('copy-webpack-plugin') //makes client.ejs template available at a relative location to the resulting JavaScript code
 
+// transpiling serverside typescript code with unique config and then bundling file for distribution to the browser
 const config = {
   name: 'server',
   entry: ['react-hot-loader/patch', path.resolve(__dirname, 'src/server/server.ts')],
@@ -12,6 +11,7 @@ const config = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
   },
+  /* Passing webpack-node-externals to the externals property will make webpack skip bundling files from the node_modules directory and instead import them at runtime. That's necessary because certain Node.js dependencies can't be bundled. Our compilation target is the Node.js runtime. Setting node.__dirname to false keeps the special __dirname path variable working as expected after the bundling.*/
   externals: [nodeExternals()],
   target: 'node',
   node: {
@@ -19,15 +19,6 @@ const config = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   use: 'babel-loader',
-      //   exclude: /node_modules/,
-      // },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
       {
         test: /\.ts(x)?$/,
         loader: 'ts-loader',
@@ -36,21 +27,6 @@ const config = {
           configFile: 'tsconfig.server.json',
         },
       },
-      // {
-      //   test: /\.svg$/,
-      //   use: 'file-loader',
-      // },
-      // {
-      //   test: /\.png$/,
-      //   use: [
-      //     {
-      //       loader: 'url-loader',
-      //       options: {
-      //         mimetype: 'image/png',
-      //       },
-      //     },
-      //   ],
-      // },
     ],
   },
   devServer: {
@@ -63,22 +39,6 @@ const config = {
       directory: './dist',
     },
   },
-  // devtool: 'source-map',
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     templateContent: ({ htmlWebpackPlugin }) =>
-  //       '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' +
-  //       htmlWebpackPlugin.options.title +
-  //       '</title></head><body><div id="app"></div></body></html>',
-  //     filename: 'index.html',
-  //   }),
-  // ],
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     template: './index.html',
-  //     inject: true,
-  //   }),
-  // ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {

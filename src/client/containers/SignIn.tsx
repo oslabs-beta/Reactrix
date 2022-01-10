@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button, { ButtonProps } from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -13,6 +13,7 @@ import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 
+//imported a template button and adjusted the styling to preference
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: theme.palette.getContrastText(grey[800]),
     backgroundColor: grey[800],
@@ -21,7 +22,8 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
     }
 }));
 
-function Copyright(props: any) {
+//defining the component Copyright on the sign-in page while adjusting the styling
+const Copyright = (props: any) => {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Reactrix'} {new Date().getFullYear()}
@@ -30,6 +32,7 @@ function Copyright(props: any) {
 }
 
 export default function SignIn() {
+    //handleSubmit will take in data from input boxes upon form submission and will do something with the data
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -39,7 +42,6 @@ export default function SignIn() {
             password: data.get('password')
         });
     };
-
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />

@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const webpackConfigClient = require('./webpack.config.client')
 const webpackConfigServer = require('./webpack.config.server')
 
+//bundle the two different configurations and alter them to development mode
 const compiler = webpack([
   {
     ...webpackConfigClient,
@@ -23,6 +24,7 @@ const compiler = webpack([
 
 let node
 
+//state which bundle is compiling and if the server is already running, kill it
 compiler.hooks.watchRun.tap('Dev', (compiler) => {
   console.log(`Compiling ${compiler.name} ...`)
   if (compiler.name === 'server' && node) {
@@ -31,6 +33,7 @@ compiler.hooks.watchRun.tap('Dev', (compiler) => {
   }
 })
 
+//watches or detects changes in source code and automatically re-compiles and restarts server with the changes
 compiler.watch({}, (err, stats) => {
   if (err) {
     console.error(err)

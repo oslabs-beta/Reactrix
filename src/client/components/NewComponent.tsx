@@ -16,7 +16,7 @@ export default function NewComponent({ label }: Props) {
       dropEffect: 'copy',
     },
     collect: (monitor: DragSourceMonitor) => ({
-      // grab the label object for use in tree > components > RenderCard
+      // grab the item object for use in tree > components > RenderCard
       item: monitor.getItem(),
       isDragging: monitor.isDragging(),
     }),
