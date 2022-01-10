@@ -3,14 +3,16 @@ import session from 'express-session';
 // import fs from 'fs';
 import path from 'path';
 import cors from "cors";
-// import dotenv from '.env';
+import dotenv from "dotenv";
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import authRoute from "./routes/auth";
 
 const app = express();
 const PORT = 3000;
-
+const GH_CLIENTID = process.env.GH_CLIENT_ID;
+const GH_CLIENTSECRET = process.env.GH_CLIENT_SECRET;
+const GH_CALLBACKURL = process.env.GH_CALLBACK_URL;
 // // enable all CORS requests
  app.use(cors({
   origin: "http://localhost:3000",
@@ -59,9 +61,9 @@ passport.deserializeUser(function(obj:any , done: any) {
 passport.use(
   new GitHubStrategy(
     {
-    clientID: 'd223334a158fd98423d8',
-    clientSecret: '318cd7b4cb94c3d06cd6c704cfb23c65430db7fe',
-    callbackURL: "http://localhost:3000/auth/github/callback"
+    clientID: GH_CLIENTID, // process.env.ClientId
+    clientSecret: GH_CLIENTSECRET,
+    callbackURL: GH_CALLBACKURL,
     },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
     console.log('profile: ',profile);
@@ -156,69 +158,4 @@ app.listen(PORT, () => {
 // //     res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
 // //   );
 // // });
-
-// app.get('/login', (req, res) => {
-//   res.status(200).redirect(`https://github.com/login/oauth/authorize?client_id=d223334a158fd98423d8&redirect_uri=http://localhost:3000/login/auth?path=/&scope=user:email`)
-// });
-
-// app.get('/login/callback', ({ query: { code } }, res) => {
-//   const body = {
-//     client_id: 'd223334a158fd98423d8',
-//     client_secret: '5201648e266bf4a28fc225e84a7d4db9d04cec0316ff85a93ecd5a711d340f35e1d3b69503197ff1',
-//     code,
-//   };
-//   const opts = { headers: { accept: 'application/json' } };
-//   axios
-//     .post('https://github.com/login/oauth/access_token', body, opts)
-//     .then((_res) => _res.data.access_token)
-//     .then((token) => {
-//       res.redirect(`/?token=${token}`);
-//     })
-//     .catch((err) => res.status(500).json({ err: err.message }));
-  
-// })
-
-// // app.get('/', (req, res) => {
-// //   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
-// // });
-
-// // app.get('/oauth-callback', (req: any, res: any) => {
-// //  const body = {
-// //    client_id: clientId,
-// //    client_secret: clientSecret,
-// //    code: req.query.code
-// //  };
-// //  const opts = { headers: { accept: 'application/json' } };
-// //  axios.post(`https://github.com/login/oauth/access_token`, body, opts)
-// //     .then(res => res.data['access_token'])
-// //     .then(_token => {
-// //      console.log('My token:', token);
-// //      token = _token;
-// //      res.json({ ok: 1 });
-// //    }).
-// //    catch(err => res.status(500).json({ message: err.message }));
-// // );
-
-
-
-// // app.use('/api', apiRouter);
-
-// app.use((req, res) => res.sendStatus(404));
-
-// // app.use((err, req, res, next) => {
-// //   const defaultErr = {
-// //     log: 'Express error handler caught unknown middleware error',
-// //     status: 400,
-// //     message: { err: 'An error occurred' },
-// //   };
-// //   const errorObj = Object.assign({}, defaultErr, err);
-// //   console.log(errorObj.log);
-// //   return res.status(errorObj.status).json(errorObj.message);
-// // });
-
-// app.listen(port, host, () => {
-//   log.info(`Server listening at http://${host}:${port}...`);
-
-// });
-
 
