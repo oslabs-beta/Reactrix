@@ -9,6 +9,8 @@ import authRoute from "./routes/auth";
 
 dotenv.config();
 
+
+// node dev.js
 const app = express();
 const PORT = 3000;
 
@@ -160,4 +162,3 @@ app.listen(PORT, () => {
 // //     res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
 // //   );
 // // });
-
