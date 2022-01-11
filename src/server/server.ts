@@ -8,18 +8,20 @@ import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import authRoute from "./routes/auth";
 
+dotenv.config();
+
 const app = express();
 const PORT = 3000;
-const GH_CLIENTID = process.env.GH_CLIENT_ID;
-const GH_CLIENTSECRET = process.env.GH_CLIENT_SECRET;
-const GH_CALLBACKURL = process.env.GH_CALLBACK_URL;
+
+
+
 // // enable all CORS requests
- app.use(cors({
+app.use(cors({
   origin: "http://localhost:3000",
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
- }
- ));
+}
+));
 
 import ReactDOMServer from 'react-dom/server';
 
@@ -58,12 +60,13 @@ passport.deserializeUser(function(obj:any , done: any) {
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and GitHub
 //   profile), and invoke a callback with a user object.
+
 passport.use(
   new GitHubStrategy(
     {
-    clientID: GH_CLIENTID, // process.env.ClientId
-    clientSecret: GH_CLIENTSECRET,
-    callbackURL: GH_CALLBACKURL,
+    clientID: `${process.env.GH_CLIENT_ID}`, 
+    clientSecret: `${process.env.GH_CLIENT_SECRET}`,
+    callbackURL: `${process.env.GH_CALLBACK_URL}`,
     },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
     console.log('profile: ',profile);

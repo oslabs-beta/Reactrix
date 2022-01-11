@@ -4,7 +4,6 @@ import { Link, Outlet, Navigate } from 'react-router-dom';
 import Button, { ButtonProps } from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -48,7 +47,8 @@ export default function SignIn() {
     // };
     const oAuth = () => {
         // event.preventDefault();
-        window.open("http://localhost:3000/auth/github", "_self");
+        window.open("http://localhost:3000/auth/github", "_self")
+         
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
