@@ -9,6 +9,8 @@ import apiRouter from "./routes/api"
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 
+
+// node dev.js
 const app = express();
 const PORT = 3000;
 
@@ -247,5 +249,4 @@ app.listen(PORT, () => {
 //   log.info(`Server listening at http://${host}:${port}...`);
 
 // });
-
 
