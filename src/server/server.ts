@@ -1,22 +1,38 @@
 import express from 'express';
 import session from 'express-session';
-import fs from 'fs';
 import path from 'path';
-import { AppContainer } from 'react-hot-loader';
 import cors from "cors";
-import apiRouter from "./routes/api"
-// import dotenv from '.env';
+import dotenv from "dotenv";
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
+import authRoute from "./routes/auth";
+
+dotenv.config();
 
 
 // node dev.js
 const app = express();
 const PORT = 3000;
 
-// // enable all CORS requests
- app.use(cors());
 
+
+// // enable all CORS requests
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
+}
+));
+
+import ReactDOMServer from 'react-dom/server';
+
+
+
+// parse incoming requests
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// -------------------------- GITHUB -------------------------------//
 // Below is where we introduce encrypted sessions
 // Make sure your app secret is unique and
 // defined by cryptographic random generator.
@@ -26,13 +42,6 @@ app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: fals
 // persistent login sessions (recommended).
 app.use(passport.initialize());
 app.use(passport.session());
-
-  
-// parse incoming requests
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-  
-// -------------------------- GITHUB -------------------------------//
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -52,16 +61,21 @@ passport.deserializeUser(function(obj:any , done: any) {
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and GitHub
 //   profile), and invoke a callback with a user object.
+
 passport.use(
   new GitHubStrategy(
     {
-    clientID: 'd223334a158fd98423d8',
-    clientSecret: '318cd7b4cb94c3d06cd6c704cfb23c65430db7fe',
-    callbackURL: "http://localhost:3000/auth/github/callback"
+    clientID: `${process.env.GH_CLIENT_ID}`, 
+    clientSecret: `${process.env.GH_CLIENT_SECRET}`,
+    callbackURL: `${process.env.GH_CALLBACK_URL}`,
     },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
     console.log('profile: ',profile);
     console.log('this is done', done);
+    // const user = {
+    //   username: profile.login,
+    //   avatar: profile.avatar_url
+    // }
     process.nextTick(function () {
       // To keep the example simple, the user's GitHub profile is returned to
       // represent the logged-in user.  In a typical application, you would want
@@ -72,60 +86,23 @@ passport.use(
     });
   }
 ));
-// GET /auth/github
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  The first step in GitHub authentication will involve redirecting
-//   the user to github.com.  After authorization, GitHub will redirect the user
-//   back to this application at /auth/github/callback
-app.get('/auth/github',
-  passport.authenticate('github', { scope: [ `user:email` ] }),
-  
-  function(req, res){
-    // The request will be redirected to GitHub for authentication, so this
-    // function will not be called.
-    console.log('app.get(/auth/github) is working')
-    return;
-  });
 
-// GET /auth/github/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function will be called,
-//   which, in this example, will redirect the user to the home page.
-app.get('/auth/github/callback', 
-  (req: any, res: any, next: any) => {
-    console.log(`i'm here`);
-    return next();
-  },
-  passport.authenticate('github', { successRedirect: '/dashboard', failureRedirect: '/' })
-);
+app.use("/auth", authRoute);
 
 
 // -------------------------- GITHUB -------------------------------//
-
-
-
-
-
-// const apiRouter = require('./routes/api');
 
 
 // statically serve everything in the build folder on the route '/dist'
 // app.use('/dist', express.static(path.join(__dirname, '../../dist')));
 app.use('/', express.static(path.join(__dirname, 'static')))
 
-app.use('/api', apiRouter);
 
 
 app.get('/', (req: any, res: any) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
-// app.get('/dashboard', (req: any, res: any) => {
-//   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
-// });
-
-// app.use('/api', apiRouter);
 
 // catch-all route handler for any requests to an unknown route
 app.use((req: any, res: any) => res.sendStatus(404));
@@ -185,68 +162,3 @@ app.listen(PORT, () => {
 // //     res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
 // //   );
 // // });
-
-// app.get('/login', (req, res) => {
-//   res.status(200).redirect(`https://github.com/login/oauth/authorize?client_id=d223334a158fd98423d8&redirect_uri=http://localhost:3000/login/auth?path=/&scope=user:email`)
-// });
-
-// app.get('/login/callback', ({ query: { code } }, res) => {
-//   const body = {
-//     client_id: 'd223334a158fd98423d8',
-//     client_secret: '5201648e266bf4a28fc225e84a7d4db9d04cec0316ff85a93ecd5a711d340f35e1d3b69503197ff1',
-//     code,
-//   };
-//   const opts = { headers: { accept: 'application/json' } };
-//   axios
-//     .post('https://github.com/login/oauth/access_token', body, opts)
-//     .then((_res) => _res.data.access_token)
-//     .then((token) => {
-//       res.redirect(`/?token=${token}`);
-//     })
-//     .catch((err) => res.status(500).json({ err: err.message }));
-  
-// })
-
-// // app.get('/', (req, res) => {
-// //   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
-// // });
-
-// // app.get('/oauth-callback', (req: any, res: any) => {
-// //  const body = {
-// //    client_id: clientId,
-// //    client_secret: clientSecret,
-// //    code: req.query.code
-// //  };
-// //  const opts = { headers: { accept: 'application/json' } };
-// //  axios.post(`https://github.com/login/oauth/access_token`, body, opts)
-// //     .then(res => res.data['access_token'])
-// //     .then(_token => {
-// //      console.log('My token:', token);
-// //      token = _token;
-// //      res.json({ ok: 1 });
-// //    }).
-// //    catch(err => res.status(500).json({ message: err.message }));
-// // );
-
-
-
-// // app.use('/api', apiRouter);
-
-// app.use((req, res) => res.sendStatus(404));
-
-// // app.use((err, req, res, next) => {
-// //   const defaultErr = {
-// //     log: 'Express error handler caught unknown middleware error',
-// //     status: 400,
-// //     message: { err: 'An error occurred' },
-// //   };
-// //   const errorObj = Object.assign({}, defaultErr, err);
-// //   console.log(errorObj.log);
-// //   return res.status(errorObj.status).json(errorObj.message);
-// // });
-
-// app.listen(port, host, () => {
-//   log.info(`Server listening at http://${host}:${port}...`);
-
-// });
-
