@@ -69,7 +69,6 @@ passport.use(
     },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
     console.log('profile: ',profile);
-    console.log('this is done', done);
     // const user = {
     //   username: profile.login,
     //   avatar: profile.avatar_url
