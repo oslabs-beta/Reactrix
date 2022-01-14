@@ -36,7 +36,7 @@ const dbController = {
             // console.log('response line 33');
             console.log(userData)
             // if (userData.username?: any  == params[1]){
-            if (userData.rows[0].username == user.username) {
+            if (userData.rows[0]?.username == user.username) {
                 console.log('line 37 first conditional passed', userData)
                 // iterate through the array value from the property with the key of rows,
                 res.username = userData.username;
