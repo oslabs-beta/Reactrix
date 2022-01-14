@@ -1,16 +1,16 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
+import UserContext from "../UserContext";
 import {
   AppBar,
   Toolbar,
   CssBaseline,
   Typography,
-  Link,
   createStyles,
   makeStyles,
   Theme,
 } from '@material-ui/core';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
-
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Navbar(): any {
   const classes = useStyles();
-
+  let { user, setUser }: any = useContext (UserContext);
   return (
     <AppBar position='fixed' className={classes.appBar}>
       <CssBaseline />
@@ -49,13 +49,13 @@ export default function Navbar(): any {
           Reactrix
         </Typography>
         <div className={classes.navLinks}>
-          <Link href='/' className={classes.link}>
-            Tutorial
+          <Link to='/tutorial' className={classes.link}>
+            {`Tutorial`}
           </Link>
-          <Link href='/' className={classes.link}>
-            Log out
+          <Link to='/' onClick={() => setUser(null) } className={classes.link}>
+            {'Log out'}
           </Link>
-        </div>
+        </div> 
       </Toolbar>
     </AppBar>
   );
