@@ -7,7 +7,7 @@ import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import authRoute from "./routes/auth";
 import db from "./models/reactrixModels";
-
+import dbController from "./controllers/reactrixController"
 
 dotenv.config();
 
@@ -65,20 +65,27 @@ passport.use(
     callbackURL: `${process.env.GH_CALLBACK_URL}`,
     },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
-    console.log('profile: ',profile);
-    console.log('this is done', done);
+    // console.log('profile line 68 in server.t: ',profile);
+    // console.log('this is done', done);
     // const user = {
     //   username: profile.login,
     //   avatar: profile.avatar_url
     // }
-    process.nextTick(function () {
-      // To keep the example simple, the user's GitHub profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the GitHub account with a user record in your database,
-      // and return that user instead.
-      console.log('process next tick is running');
-      return done(null, profile);
-    });
+
+    process.nextTick(
+      
+      function () {
+        const userProf = {};
+        dbController.handleLogin(profile, userProf);
+    //   // To keep the example simple, the user's GitHub profile is returned to
+    //   // represent the logged-in user.  In a typical application, you would want
+    //   // to associate the GitHub account with a user record in your database,
+    //   // and return that user instead.
+    //   console.log('process next tick is running');
+      // return done(null, profile);
+      return done(null, userProf);
+    }
+    );
   }
 ));
 
@@ -117,4 +124,8 @@ app.use((req: any, res: any) => res.sendStatus(404));
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
+
+function res(profile: any, res: any, done: any): Function {
+  throw new Error('Function not implemented.');
+}
 
