@@ -6,15 +6,14 @@ import dotenv from "dotenv";
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import authRoute from "./routes/auth";
+import db from "./models/reactrixModels";
+import dbController from "./controllers/reactrixController"
 
 dotenv.config();
-
 
 // node dev.js
 const app = express();
 const PORT = 3000;
-
-
 
 // // enable all CORS requests
 app.use(cors({
@@ -23,10 +22,6 @@ app.use(cors({
   credentials: true,
 }
 ));
-
-import ReactDOMServer from 'react-dom/server';
-
-
 
 // parse incoming requests
 app.use(express.json());
@@ -70,19 +65,27 @@ passport.use(
     callbackURL: `${process.env.GH_CALLBACK_URL}`,
     },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
-    console.log('profile: ',profile);
+    // console.log('profile line 68 in server.t: ',profile);
+    // console.log('this is done', done);
     // const user = {
     //   username: profile.login,
     //   avatar: profile.avatar_url
     // }
-    process.nextTick(function () {
-      // To keep the example simple, the user's GitHub profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the GitHub account with a user record in your database,
-      // and return that user instead.
-      console.log('process next tick is running');
-      return done(null, profile);
-    });
+
+    process.nextTick(
+      
+      function () {
+        const userProf = {};
+        dbController.handleLogin(profile, userProf);
+    //   // To keep the example simple, the user's GitHub profile is returned to
+    //   // represent the logged-in user.  In a typical application, you would want
+    //   // to associate the GitHub account with a user record in your database,
+    //   // and return that user instead.
+    //   console.log('process next tick is running');
+      // return done(null, profile);
+      return done(null, userProf);
+    }
+    );
   }
 ));
 
@@ -122,42 +125,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
 
+function res(profile: any, res: any, done: any): Function {
+  throw new Error('Function not implemented.');
+}
 
-
-
-
-// import express from "express";
-// import axios from "axios";
-// import config from "config";
-// // import api from './routes/api';
-// import log from './logger';
-
-// const port = config.get("port") as number;
-// const host = config.get("host") as string;
-// const app = express();
-
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-
-// // Rules of our API
-// app.use((req, res, next) => {
-//   res.header('Access-Control-ALlow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//   next();
-// });
-
-// // Error Handling
-// app.use((req, res, next) => {
-//   const error = new Error('not found');
-//   return res.status(404).json({
-//     message: error.message
-//   });
-// });
-
-// // app.use('/api', api);
-
-// // app.get('/', (req, res) => {
-// //   return(
-// //     res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
-// //   );
-// // });

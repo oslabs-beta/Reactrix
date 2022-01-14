@@ -1,12 +1,12 @@
 import express, { Router } from 'express';
-import controller from '../controllers/login.controller';
 import passport from 'passport';
 import { BrowserRouter } from 'react-router-dom';
 import { treeItemClasses } from '@mui/lab';
 // import { Redirect } from 'react-router-dom';
+import dbController from '../controllers/reactrixController'
 const router = express.Router();
 
-router.get("/github", passport.authenticate("github", {scope: [ `user:email`] }),
+router.get("/github", passport.authenticate("github", {scope: [ `user: username`] }),
     function(req, res){
     // The request will be redirected to GitHub for authentication, so this
     // function will not be called.
@@ -21,13 +21,14 @@ router.get("/github", passport.authenticate("github", {scope: [ `user:email`] })
 // router.get('/api/login/callback', controller.login);
 
 router.get("/login/success", (req, res) => {
-    console.log(req.user)
+    // console.log('req in auth.ts line 24: ', req)
     if(req.user){
-        res.status(200).json({
+        res.status(200)
+        .json({
             success: true,
             message: "successful",
             user: req.user,
-            // cookies: req.cookies
+            cookies: req.cookies
         })
     }
 });
