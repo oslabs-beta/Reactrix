@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, Outlet, Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import Button, { ButtonProps } from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,7 +11,6 @@ import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
-import { AnyRecord } from 'dns';
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 
@@ -107,7 +106,6 @@ export default function SignIn() {
                         <Grid item>
                             <Link to="/dashboard">{'Continue as Guest'}</Link>
                         </Grid>
-                        {/* <Link to="/auth/github">Login</Link> */}
                     </Grid>
                 </Box>
             </Box>
