@@ -1,10 +1,11 @@
 import * as React from 'react';
 import OrgTreeComponent, { useTree } from '../tree';
+import { Typography } from '@material-ui/core';
 
 let data = {
   id: 1,
   label: 'App',
-  children: [],
+  children: []
 };
 
 export default function ComponentTree(props: any): any {
@@ -12,7 +13,8 @@ export default function ComponentTree(props: any): any {
 
   return (
     <div>
-        <OrgTreeComponent data={data} ref={treeRef} horizontal />
+      <Typography variant="h5">Component Tree</Typography>
+      <OrgTreeComponent data={data} ref={treeRef} horizontal />
     </div>
   );
 }
