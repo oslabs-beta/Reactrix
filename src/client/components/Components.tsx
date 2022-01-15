@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme } from '@material-ui/core';
 
 import GenerateComponent from './GenerateComponent';
@@ -25,6 +25,7 @@ export default function Component() {
     const [state, setState] = useState('');
     const [hook, setHook] = useState('');
     const [componentDetails, setComponentDetails] = useState({ name: null, url: null, state: null, hook: null });
+    // const [componentTreeState, setComponentTreeState] = useState([]);
 
     const handleSetDetails = (name: string, url?: string, state?: string, hook?: string) => {
         const newComponentDetails = {
@@ -37,26 +38,30 @@ export default function Component() {
         setComponentDetails(newComponentDetails);
     };
 
-    const handleOnChangeName = (event) => {
+    // const handleAddToComponentTreeState = (component) => {
+    //     setComponentTreeState((componentTreeState) => [...componentTreeState, component]);
+    // };
+
+    const handleOnChangeName = (event: any) => {
         setName(event.target.value);
     };
 
-    const handleOnChangeUrl = (event) => {
+    const handleOnChangeUrl = (event: any) => {
         setUrl(event.target.value);
     };
 
-    const handleOnChangeState = (event) => {
-        console.log(event.target.value);
+    const handleOnChangeState = (event: any) => {
         setState(event.target.value);
     };
 
-    const handleOnChangeHook = (event) => {
-        console.log(event.target.value);
+    const handleOnChangeHook = (event: any) => {
         setHook(event.target.value);
     };
 
     // console.log('componentDetails', componentDetails);
     // console.log('name', name);
+    // console.log('componentTreeState', componentTreeState);
+
     // https://jsonplaceholder.typicode.com/todos/1
 
     return (

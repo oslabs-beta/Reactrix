@@ -11,6 +11,19 @@ export default function GenerateComponent(props: any) {
         axios.get(`${url}`).then((res) => console.log(res));
     };
 
+    // const checkIfDuplicateName = (name: string) => {
+    //     let checkList = state.components.slice(); // makes copy of components array
+
+    //     // checks to see if inputted comp name already exists
+    //     let dupe = false;
+    //     checkList.forEach((comp) => {
+    //         if (comp.name.toLowerCase() === inputName.toLowerCase()) {
+    //             dupe = true;
+    //         }
+    //     });
+    //     return dupe;
+    // };
+
     const emptyCard = (
         <React.Fragment>
             <CardContent>
