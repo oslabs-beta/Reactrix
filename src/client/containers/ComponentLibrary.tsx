@@ -93,7 +93,6 @@ export default function ComponentLibrary(): any {
         <Toolbar />
         <Grid container spacing={4}>
           <Grid item xs={8} className={classes.containerLeft}>
-            {/* <Typography variant='h5'>Component Tree</Typography> */}
             <Outlet />
           </Grid>
           <Grid item xs={4} className={classes.containerRight}>
