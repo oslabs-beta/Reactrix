@@ -17,9 +17,9 @@ const Main = () => {
         <div>
             <DndProvider backend={HTML5Backend}>
                 <ThemeProvider theme={theme}>
-                    {/* <Navbar />
+                    <Navbar />
                     <ComponentLibrary />
-                    <Footer /> */}
+                    {/* <Footer /> */}
                     <Components />
                 </ThemeProvider>
             </DndProvider>

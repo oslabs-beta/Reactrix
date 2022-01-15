@@ -2,19 +2,19 @@ import * as React from 'react';
 import OrgTreeComponent, { useTree } from '../tree';
 
 let data = {
-  id: 1,
-  label: 'App',
-  children: [],
+    id: 1,
+    label: 'App',
+    children: []
 };
 
 export default function ComponentTree(props: any): any {
-  const { treeRef } = useTree();
+    const { treeRef } = useTree();
 
-  return (
-    <div>
-      <div>
-        <OrgTreeComponent data={data} ref={treeRef} horizontal />
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            <div>
+                <OrgTreeComponent data={data} ref={treeRef} horizontal />
+            </div>
+        </div>
+    );
 }

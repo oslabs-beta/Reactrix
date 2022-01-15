@@ -4,31 +4,27 @@ import { Box, Button, Card, CardActions, CardContent, Typography } from '@materi
 import axios from 'axios';
 
 export default function GenerateComponent(props: any) {
-    const { name, url, state, hook } = props.componentDetails;
-    console.log('props: ', props.componentDetails);
+    const { id, label, url, state, hook } = props.componentDetails;
+    const { componentTree } = props;
 
     const handleRequest = (url: string) => {
         axios.get(`${url}`).then((res) => console.log(res));
     };
 
-    // const checkIfDuplicateName = (name: string) => {
-    //     let checkList = state.components.slice(); // makes copy of components array
-
-    //     // checks to see if inputted comp name already exists
-    //     let dupe = false;
-    //     checkList.forEach((comp) => {
-    //         if (comp.name.toLowerCase() === inputName.toLowerCase()) {
-    //             dupe = true;
-    //         }
-    //     });
-    //     return dupe;
-    // };
+    const formatComponentName = (name: string) => {
+        if (name) {
+            let removeSpaces = name.replace(/\s+/g, '');
+            const formattedName = removeSpaces.charAt(0).toUpperCase() + removeSpaces.slice(1);
+            return formattedName;
+        }
+        return;
+    };
 
     const emptyCard = (
         <React.Fragment>
             <CardContent>
-                <Typography variant="body1">Default Card</Typography>
-                <Typography variant="h4">Name: </Typography>
+                <Typography variant="caption">Default Empty Component</Typography>
+                <Typography variant="h3">Name: </Typography>
             </CardContent>
             <CardActions></CardActions>
         </React.Fragment>
@@ -37,7 +33,7 @@ export default function GenerateComponent(props: any) {
     const detailCard = (
         <React.Fragment>
             <CardContent>
-                <Typography variant="h4">Name: {name}</Typography>
+                <Typography variant="h3">Name: {formatComponentName(label)}</Typography>
             </CardContent>
             <CardActions>
                 {url ? (
@@ -52,11 +48,13 @@ export default function GenerateComponent(props: any) {
                         API Call
                     </Button>
                 ) : null}
+                {state ? <Typography variant="body2">State: {state}</Typography> : null}
+                {hook ? <Typography variant="body2">Hook: {hook}</Typography> : null}
             </CardActions>
         </React.Fragment>
     );
 
-    if (url !== null)
+    if (label !== 'App' || url !== null)
         return (
             <Box sx={{ minWidth: 275, maxWidth: 550 }}>
                 <Card variant="outlined">{detailCard}</Card>
