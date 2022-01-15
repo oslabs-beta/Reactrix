@@ -1,72 +1,22 @@
-import React, { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React from 'react';
 
 import {
   Box,
-  Button,
   Drawer,
-  Grid,
   List,
   ListItem,
   Toolbar,
   Typography,
   Divider,
-  createStyles,
-  makeStyles,
 } from '@material-ui/core';
 
 import NewComponent from '../components/NewComponent';
 import ReusableComponents from './ReusableComponents';
-import PerformanceMetrics from './PerformanceMetrics';
-import ComponentDetails from './ComponentDetails';
-import Snapshots from './Snapshots';
-import { handleInitialData, handleUpdateData } from '../helpers/helpers';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    drawer: {
-      width: 300,
-      flexShrink: 0,
-      [`& .MuiDrawer-paper`]: { width: 300, boxSizing: 'border-box' },
-    },
-    containerLeft: {
-      height: 'auto',
-      borderBottom: '0.5px Solid lightgrey',
-      borderRight: '0.5px Solid lightgrey',
-    },
-    containerRight: {
-      height: 'auto',
-      borderBottom: '0.5px Solid lightgrey',
-    },
-  })
-);
-
-export default function ComponentLibrary(): any {
-  const [firstSnapshot, setFirstSnapshot] = useState(true);
-  const [checked, setChecked] = useState(false);
-  let navigate = useNavigate();
-
-  function handleFirstCheck() {
-    setFirstSnapshot(!firstSnapshot);
-  }
-
-  function handleCheck() {
-    setChecked(!checked);
-  }
-
-  if (checked) {
-    const newDummyData = handleUpdateData();
-    console.log(
-      'this is dummydata, it should be updating with every truthy return of check',
-      newDummyData
-    );
-  }
-
-  const classes = useStyles();
+export default function ComponentLibrary(props: any): any {
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Drawer variant="permanent" className={classes.drawer}>
+      <Drawer variant="permanent" className={props.drawer}>
         <Box sx={{ overflow: 'auto' }}>
           <Toolbar />
           <List>
@@ -86,26 +36,5 @@ export default function ComponentLibrary(): any {
           </List>
         </Box>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 2.5 }}>
-        <Toolbar />
-        <Grid container spacing={4}>
-          <Grid item xs={8} className={classes.containerLeft}>
-            <Outlet />
-            <Button type="submit" variant="contained" onClick={() => navigate('demo')}>
-              Sign In
-            </Button>
-          </Grid>
-          <Grid item xs={4} className={classes.containerRight}>
-            <ComponentDetails />
-          </Grid>
-          <Grid item xs={8} className={classes.containerLeft}>
-            <PerformanceMetrics checked={checked} firstSnapshot={firstSnapshot} handleCheck={handleCheck} />
-          </Grid>
-          <Grid item xs={4} className={classes.containerRight}>
-            <Snapshots handleCheck={handleCheck} handleFirstCheck={handleFirstCheck} />
-          </Grid>
-        </Grid>
-      </Box>
-    </Box>
   );
 }
