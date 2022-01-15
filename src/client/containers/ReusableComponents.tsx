@@ -21,8 +21,8 @@ export default function ReusableComponent(props: any) {
         <div ref={dragPreview} />
     ) : (
         <div>
-            {reusableComponents.map((ele, key) => (
-                <ListItem>{ele.id !== 1 ? <SingleReusableComponent details={ele} key={key} /> : null}</ListItem>
+            {reusableComponents.map((ele: any, key: any) => (
+                <ListItem>{ele.label !== 'App' ? <SingleReusableComponent details={ele} key={key} /> : null}</ListItem>
             ))}
         </div>
     );

@@ -1,11 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 import { Box, Button, Card, CardActions, CardContent, Typography } from '@material-ui/core';
 
-import axios from 'axios';
+import { HierarchyContextProvider } from '../tree/context/HierarchyContextProvider';
 
 export default function GenerateComponent(props: any) {
-    const { id, label, url, state, hook } = props.componentDetails;
-    const { reusableComponents } = props;
+    const { label, url, state, hook } = props.componentDetails;
 
     const handleRequest = (url: string) => {
         axios.get(`${url}`).then((res) => console.log(res));

@@ -26,17 +26,17 @@ export default function Component() {
     const classes = useStyles();
     const { treeRef } = useTree();
 
-    const [id, setId] = useState(2);
+    // const [id, setId] = useState('');
     const [label, setLabel] = useState('');
     const [url, setUrl] = useState('');
     const [state, setState] = useState('');
     const [hook, setHook] = useState('');
     const [componentDetails, setComponentDetails] = useState({
-        id: 1,
+        id: '1',
         label: 'App',
-        url: null,
-        state: null,
-        hook: null,
+        url: '',
+        state: '',
+        hook: '',
         children: []
     });
     const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
@@ -45,10 +45,9 @@ export default function Component() {
         setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
     }, [componentDetails]);
 
-    const handleSetDetails = (id: any, label?: any, url?: any, state?: any, hook?: any, children?: []) => {
+    const handleSetDetails = (label?: any, url?: any, state?: any, hook?: any, children?: any) => {
         const newComponentDetails = {
             ...componentDetails,
-            id: id,
             label: label,
             url: url,
             state: state,
@@ -62,7 +61,7 @@ export default function Component() {
     //     setReusableComponents((reusableComponents) => [...reusableComponents, component]);
     // };
 
-    const handleOnChangeName = (event: any) => {
+    const handleOnChangeLabel = (event: any) => {
         setLabel(event.target.value);
     };
 
@@ -101,7 +100,7 @@ export default function Component() {
                             inputProps={{
                                 'aria-label': 'weight'
                             }}
-                            onChange={handleOnChangeName}
+                            onChange={handleOnChangeLabel}
                         />
                         <FormHelperText id="outlined-weight-helper-text">Name</FormHelperText>
                     </FormControl>
@@ -145,8 +144,7 @@ export default function Component() {
                         variant="outlined"
                         className={classes.save}
                         onClick={() => {
-                            handleSetDetails(id, label, url, state, hook);
-                            setId(id + 1);
+                            handleSetDetails(label, url, state, hook);
                         }}
                     >
                         Save

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { nanoid } from 'nanoid';
 
 import { isLastNode } from '..';
 import { useHierarchyData } from '../../context/HierarchyContextProvider';
@@ -104,7 +105,6 @@ export const RenderCard = ({ data, setExpand, expand, mock, prop: { renderCard, 
         if (draggingItemRef.current) {
             const dragItemId = draggingItemRef.current.id;
             const dragItemLabel = draggingItemRef.current.label;
-            console.log('dragItemId', dragItemId, 'dragItemLabel', dragItemLabel);
             const canDrop = dragItemId !== data.id && !isChild(dragItemId, data.id);
             dragLabel = draggingItemRef.current.label;
             if (!canDrop) return;
@@ -120,7 +120,7 @@ export const RenderCard = ({ data, setExpand, expand, mock, prop: { renderCard, 
         const dragItem = findById(drag.id); // returns null if id is not found
 
         // grab details for the item currently begin dragged to component tree
-        const { id, label, url, state, hook } = drag;
+        const { label, url, state, hook } = drag;
 
         const dropItem = data;
 
@@ -153,7 +153,7 @@ export const RenderCard = ({ data, setExpand, expand, mock, prop: { renderCard, 
             // returns a new DragItemHierarchy
             const addedNewDragItemHierarchy = addChildrenById(dropItem.id, [
                 {
-                    id: id,
+                    id: nanoid(),
                     label: label,
                     url: url,
                     state: state,
@@ -166,6 +166,26 @@ export const RenderCard = ({ data, setExpand, expand, mock, prop: { renderCard, 
             setHierarchy(addedNewDragItemHierarchy);
             hierarchyRef.current = addedNewDragItemHierarchy;
         }
+
+        // traverse component hierarchy tree and search for children
+        const treeStructure = hierarchyRef.current;
+        console.log('THIS IS THE FULL TREE', treeStructure);
+
+        const searchForChildren = (obj: any, target: string, result = []) => {
+            const foundChildren = result;
+            console.log('current obj', obj);
+            if (obj.hasOwnProperty(target)) {
+                const child = obj[target];
+                if (child.length > 0) {
+                    console.log('this component has a child');
+                    searchForChildren(obj[target], target, result);
+                } else {
+                    console.log('this child has no children');
+                }
+            }
+            return foundChildren;
+        };
+        // searchForChildren(treeStructure, 'children');
     };
 
     const { onDebounce } = useDebounce(onDragEnter, 300);
@@ -183,8 +203,9 @@ export const RenderCard = ({ data, setExpand, expand, mock, prop: { renderCard, 
     );
 
     useEffect(() => {
-        if (isOver) onDebounce(data.id);
-        else onDragLeave();
+        if (isOver) {
+            onDebounce(data.id);
+        } else onDragLeave();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOver]);
 
