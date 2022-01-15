@@ -50,7 +50,6 @@ const App = () => {
     getUser();
   }, []);
 
-  // console.log('line 201 from App.tsx', user);
   // use context API;
   return (
     <Router>
@@ -74,7 +73,5 @@ const App = () => {
     </Router>
   );
 };
-{/* <Route path="/" element={ user ? <Navigate to="/dashboard"/> : <SignIn />} />
-<Route path="/dashboard" element={<Main />} />
-<Route path="/tutorial" element={<Tutorial />} /> */}
+
 export default hot(App);

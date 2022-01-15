@@ -12,9 +12,7 @@ export default function ComponentTree(props: any): any {
 
   return (
     <div>
-      <div>
         <OrgTreeComponent data={data} ref={treeRef} horizontal />
-      </div>
     </div>
   );
 }

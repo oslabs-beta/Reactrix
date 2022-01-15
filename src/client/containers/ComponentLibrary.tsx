@@ -15,7 +15,6 @@ import {
   makeStyles,
 } from '@material-ui/core';
 
-import ComponentTree from './ComponentTree';
 import NewComponent from '../components/NewComponent';
 import ReusableComponents from './ReusableComponents';
 import PerformanceMetrics from './PerformanceMetrics';
@@ -95,7 +94,6 @@ export default function ComponentLibrary(): any {
         <Grid container spacing={4}>
           <Grid item xs={8} className={classes.containerLeft}>
             <Typography variant='h5'>Component Tree</Typography>
-            {/* <ComponentTree /> */}
             <Outlet />
           </Grid>
           <Grid item xs={4} className={classes.containerRight}>

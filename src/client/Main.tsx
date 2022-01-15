@@ -1,29 +1,17 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-// import { HTML5Backend } from 'react-dnd-html5-backend';
-// import { DndProvider } from 'react-dnd';
-// import { theme } from './styles/theme';
-// import { ThemeProvider } from '@material-ui/core';
 
 import Navbar from './components/Navbar';
 import ComponentLibrary from './containers/ComponentLibrary';
-// import ComponentTree from './containers/ComponentTree';
-// import ComponentDetails from './containers/ComponentDetails';
 import Footer from './components/Footer';
 
 const Main = () => {
-    return (
-        <div>
-            {/* <DndProvider backend={HTML5Backend}>
-                <ThemeProvider theme={theme}> */}
-                    <Navbar />
-                    {/* <ComponentLibrary /> */}
-                    <Outlet />
-                    {/* <Footer /> */}
-                {/* </ThemeProvider>
-            </DndProvider> */}
-        </div>
-    );
+  return (
+    <div>
+      <Navbar />
+      <Outlet />
+    </div>
+  );
 };
 
 export default Main;
