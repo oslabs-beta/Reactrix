@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import {
   Box,
+  Button,
   Drawer,
   Grid,
   List,
@@ -44,6 +45,7 @@ const useStyles = makeStyles(() =>
 export default function ComponentLibrary(): any {
   const [firstSnapshot, setFirstSnapshot] = useState(true);
   const [checked, setChecked] = useState(false);
+  let navigate = useNavigate();
 
   function handleFirstCheck() {
     setFirstSnapshot(!firstSnapshot);
@@ -65,54 +67,50 @@ export default function ComponentLibrary(): any {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Drawer variant='permanent' className={classes.drawer}>
+      <Drawer variant="permanent" className={classes.drawer}>
         <Box sx={{ overflow: 'auto' }}>
           <Toolbar />
           <List>
             <ListItem>
               <ListItemText>
-                <Typography variant='h5'>Component Library</Typography>
+                <Typography variant="h5">Component Library</Typography>
               </ListItemText>
             </ListItem>
             <ListItem>
-              <NewComponent label='New Component' />
+              <NewComponent label="New Component" />
             </ListItem>
           </List>
           <List>
             <Divider />
             <ListItem>
               <ListItemText>
-                <Typography variant='subtitle1'>Reusable Components</Typography>
+                <Typography variant="subtitle1">Reusable Components</Typography>
               </ListItemText>
             </ListItem>
             <ReusableComponents />
           </List>
         </Box>
       </Drawer>
-      <Box component='main' sx={{ flexGrow: 1, p: 2.5 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 2.5 }}>
         <Toolbar />
         <Grid container spacing={4}>
           <Grid item xs={8} className={classes.containerLeft}>
             <Outlet />
+            <Button type="submit" variant="contained" onClick={() => navigate('demo')}>
+              Sign In
+            </Button>
           </Grid>
           <Grid item xs={4} className={classes.containerRight}>
-            <Typography variant='h5'>Component Details</Typography>
+            <Typography variant="h5">Component Details</Typography>
             <ComponentDetails />
           </Grid>
           <Grid item xs={8} className={classes.containerLeft}>
-            <Typography variant='h5'>Performance Metrics</Typography>
-            <PerformanceMetrics
-              checked={checked}
-              firstSnapshot={firstSnapshot}
-              handleCheck={handleCheck}
-            />
+            <Typography variant="h5">Performance Metrics</Typography>
+            <PerformanceMetrics checked={checked} firstSnapshot={firstSnapshot} handleCheck={handleCheck} />
           </Grid>
           <Grid item xs={4} className={classes.containerRight}>
-            <Typography variant='h5'>Snapshots</Typography>
-            <Snapshots
-              handleCheck={handleCheck}
-              handleFirstCheck={handleFirstCheck}
-            />
+            <Typography variant="h5">Snapshots</Typography>
+            <Snapshots handleCheck={handleCheck} handleFirstCheck={handleFirstCheck} />
           </Grid>
         </Grid>
       </Box>
