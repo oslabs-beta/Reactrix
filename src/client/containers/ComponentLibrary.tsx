@@ -1,9 +1,23 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Box, Drawer, Grid, List, ListItem, ListItemText, Toolbar, Typography, Divider, createStyles, makeStyles } from '@material-ui/core';
+=======
+import React from 'react';
 
-import ComponentTree from './ComponentTree';
+import {
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  Toolbar,
+  Typography,
+  Divider,
+} from '@material-ui/core';
+>>>>>>> dev
+
 import NewComponent from '../components/NewComponent';
 import ReusableComponents from './ReusableComponents';
+<<<<<<< HEAD
 import PerformanceMetrics from './PerformanceMetrics';
 import ComponentDetails from './ComponentDetails';
 import Snapshots from './Snapshots';
@@ -95,4 +109,31 @@ export default function ComponentLibrary(): any {
             </Box>
         </Box>
     );
+=======
+
+export default function ComponentLibrary(props: any): any {
+
+  return (
+      <Drawer variant="permanent" className={props.drawer}>
+        <Box sx={{ overflow: 'auto' }}>
+          <Toolbar />
+          <List>
+            <ListItem>
+                <Typography variant="h5">Component Library</Typography>
+            </ListItem>
+            <ListItem>
+              <NewComponent label="New Component" />
+            </ListItem>
+          </List>
+          <List>
+            <Divider />
+            <ListItem>
+                <Typography variant="subtitle1">Reusable Components</Typography>
+            </ListItem>
+            <ReusableComponents />
+          </List>
+        </Box>
+      </Drawer>
+  );
+>>>>>>> dev
 }
