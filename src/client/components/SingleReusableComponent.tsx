@@ -2,14 +2,22 @@ import * as React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 import { Button } from '@material-ui/core';
 
-interface IReusableComponent {
-    label: any;
-}
+// interface IReusableComponent {
+//     label: any;
+// }
 
-export default function SingleReusableComponent({ label }: IReusableComponent) {
+export default function SingleReusableComponent(props: any) {
+    const { id, label, url, state, hook, children } = props.details;
     const [collected, drag, dragPreview] = useDrag(() => ({
         type: 'box',
-        item: { label: label },
+        item: {
+            id: id,
+            label: label,
+            url: url,
+            state: state,
+            hook: hook,
+            children: children
+        },
         options: {
             dropEffect: 'copy'
         },

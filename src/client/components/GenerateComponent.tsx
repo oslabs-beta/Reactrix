@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default function GenerateComponent(props: any) {
     const { id, label, url, state, hook } = props.componentDetails;
-    const { componentTree } = props;
+    const { reusableComponents } = props;
 
     const handleRequest = (url: string) => {
         axios.get(`${url}`).then((res) => console.log(res));
@@ -41,7 +41,6 @@ export default function GenerateComponent(props: any) {
                         variant="outlined"
                         size="small"
                         onClick={() => {
-                            console.log('response from API call: ');
                             handleRequest(url);
                         }}
                     >

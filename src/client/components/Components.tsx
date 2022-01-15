@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme } from '@material-ui/core';
@@ -41,21 +41,26 @@ export default function Component() {
     });
     const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
 
-    const handleSetDetails = (id: any, label?: any, url?: any, state?: any, hook?: any, children?: any[]) => {
+    useEffect(() => {
+        setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
+    }, [componentDetails]);
+
+    const handleSetDetails = (id: any, label?: any, url?: any, state?: any, hook?: any, children?: []) => {
         const newComponentDetails = {
             ...componentDetails,
             id: id,
             label: label,
             url: url,
             state: state,
-            hook: hook
+            hook: hook,
+            children: children
         };
         setComponentDetails(newComponentDetails);
     };
 
-    const handleAddToComponentTree = (component: any) => {
-        setReusableComponents((reusableComponents) => [...reusableComponents, component]);
-    };
+    // const handleAddToReusableComponents = (component: any) => {
+    //     setReusableComponents((reusableComponents) => [...reusableComponents, component]);
+    // };
 
     const handleOnChangeName = (event: any) => {
         setLabel(event.target.value);
@@ -141,7 +146,6 @@ export default function Component() {
                         className={classes.save}
                         onClick={() => {
                             handleSetDetails(id, label, url, state, hook);
-                            handleAddToComponentTree(componentDetails);
                             setId(id + 1);
                         }}
                     >
