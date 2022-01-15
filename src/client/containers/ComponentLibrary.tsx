@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+
 import {
   Box,
   Drawer,
@@ -93,7 +95,7 @@ export default function ComponentLibrary(): any {
         <Grid container spacing={4}>
           <Grid item xs={8} className={classes.containerLeft}>
             <Typography variant='h5'>Component Tree</Typography>
-            <ComponentTree />
+            <Outlet />
           </Grid>
           <Grid item xs={4} className={classes.containerRight}>
             <Typography variant='h5'>Component Details</Typography>
