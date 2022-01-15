@@ -59,10 +59,13 @@ const App = () => {
           <ThemeProvider theme={theme}>
             <Routes>
               <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
-              <Route path="/dashboard" element={<Main />} />
-                <Route index element={<ComponentLibrary />} />
+              <Route path="/dashboard" element={<Main />} >
+                <Route path="/dashboard" element={<ComponentLibrary />} >
                   <Route index element={<ComponentTree />} />
-                  <Route path="/demo" element={<Tutorial />} />
+                  <Route path="demo" element={<Tutorial />} />
+                </Route>
+                <Route path="test" element={<Tutorial />} />
+              </Route>
               <Route path="/tutorial" element={<Tutorial />} />
             </Routes>
           </ThemeProvider>
@@ -71,5 +74,7 @@ const App = () => {
     </Router>
   );
 };
-
+{/* <Route path="/" element={ user ? <Navigate to="/dashboard"/> : <SignIn />} />
+<Route path="/dashboard" element={<Main />} />
+<Route path="/tutorial" element={<Tutorial />} /> */}
 export default hot(App);
