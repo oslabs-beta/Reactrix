@@ -6,7 +6,7 @@ import { theme } from '../styles/theme';
 import { ThemeProvider } from '@material-ui/core';
 
 import Navbar from '../components/Navbar';
-import ComponentLibrary from '../containers/ComponentLibrary';
+import ComponentLibrary from './ComponentLibrary';
 // import ComponentTree from './containers/ComponentTree';
 // import ComponentDetails from './containers/ComponentDetails';
 import Footer from '../components/Footer';

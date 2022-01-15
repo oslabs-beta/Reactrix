@@ -5,57 +5,48 @@ import { hot } from 'react-hot-loader/root';
 import './styles/styles.css';
 
 import Main from './Main';
-import GuestDashBoard from './containers/GuestDashBoard';
+import GuestDashboard from './containers/GuestDashboard';
 import SignIn from './containers/SignIn';
 import Footer from './components/Footer';
 import { AnyObject } from 'chart.js/types/basic';
-import UserContext from "./UserContext";
+import UserContext from './UserContext';
 import Tutorial from './containers/ComponentTutorial';
+import Components from './components/Components';
 
 const App = () => {
-    const [user, setUser] = useState (null);
+    const [user, setUser] = useState(null);
 
-    const providerUser = useMemo(() => ({ user, setUser }), [user, setUser])
-        useEffect(()=> {
-            // console.log('useEffect line 172 App.tsx is hit');
-            const getUser = async ()=> {
-                fetch("http://localhost:3000/auth/login/success",
-                {
-                    method: "GET",
-                    credentials: "include",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Credentials": 'true',
-                    },
-                }   
-                ).then((response) => {
+    const providerUser = useMemo(() => ({ user, setUser }), [user, setUser]);
+    useEffect(() => {
+        // console.log('useEffect line 172 App.tsx is hit');
+        const getUser = async () => {
+            fetch('http://localhost:3000/auth/login/success', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Credentials': 'true'
+                }
+            })
+                .then((response) => {
                     // console.log('line 187 response: ', response)
                     if (response.status === 200) return response.json();
-                    throw new Error ("authentication has been failed!")
-                }).then(resObject=> {
-                    // setUser(true)
-                    setUser(resObject.user)
-                }).then(err => {
-                    console.log('error from main page', err);
+                    throw new Error('authentication has been failed!');
                 })
-            }
-            getUser();
-        }, []);
+                .then((resObject) => {
+                    // setUser(true)
+                    setUser(resObject.user);
+                })
+                .then((err) => {
+                    console.log('error from main page', err);
+                });
+        };
+        getUser();
+    }, []);
 
-    console.log( 'line 201 from App.tsx', user );
-// use context API;
-    return (
-        <Router>
-            <UserContext.Provider value={ providerUser }>
-                <Routes>
-                    <Route path="/" element={ user ? <Navigate to="/dashboard"/> : <SignIn />} />
-                    <Route path="/dashboard" element={<Main />} />
-                    <Route path="/tutorial" element={<Tutorial />} />
-                </Routes>
-            </UserContext.Provider>
-        </Router>
-    );
+    // use context API;
+    return <Components />;
 };
 
 export default hot(App);

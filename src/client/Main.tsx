@@ -10,15 +10,17 @@ import ComponentLibrary from './containers/ComponentLibrary';
 // import ComponentTree from './containers/ComponentTree';
 // import ComponentDetails from './containers/ComponentDetails';
 import Footer from './components/Footer';
+import Components from './components/Components';
 
 const Main = () => {
     return (
         <div>
             <DndProvider backend={HTML5Backend}>
                 <ThemeProvider theme={theme}>
-                    <Navbar />
+                    {/* <Navbar />
                     <ComponentLibrary />
-                    {/* <Footer /> */}
+                    <Footer /> */}
+                    <Components />
                 </ThemeProvider>
             </DndProvider>
         </div>
