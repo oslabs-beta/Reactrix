@@ -8,7 +8,6 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemText,
   Toolbar,
   Typography,
   Divider,
@@ -72,9 +71,7 @@ export default function ComponentLibrary(): any {
           <Toolbar />
           <List>
             <ListItem>
-              <ListItemText>
                 <Typography variant="h5">Component Library</Typography>
-              </ListItemText>
             </ListItem>
             <ListItem>
               <NewComponent label="New Component" />
@@ -83,9 +80,7 @@ export default function ComponentLibrary(): any {
           <List>
             <Divider />
             <ListItem>
-              <ListItemText>
                 <Typography variant="subtitle1">Reusable Components</Typography>
-              </ListItemText>
             </ListItem>
             <ReusableComponents />
           </List>
@@ -101,15 +96,12 @@ export default function ComponentLibrary(): any {
             </Button>
           </Grid>
           <Grid item xs={4} className={classes.containerRight}>
-            <Typography variant="h5">Component Details</Typography>
             <ComponentDetails />
           </Grid>
           <Grid item xs={8} className={classes.containerLeft}>
-            <Typography variant="h5">Performance Metrics</Typography>
             <PerformanceMetrics checked={checked} firstSnapshot={firstSnapshot} handleCheck={handleCheck} />
           </Grid>
           <Grid item xs={4} className={classes.containerRight}>
-            <Typography variant="h5">Snapshots</Typography>
             <Snapshots handleCheck={handleCheck} handleFirstCheck={handleFirstCheck} />
           </Grid>
         </Grid>
