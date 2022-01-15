@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import SaveIcon from '@material-ui/icons/Save';
+
+import GenerateComponent from './GenerateComponent';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,68 +18,126 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function ComponentDetails() {
-  function handleClick() {
-    // setLoading(true);
-  }
-
   const classes = useStyles();
+
+  // const [id, setId] = useState('');
+  const [label, setLabel] = useState('');
+  const [url, setUrl] = useState('');
+  const [state, setState] = useState('');
+  const [hook, setHook] = useState('');
+  const [componentDetails, setComponentDetails] = useState({
+    id: '1',
+    label: 'App',
+    url: '',
+    state: '',
+    hook: '',
+    children: []
+  });
+  const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
+
+  useEffect(() => {
+    setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
+  }, [componentDetails]);
+
+  const handleSetDetails = (label?: any, url?: any, state?: any, hook?: any, children?: any) => {
+    const newComponentDetails = {
+      ...componentDetails,
+      label: label,
+      url: url,
+      state: state,
+      hook: hook,
+      children: children
+    };
+    setComponentDetails(newComponentDetails);
+  };
+
+  // const handleAddToReusableComponents = (component: any) => {
+  //     setReusableComponents((reusableComponents) => [...reusableComponents, component]);
+  // };
+
+  const handleOnChangeLabel = (event: any) => {
+    setLabel(event.target.value);
+  };
+
+  const handleOnChangeUrl = (event: any) => {
+    setUrl(event.target.value);
+  };
+
+  const handleOnChangeState = (event: any) => {
+    setState(event.target.value);
+  };
+
+  const handleOnChangeHook = (event: any) => {
+    setHook(event.target.value);
+  };
+
+  /*
+    https://jsonplaceholder.typicode.com/todos/1
+    */
 
   return (
     <div>
-      <Typography variant="h5">Component Details</Typography>
+      <GenerateComponent componentDetails={componentDetails} reusableComponents={reusableComponents} />
       <Box className={classes.form} component="form" m={2} mt={5}>
-        <FormControl className={classes.form} variant="outlined">
-          <OutlinedInput
-            id="outlined-adornment-weight"
-            aria-describedby="outlined-weight-helper-text"
-            placeholder="Add your component name"
-            inputProps={{
-              'aria-label': 'weight'
+        <div>
+          <FormControl className={classes.form} variant="outlined">
+            <OutlinedInput
+              id="outlined-adornment-weight"
+              aria-describedby="outlined-weight-helper-text"
+              placeholder="Add a component name"
+              inputProps={{
+                'aria-label': 'weight'
+              }}
+              onChange={handleOnChangeLabel}
+            />
+            <FormHelperText id="outlined-weight-helper-text">Name</FormHelperText>
+          </FormControl>
+          <FormControl className={classes.form} variant="outlined">
+            <OutlinedInput
+              id="outlined-adornment-weight"
+              aria-describedby="outlined-weight-helper-text"
+              placeholder="Add an API call URL"
+              inputProps={{
+                'aria-label': 'weight'
+              }}
+              onChange={handleOnChangeUrl}
+            />
+            <FormHelperText id="outlined-weight-helper-text">URL</FormHelperText>
+          </FormControl>
+          <FormControl className={classes.form} variant="outlined">
+            <OutlinedInput
+              id="outlined-adornment-weight"
+              aria-describedby="outlined-weight-helper-text"
+              placeholder="Set state"
+              inputProps={{
+                'aria-label': 'weight'
+              }}
+              onChange={handleOnChangeState}
+            />
+            <FormHelperText id="outlined-weight-helper-text">State</FormHelperText>
+          </FormControl>
+          <FormControl className={classes.form} variant="outlined">
+            <OutlinedInput
+              id="outlined-adornment-weight"
+              aria-describedby="outlined-weight-helper-text"
+              placeholder="Add a hook"
+              inputProps={{
+                'aria-label': 'weight'
+              }}
+              onChange={handleOnChangeHook}
+            />
+            <FormHelperText id="outlined-weight-helper-text">Hooks</FormHelperText>
+          </FormControl>
+          <Button
+            variant="outlined"
+            className={classes.save}
+            onClick={() => {
+              handleSetDetails(label, url, state, hook);
             }}
-          />
-          <FormHelperText id="outlined-weight-helper-text">Name</FormHelperText>
-        </FormControl>
-        <FormControl className={classes.form} variant="outlined">
-          <OutlinedInput
-            id="outlined-adornment-weight"
-            aria-describedby="outlined-weight-helper-text"
-            placeholder="Add an API call URL"
-            inputProps={{
-              'aria-label': 'weight'
-            }}
-          />
-          <FormHelperText id="outlined-weight-helper-text">URL</FormHelperText>
-        </FormControl>
-        <FormControl className={classes.form} variant="outlined">
-          <OutlinedInput
-            id="outlined-adornment-weight"
-            aria-describedby="outlined-weight-helper-text"
-            placeholder="Set state"
-            inputProps={{
-              'aria-label': 'weight'
-            }}
-          />
-          <FormHelperText id="outlined-weight-helper-text">State</FormHelperText>
-        </FormControl>
-        <FormControl className={classes.form} variant="outlined">
-          <OutlinedInput
-            id="outlined-adornment-weight"
-            aria-describedby="outlined-weight-helper-text"
-            placeholder="Add a hook"
-            inputProps={{
-              'aria-label': 'weight'
-            }}
-          />
-          <FormHelperText id="outlined-weight-helper-text">Hooks</FormHelperText>
-        </FormControl>
-        <Button
-          // onClick={handleClick}
-          startIcon={<SaveIcon />}
-          variant="outlined"
-          className={classes.save}
-        >
-          Save
-        </Button>
+          >
+            Save
+          </Button>
+        </div>
       </Box>
     </div>
   );
