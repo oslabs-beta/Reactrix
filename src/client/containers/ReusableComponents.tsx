@@ -9,7 +9,7 @@ import SingleReusableComponent from '../components/SingleReusableComponent';
 export default function ReusableComponent(props: any) {
   let { reusableComponents } = props;
 
-  //! delete this dummy data once database is set up
+  //! delete this dummy data once database is functional
   const dummyData = [
     {
       id: nanoid(),
