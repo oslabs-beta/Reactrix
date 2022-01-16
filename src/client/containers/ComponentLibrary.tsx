@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Drawer, List, ListItem, Toolbar, Typography, Divider } from '@material-ui/core';
 
 import NewComponent from '../components/NewComponent';

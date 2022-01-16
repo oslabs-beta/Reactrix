@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
-import { ListItem } from '@material-ui/core';
-
 import { nanoid } from 'nanoid';
+import { ListItem } from '@material-ui/core';
 
 import SingleReusableComponent from '../components/SingleReusableComponent';
 
 export default function ReusableComponent(props: any) {
-  let { reusableComponents } = props;
+  // let { reusableComponents } = props;
 
   //! delete this dummy data once database is functional
   const dummyData = [
