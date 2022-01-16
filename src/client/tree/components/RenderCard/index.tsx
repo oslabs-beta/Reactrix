@@ -11,65 +11,12 @@ import { IRenderCard } from '../interfaces';
 import { RenderBtn } from '../RenderBtn';
 import { CardArea, RenderLabel, StyledLabel, RenderCardPersonal } from './styles';
 
-export const RenderCard = ({ data, setExpand, expand, mock, prop: { renderCard, ...prop } }: IRenderCard) => {
+export const RenderCard = ({ data, setExpand, expand, prop: { renderCard, ...prop } }: IRenderCard) => {
   const { setHierarchy, hierarchyRef, addChildrenById, editById, isChild, findParentByChildId, findById, draggingItemRef } = useHierarchyData();
 
   const node = prop.node;
   const label = data[node.label];
   const clx = ['org-tree-node-label-inner'];
-
-  if (mock) {
-    clx.push('mock_card');
-  }
-
-  const onAppendMock = (id: number | string, label: string) => {
-    // add renderNode if has already children inside
-    const componentChildren = document.getElementById(`children_${id}`);
-    if (componentChildren) {
-      const elementMockLabel = document.getElementById(`label_text_mock`);
-      const elementMockNode = document.getElementById(`node-tree-mock`);
-      if (!elementMockLabel) return;
-      if (!elementMockNode) return;
-
-      elementMockLabel.innerText = label;
-
-      elementMockNode.style.display = 'table-cell';
-      elementMockNode.id = `node-tree-mock-clone`;
-      const elementMockNodeClone = elementMockNode?.cloneNode(true);
-      elementMockNode.style.display = 'none';
-      elementMockNode.id = `node-tree-mock`;
-
-      const elementMockNodeLastChild = elementMockNodeClone.lastChild;
-      elementMockNodeLastChild && elementMockNodeClone.removeChild(elementMockNodeLastChild);
-
-      componentChildren.appendChild(elementMockNodeClone);
-      return;
-    }
-
-    // add renderChildrenNode if does not have children inside
-    const componentNode = document.getElementById(`node-tree-${id}`);
-    if (componentNode) {
-      const elementMockLabel = document.getElementById(`label_text_child_mock`);
-      const componentMockChildren = document.getElementById(`children_mock`);
-
-      if (!elementMockLabel) return;
-      if (!componentMockChildren) return;
-
-      elementMockLabel.innerText = label;
-
-      const oldMockId = componentMockChildren.id;
-      componentMockChildren.id = `node-tree-mock-clone`;
-      const componentMockChildrenClone = componentMockChildren?.cloneNode(true);
-      componentMockChildren.id = oldMockId;
-
-      componentNode.appendChild(componentMockChildrenClone);
-    }
-  };
-
-  const onRemoveMock = () => {
-    const componentCloneMock = document.getElementById(`node-tree-mock-clone`);
-    componentCloneMock && componentCloneMock.remove();
-  };
 
   const [{ isDragging }, drag] = useDrag(
     () => ({
@@ -109,11 +56,6 @@ export const RenderCard = ({ data, setExpand, expand, mock, prop: { renderCard, 
       dragLabel = draggingItemRef.current.label;
       if (!canDrop) return;
     }
-    onAppendMock(dropId, dragLabel);
-  };
-
-  const onDragLeave = () => {
-    onRemoveMock();
   };
 
   const onDrop = (drag: INestedObject) => {
@@ -205,7 +147,7 @@ export const RenderCard = ({ data, setExpand, expand, mock, prop: { renderCard, 
   useEffect(() => {
     if (isOver) {
       onDebounce(data.id);
-    } else onDragLeave();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOver]);
 
@@ -224,8 +166,7 @@ export const RenderCard = ({ data, setExpand, expand, mock, prop: { renderCard, 
             isDragging,
             label,
             labelId: `label_text_${data.id}`,
-            data,
-            isPreviewCard: !!mock
+            data
           })}
           {prop.collapsable && !isLastNode(data, prop) && <RenderBtn setExpand={setExpand} expand={expand} data={data} prop={prop} />}
         </RenderCardPersonal>

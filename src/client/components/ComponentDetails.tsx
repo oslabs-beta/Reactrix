@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography, withStyles } from '@material-ui/core';
 
 import GenerateComponent from './GenerateComponent';
 
@@ -17,9 +17,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const SaveButton = withStyles({
+  root: {
+    backgroundColor: '#90caf9',
+    color: '#000',
+    '&:hover': {
+      backgroundColor: '#42a5f5',
+      borderColor: '#42a5f5',
+      color: '#000'
+    }
+  }
+})(Button);
+
 export default function ComponentDetails(props: any) {
   const classes = useStyles();
-
   const { label, url, state, hook, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
 
   /*
@@ -80,7 +91,7 @@ export default function ComponentDetails(props: any) {
             />
             <FormHelperText id="outlined-weight-helper-text">Hooks</FormHelperText>
           </FormControl>
-          <Button
+          <SaveButton
             variant="outlined"
             className={classes.save}
             onClick={() => {
@@ -88,7 +99,7 @@ export default function ComponentDetails(props: any) {
             }}
           >
             Save
-          </Button>
+          </SaveButton>
         </div>
       </Box>
     </div>

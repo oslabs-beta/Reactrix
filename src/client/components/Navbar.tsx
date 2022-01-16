@@ -41,9 +41,6 @@ export default function Navbar(): any {
           Reactrix
         </Typography>
         <div className={classes.navLinks}>
-          <Link to="/tutorial" className={classes.link}>
-            {`Tutorial`}
-          </Link>
           <Link to="/" onClick={() => setUser(null)} className={classes.link}>
             {'Log out'}
           </Link>

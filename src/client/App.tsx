@@ -11,7 +11,7 @@ import './styles/styles.css';
 import Main from './containers/Main';
 import SignIn from './components/SignIn';
 import { UserContext } from './contexts/UserContext';
-import Tutorial from './components/ComponentTutorial';
+import Demo from './components/Demo';
 import ComponentTree from './containers/ComponentTree';
 
 const App = () => {
@@ -52,10 +52,9 @@ const App = () => {
               <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
               <Route path="/dashboard" element={<Main />}>
                 <Route index element={<ComponentTree />} />
-                <Route path="demo" element={<Tutorial />} />
-                <Route path="test" element={<Tutorial />} />
+                <Route path="demo" element={<Demo />} />
               </Route>
-              <Route path="/tutorial" element={<Tutorial />} />
+              <Route path="/demo" element={<Demo />} />
             </Routes>
           </ThemeProvider>
         </DndProvider>

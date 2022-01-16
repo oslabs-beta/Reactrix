@@ -9,7 +9,7 @@ import { handleInitialData, handleUpdateData } from '../helpers/helpers';
 
 const GridContainer = (props: any) => {
   const { containerLeft, containerRight, label, url, state, hook, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const [firstSnapshot, setFirstSnapshot] = useState(true);
   const [checked, setChecked] = useState(false);
@@ -24,7 +24,6 @@ const GridContainer = (props: any) => {
 
   if (checked) {
     const newDummyData = handleUpdateData();
-    console.log('this is dummydata, it should be updating with every truthy return of check', newDummyData);
   }
 
   return (
@@ -34,9 +33,6 @@ const GridContainer = (props: any) => {
         <Grid item xs={8} className={containerLeft}>
           {/* Outlet defaults to component tree, but changes to demo app on button click */}
           <Outlet />
-          <Button type="submit" variant="contained" onClick={() => navigate('demo')}>
-            Demo
-          </Button>
         </Grid>
         <Grid item xs={4} className={containerRight}>
           <ComponentDetails

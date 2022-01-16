@@ -44,10 +44,6 @@ export const RenderLabel = styled.div<ICardCard>`
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  &.mock_card {
-    border: 1px solid #2196f3;
-  }
-
   ${(props) =>
     props.isDragging &&
     css`
@@ -57,10 +53,6 @@ export const RenderLabel = styled.div<ICardCard>`
 
 export const RenderCardPersonal = styled.div`
   position: relative;
-
-  &.mock_card {
-    border: 1px solid #2196f3;
-  }
 `;
 
 export const StyledLabel = styled.div`

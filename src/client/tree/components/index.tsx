@@ -11,18 +11,11 @@ export const isLastNode = (data: any, prop: IOrgTreeNodeProps) => {
   return !(Array.isArray(data[node.children]) && data[node.children].length > 0);
 };
 
-const mock_data = {
-  id: 'mock',
-  label: 'Label',
-  children: [{ id: 'child_mock', label: 'Preview', children: [] }]
-};
-
 export const TreeNode = (props: IOrgTreeNodeProps) => {
   const { hierarchy } = useHierarchyData();
   return (
     <DndProvider backend={HTML5Backend}>
       <RenderNode data={hierarchy} prop={props} first />
-      <RenderNode data={mock_data} prop={props} mock />
     </DndProvider>
   );
 };
