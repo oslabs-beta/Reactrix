@@ -22,8 +22,7 @@ export default function ComponentLibrary(props: any): any {
           <ListItem>
             <Typography variant="subtitle1">Reusable Components</Typography>
           </ListItem>
-          {/* //! Data needs to be passed to ReusableComponents from the db */}
-          {/* <ReusableComponents /> */}
+          <ReusableComponents />
         </List>
       </Box>
     </Drawer>
