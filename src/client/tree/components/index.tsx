@@ -3,7 +3,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { useHierarchyData } from '../context/HierarchyContextProvider';
-import { IOrgTreeNodeProps } from '../interfaces';
+import { IOrgTreeNodeProps } from '../../../interfaces';
 import { RenderNode } from './RenderNode';
 
 export const isLastNode = (data: any, prop: IOrgTreeNodeProps) => {

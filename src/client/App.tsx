@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, Profiler } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -11,8 +11,9 @@ import './styles/styles.css';
 import Main from './containers/Main';
 import SignIn from './components/SignIn';
 import { UserContext } from './contexts/UserContext';
-import Demo from './components/Demo';
+import Demo from './prototype/Demo';
 import ComponentTree from './containers/ComponentTree';
+import { sendProfilerData } from './helpers/helpers';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -52,7 +53,7 @@ const App = () => {
               <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
               <Route path="/dashboard" element={<Main />}>
                 <Route index element={<ComponentTree />} />
-                <Route path="demo" element={<Demo />} />
+                <Route path="demo" element={<Profiler id='Demo' onRender={sendProfilerData}><Demo /></Profiler>} />
               </Route>
             </Routes>
           </ThemeProvider>

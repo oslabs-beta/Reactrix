@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 import { isLastNode } from '..';
 import { useHierarchyData } from '../../context/HierarchyContextProvider';
 import { useDebounce } from '../../hooks/useDebounce';
-import { INestedObject } from '../../interfaces';
+import { INestedObject } from '../../../../interfaces';
 import { IRenderCard } from '../interfaces';
 import { RenderBtn } from '../RenderBtn';
 import { CardArea, RenderLabel, StyledLabel, RenderCardPersonal } from './styles';

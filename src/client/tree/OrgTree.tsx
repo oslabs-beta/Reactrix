@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useState } from 'react';
 
 import { TreeNode } from './components';
 import { HierarchyContextProvider } from './context/HierarchyContextProvider';
-import { INodeTree, IOrgTreeProps } from './interfaces';
+import { INodeTree, IOrgTreeProps } from '../../interfaces';
 import { OrgTree, OrgTreeContainer } from './OrgTree.styles';
 
 const initialState = {

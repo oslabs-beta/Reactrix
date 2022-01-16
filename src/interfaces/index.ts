@@ -2,6 +2,12 @@ import { MouseEvent } from 'react';
 
 import { CSSProperties, Dispatch, MutableRefObject, ReactNode, SetStateAction, ForwardedRef } from 'react';
 
+// start of new code
+export interface IProfilerContextData {
+
+}
+// end of new code
+
 export interface INestedObject extends Record<string, any> {
   id: string | number;
   label: string;

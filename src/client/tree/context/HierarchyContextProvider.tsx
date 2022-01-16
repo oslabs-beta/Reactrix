@@ -2,7 +2,7 @@ import * as clone from 'clone';
 import * as React from 'react';
 import { createContext, useCallback, useContext, useImperativeHandle, useRef, useState } from 'react';
 
-import { IHierarchyContextData, INestedObject, IParsedArray, ISidebarDrawerProps } from '../interfaces';
+import { IHierarchyContextData, INestedObject, IParsedArray, ISidebarDrawerProps } from '../../../interfaces';
 
 const HierarchyContext = createContext({} as IHierarchyContextData);
 
