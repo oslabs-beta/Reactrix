@@ -5,13 +5,15 @@ import NewComponent from '../components/NewComponent';
 import ReusableComponents from './ReusableComponents';
 
 export default function ComponentLibrary(props: any): any {
+  const { reusableComponents } = props;
+
   return (
     <Drawer variant="permanent" className={props.drawer}>
       <Box sx={{ overflow: 'auto' }}>
         <Toolbar />
         <List>
           <ListItem>
-            <Typography variant="h5">Component Library</Typography>
+            <Typography variant="h6">Component Library</Typography>
           </ListItem>
           <ListItem>
             <NewComponent label="New Component" />
@@ -22,7 +24,7 @@ export default function ComponentLibrary(props: any): any {
           <ListItem>
             <Typography variant="subtitle1">Reusable Components</Typography>
           </ListItem>
-          <ReusableComponents />
+          <ReusableComponents reusableComponents={reusableComponents} />
         </List>
       </Box>
     </Drawer>

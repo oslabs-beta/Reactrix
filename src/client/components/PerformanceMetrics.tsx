@@ -49,7 +49,7 @@ const data = {
 export default function PerformanceMetrics({ firstSnapshot, checked }: Props) {
   return (
     <div>
-      <Typography variant="h5">Performance Metrics</Typography>
+      <Typography variant="h6">Performance Metrics</Typography>
       <Bar
         options={options}
         data={firstSnapshot && checked ? data : checked && !firstSnapshot ? handleUpdateData() : handleInitialData()}

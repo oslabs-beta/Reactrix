@@ -5,23 +5,23 @@ export const theme = createTheme({
   palette: {
     primary: {
       light: grey[400],
-      main: grey[800],
+      main: grey[900],
       dark: grey[800],
-      contrastText: '#000',
-    },
+      contrastText: '#000'
+    }
   },
   props: {
     MuiButtonBase: {
-      disableRipple: true,
-    },
+      disableRipple: true
+    }
   },
   shape: {
-    borderRadius: 4,
+    borderRadius: 5
   },
   typography: {
     fontFamily: 'Inter',
     button: {
-      textTransform: 'none',
-    },
-  },
+      textTransform: 'none'
+    }
+  }
 });

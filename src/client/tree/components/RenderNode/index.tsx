@@ -6,7 +6,7 @@ import { RenderChildren } from '../RenderChildren';
 import { RenderCard } from '../RenderCard';
 import { OrgTreeNode } from './styles';
 
-export const RenderNode = ({ data, prop, first, mock }: IRender) => {
+export const RenderNode = ({ data, prop, first }: IRender) => {
   const node = prop.node;
   const cls = ['org-tree-node'];
 
@@ -31,11 +31,10 @@ export const RenderNode = ({ data, prop, first, mock }: IRender) => {
       className={cls.join(' ')}
       strokeColor={prop.strokeColor}
       strokeWidth={prop.strokeWidth}
-      style={data.id === 'mock' ? { display: 'none' } : {}}
       onClick={() => console.log('onClick from OrgTreeNode (data): ', data)}
     >
-      <RenderCard setExpand={setExpand} expand={expand} data={data} prop={prop} mock={mock} />
-      {(!prop.collapsable || expand) && <RenderChildren data={data} list={data.children} prop={prop} mock={mock} />}
+      <RenderCard setExpand={setExpand} expand={expand} data={data} prop={prop} />
+      {(!prop.collapsable || expand) && <RenderChildren data={data} list={data.children} prop={prop} />}
     </OrgTreeNode>
   );
 };

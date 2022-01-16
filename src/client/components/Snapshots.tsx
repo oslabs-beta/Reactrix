@@ -23,7 +23,7 @@ export default function Snapshots({ handleFirstCheck, handleCheck }: Props) {
 
   return (
     <div>
-      <Typography variant="h5">Snapshots</Typography>
+      <Typography variant="h6">Snapshots</Typography>
       <TreeView
         aria-label="file system navigator"
         defaultCollapseIcon={<ExpandMoreIcon />}
