@@ -66,6 +66,7 @@ export default function Main() {
   //     setReusableComponents((reusableComponents) => [...reusableComponents, component]);
   // };
 
+  // TODO: event handlers below are currently triggering re-renders of whole app
   const handleOnChangeLabel = (event: any) => {
     setLabel(event.target.value);
   };
