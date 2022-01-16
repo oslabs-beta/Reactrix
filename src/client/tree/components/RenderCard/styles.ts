@@ -36,7 +36,7 @@ export const RenderLabel = styled.div<ICardCard>`
   border-radius: 5px;
   border: 1px solid lightgrey;
   &:hover {
-    background-color: #eeeeee;
+    border: 1px solid #2196f3;
   }
   transition: 0.3s;
 
@@ -45,7 +45,7 @@ export const RenderLabel = styled.div<ICardCard>`
   text-overflow: ellipsis;
 
   &.mock_card {
-    border: 1px solid #7de874;
+    border: 1px solid #2196f3;
   }
 
   ${(props) =>
@@ -55,11 +55,11 @@ export const RenderLabel = styled.div<ICardCard>`
     `}
 `;
 
-export const RenderCarPersonal = styled.div`
+export const RenderCardPersonal = styled.div`
   position: relative;
 
   &.mock_card {
-    border: 1px solid #7de874;
+    border: 1px solid #2196f3;
   }
 `;
 

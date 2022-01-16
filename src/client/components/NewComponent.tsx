@@ -1,13 +1,22 @@
 import React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 
-import { Button } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 
-interface Props {
-  label: string;
-}
+const StyledButton = withStyles({
+  root: {
+    backgroundColor: '#fff',
+    color: '#000',
+    '&:hover': {
+      backgroundColor: '#fff',
+      borderColor: '#388e3c',
+      color: '#000'
+    }
+  }
+})(Button);
 
-export default function NewComponent({ label }: Props) {
+export default function NewComponent(props: any) {
+  const { label } = props;
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'box',
     // pass in object containing payload of component label
@@ -24,9 +33,9 @@ export default function NewComponent({ label }: Props) {
 
   return (
     <div ref={drag}>
-      <Button variant="outlined" size="medium">
+      <StyledButton variant="outlined" size="medium">
         {label}
-      </Button>
+      </StyledButton>
     </div>
   );
 }

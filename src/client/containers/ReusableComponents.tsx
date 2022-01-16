@@ -9,7 +9,7 @@ export default function ReusableComponent(props: any) {
   return (
     <div>
       {reusableComponents.map((ele: any, key: any) => (
-        <ListItem>{ele.label !== 'App' ? <SingleReusableComponent details={ele} key={key} /> : null}</ListItem>
+        <ListItem>{ele.label !== 'App' && <SingleReusableComponent details={ele} key={key} />}</ListItem>
       ))}
     </div>
   );

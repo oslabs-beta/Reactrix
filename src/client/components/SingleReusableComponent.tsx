@@ -1,6 +1,18 @@
 import * as React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
-import { Button } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
+
+const StyledButton = withStyles({
+  root: {
+    backgroundColor: '#fff',
+    color: '#000',
+    '&:hover': {
+      backgroundColor: '#fff',
+      borderColor: '#e91e63',
+      color: '#000'
+    }
+  }
+})(Button);
 
 export default function SingleReusableComponent(props: any) {
   const { label, url, state, hook, children } = props.details;
@@ -24,9 +36,9 @@ export default function SingleReusableComponent(props: any) {
 
   return (
     <div ref={drag}>
-      <Button variant="outlined" size="large" key={label}>
+      <StyledButton variant="outlined" size="large" key={label}>
         {label}
-      </Button>
+      </StyledButton>
     </div>
   );
 }
