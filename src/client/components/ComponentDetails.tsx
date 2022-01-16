@@ -98,7 +98,7 @@ export default function ComponentDetails(props: any) {
               handleSetDetails(label, url, state, hook);
             }}
           >
-            Save
+            Save Details
           </SaveButton>
         </div>
       </Box>

@@ -4,23 +4,23 @@ import { Box, Button, ButtonGroup, Card, CardActions, CardContent, Grid, Typogra
 
 const DemoButton = withStyles({
   root: {
-    backgroundColor: '#ff9800',
-    color: '#fff',
+    backgroundColor: '#b3e5fc',
+    color: '#000',
     '&:hover': {
-      backgroundColor: '#f57c00',
-      borderColor: '#f57c00',
-      color: '#fff'
+      backgroundColor: '#29b6f6',
+      borderColor: '#29b6f6',
+      color: '#000'
     }
   }
 })(Button);
 
 const SnapshotButton = withStyles({
   root: {
-    backgroundColor: '#9c27b0',
+    backgroundColor: '#2196f3',
     color: '#fff',
     '&:hover': {
-      backgroundColor: '#7b1fa2',
-      borderColor: '#7b1fa2',
+      backgroundColor: '#1565c0',
+      borderColor: '#1565c0',
       color: '#fff'
     }
   }
