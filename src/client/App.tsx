@@ -10,17 +10,15 @@ import './styles/styles.css';
 
 import Main from './containers/Main';
 import SignIn from './components/SignIn';
-import UserContext from './UserContext';
-import Tutorial from './components/ComponentTutorial';
+import { UserContext } from './contexts/UserContext';
+import Demo from './components/Demo';
 import ComponentTree from './containers/ComponentTree';
-import Prototype from './prototype/prototype';
 
 const App = () => {
   const [user, setUser] = useState(null);
 
   const providerUser = useMemo(() => ({ user, setUser }), [user, setUser]);
   useEffect(() => {
-    // console.log('useEffect line 172 App.tsx is hit');
     const getUser = async () => {
       fetch('http://localhost:3000/auth/login/success', {
         method: 'GET',
@@ -32,12 +30,10 @@ const App = () => {
         }
       })
         .then((response) => {
-          // console.log('line 187 response: ', response)
           if (response.status === 200) return response.json();
           throw new Error('authentication has been failed!');
         })
         .then((resObject) => {
-          // setUser(true)
           setUser(resObject.user);
         })
         .then((err) => {
@@ -47,7 +43,6 @@ const App = () => {
     getUser();
   }, []);
 
-  // use context API;
   return (
     <Router>
       <UserContext.Provider value={providerUser}>
@@ -55,12 +50,10 @@ const App = () => {
           <ThemeProvider theme={theme}>
             <Routes>
               <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
-              <Route path="/dashboard" element={<Main />} >
-                  <Route index element={<ComponentTree />} />
-                  <Route path="demo" element={<Prototype />} />
-                <Route path="test" element={<Tutorial />} />
+              <Route path="/dashboard" element={<Main />}>
+                <Route index element={<ComponentTree />} />
+                <Route path="demo" element={<Demo />} />
               </Route>
-              <Route path="/tutorial" element={<Tutorial />} />
             </Routes>
           </ThemeProvider>
         </DndProvider>

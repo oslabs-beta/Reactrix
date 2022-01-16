@@ -61,7 +61,8 @@ function Board(props: any) {
     }
     if (text.flat().filter((x) => x === '-').length === 0) {
       return 'Draw';
-    }
+    };
+    return;
   }
 
   return <div>{rows}</div>;

@@ -1,34 +1,41 @@
 import React from 'react';
 import { useDrag, DragSourceMonitor } from 'react-dnd';
 
-import { Button } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 
-interface Props {
-  label: string;
-}
+const StyledButton = withStyles({
+  root: {
+    backgroundColor: '#fff',
+    color: '#000',
+    '&:hover': {
+      backgroundColor: '#fff',
+      borderColor: '#388e3c',
+      color: '#000'
+    }
+  }
+})(Button);
 
-export default function NewComponent({ label }: Props) {
-  const [collected, drag, dragPreview] = useDrag(() => ({
+export default function NewComponent(props: any) {
+  const { label } = props;
+  const [{ isDragging }, drag] = useDrag(() => ({
     type: 'box',
     // pass in object containing payload of component label
     item: { label: label },
-    options: {
-      dropEffect: 'copy',
-    },
     collect: (monitor: DragSourceMonitor) => ({
       // grab the label object for use in tree > components > RenderCard
       item: monitor.getItem(),
-      isDragging: monitor.isDragging(),
+      isDragging: !!monitor.isDragging()
     }),
+    options: {
+      dropEffect: 'copy'
+    }
   }));
 
-  return collected.isDragging ? (
-    <div ref={dragPreview} />
-  ) : (
-    <div ref={drag} {...collected}>
-      <Button variant='outlined' size='medium'>
+  return (
+    <div ref={drag}>
+      <StyledButton variant="outlined" size="large">
         {label}
-      </Button>
+      </StyledButton>
     </div>
   );
 }

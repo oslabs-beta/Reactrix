@@ -8,15 +8,7 @@ import { RenderNode } from './RenderNode';
 
 export const isLastNode = (data: any, prop: IOrgTreeNodeProps) => {
   const node = prop.node;
-  return !(
-    Array.isArray(data[node.children]) && data[node.children].length > 0
-  );
-};
-
-const mock_data = {
-  id: 'mock',
-  label: 'Label',
-  children: [{ id: 'child_mock', label: 'Label', children: [] }],
+  return !(Array.isArray(data[node.children]) && data[node.children].length > 0);
 };
 
 export const TreeNode = (props: IOrgTreeNodeProps) => {
@@ -24,7 +16,6 @@ export const TreeNode = (props: IOrgTreeNodeProps) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <RenderNode data={hierarchy} prop={props} first />
-      <RenderNode data={mock_data} prop={props} mock />
     </DndProvider>
   );
 };
