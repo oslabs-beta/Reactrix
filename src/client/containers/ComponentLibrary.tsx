@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Box, Drawer, List, ListItem, Toolbar, Typography, Divider } from '@material-ui/core';
 
 import NewComponent from '../components/NewComponent';
 import ReusableComponents from './ReusableComponents';
 
 export default function ComponentLibrary(props: any): any {
+  const { reusableComponents } = props;
+
   return (
     <Drawer variant="permanent" className={props.drawer}>
       <Box sx={{ overflow: 'auto' }}>
@@ -22,7 +24,7 @@ export default function ComponentLibrary(props: any): any {
           <ListItem>
             <Typography variant="subtitle1">Reusable Components</Typography>
           </ListItem>
-          <ReusableComponents />
+          <ReusableComponents reusableComponents={reusableComponents} />
         </List>
       </Box>
     </Drawer>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import OrgTreeComponent, { useTree } from '../tree';
-import { Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 let data = {
   id: 1,
@@ -15,6 +15,7 @@ export default function ComponentTree(props: any): any {
     <div>
       <Typography variant="h5">Component Tree</Typography>
       <OrgTreeComponent data={data} ref={treeRef} horizontal />
+      <Button variant="outlined">Take Snapshot</Button>
     </div>
   );
 }

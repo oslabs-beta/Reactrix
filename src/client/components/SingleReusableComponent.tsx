@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 
 export default function SingleReusableComponent(props: any) {
   const { label, url, state, hook, children } = props.details;
-  const [collected, drag, dragPreview] = useDrag(() => ({
+  const [{ isDragging }, drag] = useDrag(() => ({
     type: 'box',
     item: {
       label: label,
@@ -13,19 +13,17 @@ export default function SingleReusableComponent(props: any) {
       hook: hook,
       children: children
     },
-    options: {
-      dropEffect: 'copy'
-    },
     collect: (monitor: DragSourceMonitor) => ({
       item: monitor.getItem(),
-      isDragging: monitor.isDragging()
-    })
+      isDragging: !!monitor.isDragging()
+    }),
+    options: {
+      dropEffect: 'copy'
+    }
   }));
 
-  return collected.isDragging ? (
-    <div ref={dragPreview} />
-  ) : (
-    <div ref={drag} {...collected}>
+  return (
+    <div ref={drag}>
       <Button variant="outlined" size="large" key={label}>
         {label}
       </Button>

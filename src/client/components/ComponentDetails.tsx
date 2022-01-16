@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 
 import GenerateComponent from './GenerateComponent';
@@ -17,59 +17,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ComponentDetails() {
+export default function ComponentDetails(props: any) {
   const classes = useStyles();
 
-  // const [id, setId] = useState('');
-  const [label, setLabel] = useState('');
-  const [url, setUrl] = useState('');
-  const [state, setState] = useState('');
-  const [hook, setHook] = useState('');
-  const [componentDetails, setComponentDetails] = useState({
-    id: '1',
-    label: 'App',
-    url: '',
-    state: '',
-    hook: '',
-    children: []
-  });
-  const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
-
-  useEffect(() => {
-    setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
-  }, [componentDetails]);
-
-  const handleSetDetails = (label?: any, url?: any, state?: any, hook?: any, children?: any) => {
-    const newComponentDetails = {
-      ...componentDetails,
-      label: label,
-      url: url,
-      state: state,
-      hook: hook,
-      children: children
-    };
-    setComponentDetails(newComponentDetails);
-  };
-
-  // const handleAddToReusableComponents = (component: any) => {
-  //     setReusableComponents((reusableComponents) => [...reusableComponents, component]);
-  // };
-
-  const handleOnChangeLabel = (event: any) => {
-    setLabel(event.target.value);
-  };
-
-  const handleOnChangeUrl = (event: any) => {
-    setUrl(event.target.value);
-  };
-
-  const handleOnChangeState = (event: any) => {
-    setState(event.target.value);
-  };
-
-  const handleOnChangeHook = (event: any) => {
-    setHook(event.target.value);
-  };
+  const { label, url, state, hook, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
 
   /*
     https://jsonplaceholder.typicode.com/todos/1
@@ -78,7 +29,7 @@ export default function ComponentDetails() {
   return (
     <div>
       <Typography variant="h5">Component Details</Typography>
-      <GenerateComponent componentDetails={componentDetails} reusableComponents={reusableComponents} />
+      {/* <GenerateComponent componentDetails={componentDetails} reusableComponents={reusableComponents} /> */}
       <Box className={classes.form} component="form" m={2} mt={5}>
         <div>
           <FormControl className={classes.form} variant="outlined">

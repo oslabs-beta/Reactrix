@@ -28,7 +28,6 @@ export default function Main() {
   const { drawer, containerLeft, containerRight } = useStyles();
 
   // const [id, setId] = useState('');
-
   const [label, setLabel] = useState('');
   const [url, setUrl] = useState('');
   const [state, setState] = useState('');
@@ -48,15 +47,19 @@ export default function Main() {
   }, [componentDetails]);
 
   const handleSetDetails = (label?: any, url?: any, state?: any, hook?: any, children?: any) => {
-    const newComponentDetails = {
-      ...componentDetails,
-      label: label,
-      url: url,
-      state: state,
-      hook: hook,
-      children: children
-    };
-    setComponentDetails(newComponentDetails);
+    if (label) {
+      const newComponentDetails = {
+        ...componentDetails,
+        label: label,
+        url: url,
+        state: state,
+        hook: hook,
+        children: children
+      };
+      setComponentDetails(newComponentDetails);
+    } else {
+      return;
+    }
   };
 
   // const handleAddToReusableComponents = (component: any) => {
@@ -83,8 +86,20 @@ export default function Main() {
     <div>
       <Navbar />
       <Box sx={{ display: 'flex' }}>
-        <ComponentLibrary drawer={drawer} />
-        <GridContainer containerLeft={containerLeft} containerRight={containerRight} />
+        <ComponentLibrary drawer={drawer} reusableComponents={reusableComponents} />
+        <GridContainer
+          containerLeft={containerLeft}
+          containerRight={containerRight}
+          label={label}
+          url={url}
+          state={state}
+          hook={hook}
+          handleSetDetails={handleSetDetails}
+          handleOnChangeLabel={handleOnChangeLabel}
+          handleOnChangeUrl={handleOnChangeUrl}
+          handleOnChangeState={handleOnChangeState}
+          handleOnChangeHook={handleOnChangeHook}
+        />
       </Box>
     </div>
   );
