@@ -39,7 +39,7 @@ export default function ComponentDetails(props: any) {
 
   return (
     <div>
-      <Typography variant="h5">Component Details</Typography>
+      <Typography variant="h6">Component Details</Typography>
       {/* <GenerateComponent componentDetails={componentDetails} reusableComponents={reusableComponents} /> */}
       <Box className={classes.form} component="form" m={2} mt={5}>
         <div>

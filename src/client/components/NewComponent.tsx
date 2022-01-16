@@ -33,7 +33,7 @@ export default function NewComponent(props: any) {
 
   return (
     <div ref={drag}>
-      <StyledButton variant="outlined" size="medium">
+      <StyledButton variant="outlined" size="large">
         {label}
       </StyledButton>
     </div>

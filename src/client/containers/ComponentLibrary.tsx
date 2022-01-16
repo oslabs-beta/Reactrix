@@ -13,7 +13,7 @@ export default function ComponentLibrary(props: any): any {
         <Toolbar />
         <List>
           <ListItem>
-            <Typography variant="h5">Component Library</Typography>
+            <Typography variant="h6">Component Library</Typography>
           </ListItem>
           <ListItem>
             <NewComponent label="New Component" />

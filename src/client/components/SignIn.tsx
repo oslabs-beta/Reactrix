@@ -78,7 +78,7 @@ export default function SignIn() {
         </ColorButton>
 
         <Grid item>
-          <Link class="signin" to="/dashboard">
+          <Link className="signin" to="/dashboard">
             {'Continue as Guest'}
           </Link>
         </Grid>

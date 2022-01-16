@@ -78,7 +78,7 @@ export default function Demo(props: any) {
       <Grid item xs={8} sm container>
         <Grid item xs container direction="column" spacing={2}>
           <Grid item xs>
-            <Typography variant="h5">Demo</Typography>
+            <Typography variant="h6">Demo</Typography>
             <Box sx={{ minWidth: 275, maxWidth: 550 }}>
               <Card variant="outlined">{emptyCard}</Card>
             </Box>
