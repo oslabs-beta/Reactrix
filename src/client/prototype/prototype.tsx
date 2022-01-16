@@ -1,41 +1,27 @@
-import React, { Component, Profiler } from 'react';
-import { render } from 'react-dom';
+import { withThemeCreator } from '@material-ui/styles';
+import React, { Profiler } from 'react';
+import { sendProfilerData } from '../helpers/helpers';
 
 export default function Prototype() {
   return (
-    <Profiler id="Prototype" onRender={(
-      id, // the "id" prop of the Profiler tree that has just committed
-      phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
-      actualDuration, // time spent rendering the committed update
-      baseDuration, // estimated time to render the entire subtree without memoization
-      startTime, // when React began rendering this update
-      commitTime, // when React committed this update
-      interactions // the Set of interactions belonging to this update
-    ) => {
-      // Aggregate or log render timings...
-      console.log('this is id', id);
-      console.log('this is phase', phase);
-      console.log('this is actualDuration', actualDuration);
-      console.log('this is baseDuration', baseDuration);
-      console.log('this is startTime', startTime);
-      console.log('this is commitTime', commitTime);
-      console.log('this is interactions', interactions);
-    }}>
-    <div>
-      <h1>Tic Tac Toe</h1>
-      <BoardWrapper />
-    </div>
+    <Profiler id="Prototype" onRender={sendProfilerData}>
+      <div>
+        <h1>Tic Tac Toe</h1>
+        <BoardWrapper />
+      </div>
     </Profiler>
   );
 }
 
 function BoardWrapper() {
-  return(
-    <div>
-      <h5>Test</h5>
-      <Board />
-    </div>
-  )
+  return (
+    <Profiler id="BoardWrapper" onRender={sendProfilerData}>
+      <div>
+        <h5>Test</h5>
+        <Board />
+      </div>
+    </Profiler>
+  );
 }
 
 function Board(props: any) {
@@ -100,8 +86,10 @@ function Box(props: any) {
     });
   };
   return (
-    <button className="box" onClick={update}>
-      {props.text}
-    </button>
+    <Profiler id='Box' onRender={sendProfilerData}>
+      <button className="box" onClick={update}>
+        {props.text}
+      </button>
+    </Profiler>
   );
 }
