@@ -10,7 +10,9 @@ import {
 } from 'react';
 
 // start of new code
+export interface IProfilerContextData {
 
+}
 // end of new code
 
 export interface INestedObject extends Record<string, any> {
