@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
-import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText(grey[800]),
@@ -29,33 +29,20 @@ function Copyright(props: any) {
 }
 
 export default function SignIn() {
-  // const useAuth = () => {
-  //     const user = { loggedIn: false };
-  //     fetch('http://localhost:3000/auth/github')
-  //     .then((data) => {
-  //         console.log(data);
-  //         return user && user.loggedIn;
-  //     })
-  // };
-
-  // const oAuth = () => {
-  //     const isAuth: any = useAuth();
-  //     return isAuth ? <Outlet /> : <Navigate to="/" />;
-  // };
   const oAuth = () => {
     // event.preventDefault();
     window.open('http://localhost:3000/auth/github', '_self');
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
-    });
-  };
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   // eslint-disable-next-line no-console
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password')
+  //   });
+  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -67,7 +54,7 @@ export default function SignIn() {
           alignItems: 'center',
           bgcolor: 'background.paper',
           minWidth: 400,
-          marginTop: 14,
+          marginTop: 18,
           p: 5,
           boxShadow: 3,
           borderRadius: 2
@@ -80,31 +67,21 @@ export default function SignIn() {
             flexWrap: 'wrap'
           }}
         >
-          <AccountTreeIcon fontSize="large" />
           <Typography component="h1" variant="h3" sx={{ fontWeight: 700, marginBottom: 2, p: 1 }}>
             Reactrix
           </Typography>
         </div>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-          <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
-          <Grid container>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign In
-            </Button>
-            <ColorButton type="submit" fullWidth variant="contained" sx={{ mt: 0, mb: 5 }} onClick={oAuth}>
-              Login with GitHub
-            </ColorButton>
-          </Grid>
-          <Grid container>
-            <Grid item xs>
-              <Link to="/">{'Create account'}</Link>
-            </Grid>
-            <Grid item>
-              <Link to="/dashboard">{'Continue as Guest'}</Link>
-            </Grid>
-          </Grid>
-        </Box>
+
+        <ColorButton type="submit" variant="contained" size="large" sx={{ mt: 3, mb: 6, minHeight: '60px' }} onClick={oAuth}>
+          <GitHubIcon />
+          {'\u00A0\u00A0Login with GitHub'}
+        </ColorButton>
+
+        <Grid item>
+          <Link class="signin" to="/dashboard">
+            {'Continue as Guest'}
+          </Link>
+        </Grid>
       </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { AppBar, Toolbar, CssBaseline, Typography, createStyles, makeStyles, Theme } from '@material-ui/core';
-import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import { Link } from 'react-router-dom';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       color: 'white',
       fontWeight: 'bold',
-      marginLeft: theme.spacing(1)
+      marginLeft: theme.spacing(-1)
     },
     logo: {
       color: 'white'
@@ -36,8 +35,7 @@ export default function Navbar(): any {
     <AppBar position="fixed" className={classes.appBar}>
       <CssBaseline />
       <Toolbar>
-        <AccountTreeIcon fontSize="small" className={classes.logo} />
-        <Typography variant="h5" className={classes.title}>
+        <Typography variant="h4" className={classes.title}>
           Reactrix
         </Typography>
         <div className={classes.navLinks}>

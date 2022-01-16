@@ -8,9 +8,9 @@ import ComponentLibrary from './ComponentLibrary';
 const useStyles = makeStyles(() =>
   createStyles({
     drawer: {
-      width: 300,
+      width: 280,
       flexShrink: 0,
-      [`& .MuiDrawer-paper`]: { width: 300, boxSizing: 'border-box' }
+      [`& .MuiDrawer-paper`]: { width: 280, boxSizing: 'border-box' }
     },
     containerLeft: {
       height: 'auto',

@@ -27,7 +27,7 @@ const GridContainer = (props: any) => {
   }
 
   return (
-    <Box component="main" sx={{ flexGrow: 1, p: 2.5 }}>
+    <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
       <Toolbar />
       <Grid container spacing={4}>
         <Grid item xs={8} className={containerLeft}>

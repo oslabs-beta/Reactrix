@@ -4,12 +4,24 @@ import { Box, Button, ButtonGroup, Card, CardActions, CardContent, Grid, Typogra
 
 const DemoButton = withStyles({
   root: {
-    backgroundColor: '#ffca28',
-    color: '#000',
+    backgroundColor: '#ff9800',
+    color: '#fff',
     '&:hover': {
-      backgroundColor: '#ffb300',
-      borderColor: '#ffb300',
-      color: '#000'
+      backgroundColor: '#f57c00',
+      borderColor: '#f57c00',
+      color: '#fff'
+    }
+  }
+})(Button);
+
+const SnapshotButton = withStyles({
+  root: {
+    backgroundColor: '#9c27b0',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#7b1fa2',
+      borderColor: '#7b1fa2',
+      color: '#fff'
     }
   }
 })(Button);
@@ -75,7 +87,7 @@ export default function Demo(props: any) {
         <Grid item>
           <ButtonGroup variant="outlined" aria-label="outlined primary button group">
             <DemoButton variant="outlined">End Demo</DemoButton>
-            <DemoButton variant="outlined">Take Snapshot</DemoButton>
+            <SnapshotButton variant="outlined">Take Snapshot</SnapshotButton>
           </ButtonGroup>
         </Grid>
       </Grid>

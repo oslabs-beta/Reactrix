@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography, withStyles } from '@material-ui/core';
 
-import GenerateComponent from './GenerateComponent';
+// import GenerateComponent from './GenerateComponent';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     form: {
-      width: 450,
-      flexShrink: 0,
+      width: 300,
+      flexShrink: 2,
 
       ['& .MuiTextField-root']: { m: 1, width: '25ch' }
     },
@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SaveButton = withStyles({
   root: {
-    backgroundColor: '#90caf9',
-    color: '#000',
+    backgroundColor: '#2196f3',
+    color: '#fff',
     '&:hover': {
-      backgroundColor: '#42a5f5',
-      borderColor: '#42a5f5',
-      color: '#000'
+      backgroundColor: '#1976d2',
+      borderColor: '#1976d2',
+      color: '#fff'
     }
   }
 })(Button);
@@ -44,6 +44,7 @@ export default function ComponentDetails(props: any) {
       <Box className={classes.form} component="form" m={2} mt={5}>
         <div>
           <FormControl className={classes.form} variant="outlined">
+            <FormHelperText id="outlined-weight-helper-text">Name (Required)</FormHelperText>
             <OutlinedInput
               id="outlined-adornment-weight"
               aria-describedby="outlined-weight-helper-text"
@@ -53,21 +54,21 @@ export default function ComponentDetails(props: any) {
               }}
               onChange={handleOnChangeLabel}
             />
-            <FormHelperText id="outlined-weight-helper-text">Name</FormHelperText>
           </FormControl>
           <FormControl className={classes.form} variant="outlined">
+            <FormHelperText id="outlined-weight-helper-text">URL (Optional)</FormHelperText>
             <OutlinedInput
               id="outlined-adornment-weight"
               aria-describedby="outlined-weight-helper-text"
-              placeholder="Add an API call URL"
+              placeholder="Add an API call"
               inputProps={{
                 'aria-label': 'weight'
               }}
               onChange={handleOnChangeUrl}
             />
-            <FormHelperText id="outlined-weight-helper-text">URL</FormHelperText>
           </FormControl>
           <FormControl className={classes.form} variant="outlined">
+            <FormHelperText id="outlined-weight-helper-text">State (Optional)</FormHelperText>
             <OutlinedInput
               id="outlined-adornment-weight"
               aria-describedby="outlined-weight-helper-text"
@@ -77,9 +78,9 @@ export default function ComponentDetails(props: any) {
               }}
               onChange={handleOnChangeState}
             />
-            <FormHelperText id="outlined-weight-helper-text">State</FormHelperText>
           </FormControl>
           <FormControl className={classes.form} variant="outlined">
+            <FormHelperText id="outlined-weight-helper-text">Hooks (Optional)</FormHelperText>
             <OutlinedInput
               id="outlined-adornment-weight"
               aria-describedby="outlined-weight-helper-text"
@@ -89,7 +90,6 @@ export default function ComponentDetails(props: any) {
               }}
               onChange={handleOnChangeHook}
             />
-            <FormHelperText id="outlined-weight-helper-text">Hooks</FormHelperText>
           </FormControl>
           <SaveButton
             variant="outlined"

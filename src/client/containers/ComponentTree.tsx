@@ -9,14 +9,26 @@ const rootComponent = {
   children: []
 };
 
-const ComponentTreeButton = withStyles({
+const DemoButton = withStyles({
   root: {
-    backgroundColor: '#ffca28',
-    color: '#000',
+    backgroundColor: '#ff9800',
+    color: '#fff',
     '&:hover': {
-      backgroundColor: '#ffb300',
-      borderColor: '#ffb300',
-      color: '#000'
+      backgroundColor: '#f57c00',
+      borderColor: '#f57c00',
+      color: '#fff'
+    }
+  }
+})(Button);
+
+const SnapshotButton = withStyles({
+  root: {
+    backgroundColor: '#9c27b0',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#7b1fa2',
+      borderColor: '#7b1fa2',
+      color: '#fff'
     }
   }
 })(Button);
@@ -37,10 +49,10 @@ export default function ComponentTree(props: any): any {
         <Grid item>
           <ButtonGroup variant="outlined" aria-label="outlined primary button group">
             <Outlet />
-            <ComponentTreeButton variant="outlined" onClick={() => navigate('demo')}>
+            <DemoButton variant="outlined" onClick={() => navigate('demo')}>
               Start Demo
-            </ComponentTreeButton>
-            <ComponentTreeButton variant="outlined">Take Snapshot</ComponentTreeButton>
+            </DemoButton>
+            <SnapshotButton variant="outlined">Take Snapshot</SnapshotButton>
           </ButtonGroup>
         </Grid>
       </Grid>
