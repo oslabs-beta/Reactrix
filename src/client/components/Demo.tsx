@@ -1,30 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Box, Button, ButtonGroup, Card, CardActions, CardContent, Grid, Typography, withStyles } from '@material-ui/core';
-
-const DemoButton = withStyles({
-  root: {
-    backgroundColor: '#b3e5fc',
-    color: '#000',
-    '&:hover': {
-      backgroundColor: '#29b6f6',
-      borderColor: '#29b6f6',
-      color: '#000'
-    }
-  }
-})(Button);
-
-const SnapshotButton = withStyles({
-  root: {
-    backgroundColor: '#2196f3',
-    color: '#fff',
-    '&:hover': {
-      backgroundColor: '#1565c0',
-      borderColor: '#1565c0',
-      color: '#fff'
-    }
-  }
-})(Button);
+import { Box, Card, CardActions, CardContent, Grid, Typography } from '@material-ui/core';
 
 export default function Demo(props: any) {
   const handleRequest = (url: string) => {
@@ -83,12 +59,6 @@ export default function Demo(props: any) {
               <Card variant="outlined">{emptyCard}</Card>
             </Box>
           </Grid>
-        </Grid>
-        <Grid item>
-          <ButtonGroup variant="outlined" aria-label="outlined primary button group">
-            <DemoButton variant="outlined">End Demo</DemoButton>
-            <SnapshotButton variant="outlined">Take Snapshot</SnapshotButton>
-          </ButtonGroup>
         </Grid>
       </Grid>
     </Grid>

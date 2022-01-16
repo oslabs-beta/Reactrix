@@ -54,7 +54,6 @@ const App = () => {
                 <Route index element={<ComponentTree />} />
                 <Route path="demo" element={<Demo />} />
               </Route>
-              <Route path="/demo" element={<Demo />} />
             </Routes>
           </ThemeProvider>
         </DndProvider>
