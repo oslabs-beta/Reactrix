@@ -54,9 +54,9 @@ const App = () => {
           <ThemeProvider theme={theme}>
             <Routes>
               <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
-              <Route path="/dashboard" element={<Main />} >
-                  <Route index element={<ComponentTree />} />
-                  <Route path="demo" element={<Tutorial />} />
+              <Route path="/dashboard" element={<Main />}>
+                <Route index element={<ComponentTree />} />
+                <Route path="demo" element={<Tutorial />} />
                 <Route path="test" element={<Tutorial />} />
               </Route>
               <Route path="/tutorial" element={<Tutorial />} />

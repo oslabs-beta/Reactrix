@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme } from '@material-ui/core';
+
+import OrgTreeComponent, { useTree } from '../tree';
 
 import GenerateComponent from './GenerateComponent';
+import ReusableComponents from '../containers/ReusableComponents';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ComponentDetails() {
   const classes = useStyles();
+  const { treeRef } = useTree();
 
   // const [id, setId] = useState('');
   const [label, setLabel] = useState('');
@@ -77,7 +83,12 @@ export default function ComponentDetails() {
 
   return (
     <div>
-      <Typography variant="h5">Component Details</Typography>
+      <DndProvider backend={HTML5Backend}>
+        {/* <ReusableComponents reusableComponents={reusableComponents} /> */}
+        <div>
+          <OrgTreeComponent data={componentDetails} ref={treeRef} horizontal />
+        </div>
+      </DndProvider>
       <GenerateComponent componentDetails={componentDetails} reusableComponents={reusableComponents} />
       <Box className={classes.form} component="form" m={2} mt={5}>
         <div>
@@ -85,7 +96,7 @@ export default function ComponentDetails() {
             <OutlinedInput
               id="outlined-adornment-weight"
               aria-describedby="outlined-weight-helper-text"
-              placeholder="Add a component name"
+              placeholder="Add your component name"
               inputProps={{
                 'aria-label': 'weight'
               }}

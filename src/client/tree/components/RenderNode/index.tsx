@@ -10,9 +10,7 @@ export const RenderNode = ({ data, prop, first, mock }: IRender) => {
   const node = prop.node;
   const cls = ['org-tree-node'];
 
-  const [expand, setExpand] = useState(
-    !(node.expand in data && !data[node.expand])
-  );
+  const [expand, setExpand] = useState(!(node.expand in data && !data[node.expand]));
 
   useEffect(() => {
     setExpand(prop.expandAll);
@@ -34,22 +32,10 @@ export const RenderNode = ({ data, prop, first, mock }: IRender) => {
       strokeColor={prop.strokeColor}
       strokeWidth={prop.strokeWidth}
       style={data.id === 'mock' ? { display: 'none' } : {}}
+      onClick={() => console.log('onClick from OrgTreeNode (data): ', data)}
     >
-      <RenderCard
-        setExpand={setExpand}
-        expand={expand}
-        data={data}
-        prop={prop}
-        mock={mock}
-      />
-      {(!prop.collapsable || expand) && (
-        <RenderChildren
-          data={data}
-          list={data.children}
-          prop={prop}
-          mock={mock}
-        />
-      )}
+      <RenderCard setExpand={setExpand} expand={expand} data={data} prop={prop} mock={mock} />
+      {(!prop.collapsable || expand) && <RenderChildren data={data} list={data.children} prop={prop} mock={mock} />}
     </OrgTreeNode>
   );
 };
