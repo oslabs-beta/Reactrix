@@ -13,6 +13,7 @@ import SignIn from './components/SignIn';
 import UserContext from './UserContext';
 import Tutorial from './components/ComponentTutorial';
 import ComponentTree from './containers/ComponentTree';
+import Prototype from './prototype/prototype';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -56,7 +57,7 @@ const App = () => {
               <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
               <Route path="/dashboard" element={<Main />} >
                   <Route index element={<ComponentTree />} />
-                  <Route path="demo" element={<Tutorial />} />
+                  <Route path="demo" element={<Prototype />} />
                 <Route path="test" element={<Tutorial />} />
               </Route>
               <Route path="/tutorial" element={<Tutorial />} />
