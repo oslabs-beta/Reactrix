@@ -12,6 +12,7 @@ const rootComponent = {
 
 export default function ComponentTree(props: any): any {
   const { treeRef } = useTree();
+  console.log('this is Profiler Data', useAppSelector(selectProfilerData))
 
   return (
     <Grid container spacing={2}>

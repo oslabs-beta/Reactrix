@@ -15,6 +15,12 @@ export const profilerSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
+    clearProfilerData: (state) => {
+      console.log('clearing Profiler data');
+      state.id = null;
+      state.phase = null;
+      state.actualDuration = null;
+    },
     storeProfilerData: (state, action: PayloadAction<IProfilingData>) => {
       console.log('this is action payload', action.payload);
       state.id = action.payload.id;
@@ -24,7 +30,7 @@ export const profilerSlice = createSlice({
   },
 });
 
-export const { storeProfilerData } = profilerSlice.actions;
+export const { clearProfilerData, storeProfilerData } = profilerSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectProfilerData = (state: RootState) => state.profiler;

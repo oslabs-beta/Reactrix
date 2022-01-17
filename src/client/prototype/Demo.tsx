@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { Box, Card, CardActions, CardContent, Grid, Typography} from '@material-ui/core';
+import { useAppSelector } from '../hooks';
+import { selectProfilerData } from '../slices/profilerSlice';
 
 export default function Demo(props: any) {
   const handleRequest = (url: string) => {
@@ -48,6 +50,7 @@ export default function Demo(props: any) {
   //     </CardActions>
   //   </React.Fragment>
   // );
+  console.log('Profiler Data should updated', useAppSelector(selectProfilerData));
 
   return (
     <Grid container spacing={2}>
