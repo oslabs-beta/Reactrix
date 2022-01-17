@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import { Box, Button, ButtonGroup, Grid, Toolbar, withStyles } from '@material-ui/core';
 
@@ -6,8 +6,6 @@ import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
 import Snapshots from '../components/Snapshots';
 import { handleInitialData, handleUpdateData } from '../helpers/helpers';
-
-// import { useHierarchyData } from '../tree/context/HierarchyContextProvider';
 
 const DemoButton = withStyles({
   root: {
@@ -56,6 +54,7 @@ export default function GridContainer(props: any) {
   const [newSnapshot, setNewSnapshot] = useState({});
   const [checked, setChecked] = useState<boolean>(false);
   const [isProfiling, setIsProfiling] = useState<boolean>(false);
+  const [startStop, setStartStop] = useState('Start');
 
   function handleFirstCheck() {
     setFirstSnapshot(!firstSnapshot);
@@ -68,9 +67,11 @@ export default function GridContainer(props: any) {
   function handleProfiling() {
     if (!isProfiling) {
       setIsProfiling(true);
+      setStartStop('Stop');
       navigate('demo');
     } else {
       setIsProfiling(false);
+      setStartStop('Start');
       navigate('');
     }
   }
@@ -83,22 +84,28 @@ export default function GridContainer(props: any) {
     const newDummyData = handleUpdateData();
   }
 
-  console.log('this is the latest snapshot: ', newSnapshot);
-
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
       <Toolbar />
       <Grid container spacing={4}>
         <Grid item xs={8} className={containerLeft}>
-          <Outlet context={getComponentTreeData} />
-          <ButtonGroup variant="outlined" aria-label="outlined primary button group">
-            <DemoButton variant="outlined" onClick={handleProfiling}>
-              Start Demo
-            </DemoButton>
-            <SnapshotButton variant="outlined" onClick={() => handleNewSnapshot(componentTreeData)}>
-              Take Snapshot
-            </SnapshotButton>
-          </ButtonGroup>
+          <Grid item xs={12} sm container>
+            <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs>
+                <Outlet context={[componentTreeData, getComponentTreeData]} />
+              </Grid>
+            </Grid>
+            <Grid item>
+              <ButtonGroup variant="outlined" aria-label="outlined primary button group">
+                <DemoButton variant="outlined" onClick={handleProfiling}>
+                  {`${startStop} Profiling`}
+                </DemoButton>
+                <SnapshotButton variant="outlined" onClick={() => handleNewSnapshot(componentTreeData)}>
+                  Take Snapshot
+                </SnapshotButton>
+              </ButtonGroup>
+            </Grid>
+          </Grid>
         </Grid>
         <Grid item xs={4} className={containerRight}>
           <ComponentDetails

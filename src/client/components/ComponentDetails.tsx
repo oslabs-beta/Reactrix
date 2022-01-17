@@ -30,8 +30,6 @@ export default function ComponentDetails(props: any) {
   const classes = useStyles();
   const { label, url, state, hook, componentTreeData, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
 
-  console.log('componentTreeData', componentTreeData);
-
   return (
     <div>
       <Typography variant="h6">Component Details</Typography>
