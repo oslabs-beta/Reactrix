@@ -41,6 +41,7 @@ interface IRenderCard {
 
 export interface IOrgTreeProps {
   data: INestedObject;
+  getData: any;
   horizontal?: boolean;
   collapsable?: boolean;
   expandAll?: boolean;
@@ -103,6 +104,20 @@ export interface ISidebarDrawerProps {
   treeRef: ForwardedRef<any>;
 }
 
+export interface ITreeRefProps {
+  onExpandNodes: IExpandNodes;
+  findById: IFindById;
+  findParentByChildId: IFindParentByChildId;
+  removeById: IRemoveById;
+  editById: IEditById;
+  addChildrenById: IAddChildrenById;
+  nestedObjectToArray: (data: INestedObject) => IParsedArray[];
+  arrayToNestedObject: (data: IParsedArray[]) => INestedObject;
+  data: INestedObject;
+}
+
+export type ITreeContext = { 0: any; 1: any };
+
 export type IExpandNodes = () => void | undefined;
 
 export type IFindById = (id: number | string, nestsObject?: INestedObject | undefined) => INestedObject | null;
@@ -120,15 +135,3 @@ export type IRemoveById = (id: number | string, dataToRemove: Array<number | str
 export type IEditById = (id: number | string, data: Partial<INestedObject>, action?: 'replace' | 'add' | 'remove', nestedObject?: INestedObject | undefined) => INestedObject;
 
 export type IAddChildrenById = (id: number | string, data: INestedObject[], nestedObject?: INestedObject | undefined) => INestedObject;
-
-export interface ITreeRefProps {
-  onExpandNodes: IExpandNodes;
-  findById: IFindById;
-  findParentByChildId: IFindParentByChildId;
-  removeById: IRemoveById;
-  editById: IEditById;
-  addChildrenById: IAddChildrenById;
-  nestedObjectToArray: (data: INestedObject) => IParsedArray[];
-  arrayToNestedObject: (data: IParsedArray[]) => INestedObject;
-  data: INestedObject;
-}

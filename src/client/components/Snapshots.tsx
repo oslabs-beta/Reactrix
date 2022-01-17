@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox, FormControlLabel, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Box, Button, Checkbox, FormControl, FormControlLabel, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography, withStyles } from '@material-ui/core';
 import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -14,25 +14,46 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     snapshots: {
       marginTop: 20
+    },
+    form: {
+      width: 300,
+      flexShrink: 2,
+
+      ['& .MuiTextField-root']: { m: 1, width: '25ch' }
+    },
+    save: {
+      marginTop: 20
     }
   })
 );
+
+const SaveButton = withStyles({
+  root: {
+    backgroundColor: '#2196f3',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#1976d2',
+      borderColor: '#1976d2',
+      color: '#fff'
+    }
+  }
+})(Button);
 
 export default function Snapshots({ handleFirstCheck, handleCheck }: Props) {
   const classes = useStyles();
 
   return (
     <div>
-      <Typography variant="h6">Snapshots</Typography>
+      <Typography variant="h6">Projects</Typography>
       <TreeView
         aria-label="file system navigator"
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
         className={classes.snapshots}
         sx={{
-          height: 500,
+          height: 300,
           flexGrow: 1,
-          maxWidth: 450,
+          maxWidth: 400,
           overflowY: 'auto',
           marginTop: 2
         }}
@@ -54,6 +75,22 @@ export default function Snapshots({ handleFirstCheck, handleCheck }: Props) {
           <FormControlLabel value="start" control={<Checkbox />} onClick={handleCheck} label="09/18/2021 Snapshot 1" />
         </TreeItem>
       </TreeView>
+      <Box className={classes.form} component="form" m={2}>
+        <FormControl className={classes.form} variant="outlined" size="small">
+          <FormHelperText id="outlined-weight-helper-text">New Project</FormHelperText>
+          <OutlinedInput
+            id="outlined-adornment-weight"
+            aria-describedby="outlined-weight-helper-text"
+            placeholder="Project name"
+            inputProps={{
+              'aria-label': 'weight'
+            }}
+          />
+        </FormControl>
+        <SaveButton variant="outlined" className={classes.save}>
+          Save Project
+        </SaveButton>
+      </Box>
     </div>
   );
 }
