@@ -4,7 +4,18 @@ import { CSSProperties, Dispatch, MutableRefObject, ReactNode, SetStateAction, F
 
 // start of new code
 export interface IProfilerContextData {
+  profilingData: IProfilingData;
+  // setProfilingData: Dispatch<SetStateAction<IProfilingData>>;
+  setProfilingData: (profilingData: IProfilingData) => void;
+}
 
+export interface IProfilingData {
+  id: string | null;
+  phase: string | null;
+  actualDuration: number | null;
+  baseDuration?: number;
+  startTime?: number;
+  commitTime?: number;
 }
 // end of new code
 

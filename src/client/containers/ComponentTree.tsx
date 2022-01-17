@@ -1,6 +1,8 @@
 import * as React from 'react';
 import OrgTreeComponent, { useTree } from '../tree';
 import { Grid, Typography } from '@material-ui/core';
+import { useAppSelector } from '../hooks';
+import { selectProfilerData } from '../slices/profilerSlice';
 
 const rootComponent = {
   id: 1,

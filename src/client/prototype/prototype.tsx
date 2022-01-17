@@ -1,10 +1,10 @@
 import { withThemeCreator } from '@material-ui/styles';
 import React, { Profiler } from 'react';
-import { sendProfilerData } from '../helpers/helpers';
+import { useSendProfilerData } from '../helpers/helpers';
 
 export default function Prototype() {
   return (
-    <Profiler id="Prototype" onRender={sendProfilerData}>
+    <Profiler id="Prototype" onRender={useSendProfilerData}>
       <div>
         <h1>Tic Tac Toe</h1>
         <BoardWrapper />
@@ -15,7 +15,7 @@ export default function Prototype() {
 
 function BoardWrapper() {
   return (
-    <Profiler id="BoardWrapper" onRender={sendProfilerData}>
+    <Profiler id="BoardWrapper" onRender={useSendProfilerData}>
       <div>
         <h5>Test</h5>
         <Board />
@@ -87,7 +87,7 @@ function Box(props: any) {
     });
   };
   return (
-    <Profiler id='Box' onRender={sendProfilerData}>
+    <Profiler id='Box' onRender={useSendProfilerData}>
       <button className="box" onClick={update}>
         {props.text}
       </button>

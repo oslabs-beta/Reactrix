@@ -13,7 +13,8 @@ import SignIn from './components/SignIn';
 import { UserContext } from './contexts/UserContext';
 import Demo from './prototype/Demo';
 import ComponentTree from './containers/ComponentTree';
-import { sendProfilerData } from './helpers/helpers';
+// import { useSendProfilerData } from './helpers/helpers';
+import { useAppDispatch } from './hooks';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -44,6 +45,26 @@ const App = () => {
     getUser();
   }, []);
 
+  const sendProfilerData = (
+    id: string, // the "id" prop of the Profiler tree that has just committed
+    phase: string, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+    actualDuration: number, // time spent rendering the committed update
+    baseDuration: number, // estimated time to render the entire subtree without memoization
+    startTime: number, // when React began rendering this update
+    commitTime: number // when React committed this update
+  ) => {
+    // Aggregate or log render timings...
+    // const dispatch = useAppDispatch();
+    // dispatch({type: 'storeProfilerData', payload: {id, phase, actualDuration}});
+    console.log('this is id', id);
+    console.log('this is phase', phase);
+    console.log('this is actualDuration', actualDuration);
+    console.log('this is baseDuration', baseDuration);
+    console.log('this is startTime', startTime);
+    console.log('this is commitTime', commitTime);
+  };
+  const dispatch = useAppDispatch();
+
   return (
     <Router>
       <UserContext.Provider value={providerUser}>
@@ -53,7 +74,23 @@ const App = () => {
               <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
               <Route path="/dashboard" element={<Main />}>
                 <Route index element={<ComponentTree />} />
-                <Route path="demo" element={<Profiler id='Demo' onRender={sendProfilerData}><Demo /></Profiler>} />
+                <Route
+                  path="demo"
+                  element={
+                    <Profiler
+                      id="Demo"
+                      onRender={(id: string, phase: string, actualDuration: number) => {
+                        dispatch({ type: 'profiler/storeProfilerData', payload: { id, phase, actualDuration } });
+                        console.log('this is id', id);
+                        console.log('this is phase', phase);
+                        console.log('this is actualDuration', actualDuration);
+                      }}
+                    >
+                      <Demo />
+                    </Profiler>
+                  }
+                />
+                {/* <Route path="demo" element={<Profiler id='Demo' onRender={useSendProfilerData}><Demo /></Profiler>} /> */}
               </Route>
             </Routes>
           </ThemeProvider>
