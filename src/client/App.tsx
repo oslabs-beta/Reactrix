@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, Profiler } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
@@ -10,10 +10,10 @@ import './styles/styles.css';
 
 import Main from './containers/Main';
 import SignIn from './components/SignIn';
-import { UserContext } from './contexts/UserContext';
 import Demo from './prototype/Demo';
 import ComponentTree from './containers/ComponentTree';
 // import { useSendProfilerData } from './helpers/helpers';
+import { UserContext } from './contexts/UserContext';
 import { useAppDispatch } from './hooks';
 
 const App = () => {
@@ -63,6 +63,7 @@ const App = () => {
     console.log('this is startTime', startTime);
     console.log('this is commitTime', commitTime);
   };
+
   const dispatch = useAppDispatch();
 
   return (

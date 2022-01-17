@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import { Box, Button, ButtonGroup, Grid, Toolbar, withStyles } from '@material-ui/core';
+import { nanoid } from 'nanoid';
 
 import { ITreeContext } from '../../interfaces/index';
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
-import Projects from '../components/Projects';
-import { handleInitialData, handleUpdateData } from '../helpers/helpers';
+import Projects from './Projects';
 
 const DemoButton = withStyles({
   root: {
@@ -51,25 +51,42 @@ export default function GridContainer(props: any) {
     handleOnChangeHook
   } = props;
 
-  const [firstSnapshot, setFirstSnapshot] = useState<boolean>(true);
-  const [checked, setChecked] = useState<boolean>(false);
+  const [projectId, setProjectId] = useState('0');
+  const [projectName, setProjectName] = useState('');
+  const [snapshots, setSnapshots] = useState([]);
+
+  const [allProjects, setAllProjects] = useState<Array<any>>([]);
+  const [newProject, setNewProject] = useState({
+    projectId: '1',
+    projectName: 'New Project',
+    snapshots: []
+  });
+  const [newSnapshot, setNewSnapshot] = useState({});
+
   const [isProfiling, setIsProfiling] = useState<boolean>(false);
   const [startStop, setStartStop] = useState('Start');
 
-  const [userProjects, setUserProjects] = useState([]);
-  const [newSnapshot, setNewSnapshot] = useState({});
+  useEffect(() => {
+    setAllProjects((allProjects) => [...allProjects, newProject]);
+  }, [newProject]);
 
-  console.log('snapshot of hierarchy tree obj sent back from button click: ', newSnapshot);
+  // const handleAddNewProjectToAllProjects = () => {
+  //   setAllProjects((allProjects) => [...allProjects, newProject]);
+  // };
 
-  function handleFirstCheck() {
-    setFirstSnapshot(!firstSnapshot);
-  }
+  const handleSaveNewProject = (projectId: string, projectName: string, snapshots: []) => {
+    setNewProject({ projectId: nanoid(), projectName: projectName, snapshots: snapshots });
+  };
 
-  function handleCheck() {
-    setChecked(!checked);
-  }
+  const handleOnChangeProjectName = (event: any) => {
+    setProjectName(event.target.value);
+  };
 
-  function handleProfiling() {
+  const handleNewSnapshot = (currentTree: any) => {
+    setNewSnapshot(currentTree);
+  };
+
+  const handleProfiling = () => {
     if (!isProfiling) {
       setIsProfiling(true);
       setStartStop('Stop');
@@ -79,15 +96,7 @@ export default function GridContainer(props: any) {
       setStartStop('Start');
       navigate('');
     }
-  }
-
-  function handleNewSnapshot(currentTree: any) {
-    setNewSnapshot(currentTree);
-  }
-
-  if (checked) {
-    const newDummyData = handleUpdateData();
-  }
+  };
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
@@ -127,10 +136,21 @@ export default function GridContainer(props: any) {
           />
         </Grid>
         <Grid item xs={8} className={containerLeft}>
-          <PerformanceMetrics checked={checked} firstSnapshot={firstSnapshot} handleCheck={handleCheck} />
+          <PerformanceMetrics />
         </Grid>
         <Grid item xs={4} className={containerRight}>
-          <Projects handleCheck={handleCheck} handleFirstCheck={handleFirstCheck} />
+          <Projects
+            allProjects={allProjects}
+            newProject={newProject}
+            newSnapshot={newSnapshot}
+            projectId={projectId}
+            projectName={projectName}
+            snapshots={snapshots}
+            setNewProject={setNewProject}
+            // handleAddNewProjectToAllProjects={handleAddNewProjectToAllProjects}
+            handleSaveNewProject={handleSaveNewProject}
+            handleOnChangeProjectName={handleOnChangeProjectName}
+          />
         </Grid>
       </Grid>
     </Box>

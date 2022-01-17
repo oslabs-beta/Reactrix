@@ -4,12 +4,6 @@ import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-type Props = {
-  checked?: boolean;
-  handleFirstCheck: any;
-  handleCheck: any;
-};
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     projects: {
@@ -39,8 +33,10 @@ const SaveButton = withStyles({
   }
 })(Button);
 
-export default function Projects({ handleFirstCheck, handleCheck }: Props) {
+export default function Projects(props: any) {
   const classes = useStyles();
+
+  const { allProjects, newProject, newSnapshot, projectId, projectName, snapshots, setNewProject, handleAddNewProjectToAllProjects, handleSaveNewProject, handleOnChangeProjectName } = props;
 
   return (
     <div>
@@ -58,9 +54,13 @@ export default function Projects({ handleFirstCheck, handleCheck }: Props) {
           marginTop: 2
         }}
       >
-        <TreeItem nodeId="1" label="Project 1">
-          <FormControlLabel value="start" control={<Checkbox />} onClick={handleCheck} label="01/04/2022 Snapshot 1" />
-        </TreeItem>
+        {Object.values(allProjects.slice(1)).map((ele: any, key: any) => {
+          return (
+            <TreeItem nodeId={ele.projectId} label={ele.projectName}>
+              <FormControlLabel value="start" control={<Checkbox />} label={ele.projectName} key={ele.projectId} />
+            </TreeItem>
+          );
+        })}
       </TreeView>
       <Box className={classes.form} component="form" m={2}>
         <FormControl className={classes.form} variant="outlined" size="small">
@@ -72,9 +72,17 @@ export default function Projects({ handleFirstCheck, handleCheck }: Props) {
             inputProps={{
               'aria-label': 'weight'
             }}
+            onChange={handleOnChangeProjectName}
           />
         </FormControl>
-        <SaveButton variant="outlined" className={classes.save}>
+        <SaveButton
+          variant="outlined"
+          className={classes.save}
+          onClick={() => {
+            handleSaveNewProject(projectId, projectName, snapshots);
+            // handleAddNewProjectToAllProjects(newProject);
+          }}
+        >
           Save Project
         </SaveButton>
       </Box>

@@ -17,6 +17,7 @@ export interface IProfilingData {
   startTime?: number;
   commitTime?: number;
 }
+
 // end of new code
 
 export interface INestedObject extends Record<string, any> {

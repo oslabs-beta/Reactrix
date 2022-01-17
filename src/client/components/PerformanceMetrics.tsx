@@ -46,17 +46,17 @@ const data = {
   ]
 };
 
-export default function PerformanceMetrics({ firstSnapshot, checked }: Props) {
+export default function PerformanceMetrics() {
   return (
     <div>
       <Typography variant="h6">Performance Metrics</Typography>
-      <Bar
+      {/* <Bar
         options={options}
         data={firstSnapshot && checked ? data : checked && !firstSnapshot ? handleUpdateData() : handleInitialData()}
         style={{
           maxHeight: '500px'
         }}
-      />
+      /> */}
     </div>
   );
 }
