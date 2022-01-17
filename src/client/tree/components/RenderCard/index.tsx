@@ -110,21 +110,8 @@ export const RenderCard = ({ data, setExpand, expand, prop: { renderCard, ...pro
       hierarchyRef.current = addedNewDragItemHierarchy;
     }
 
-    //! traverse component hierarchy tree and search for children
+    // send current hierachy tree object back to main component to be passed to children that require the data
     getHierarchyTreeData(hierarchyRef.current);
-
-    const searchForChildren = (obj: any, target: string, result = []) => {
-      const foundChildren = result;
-      if (obj.hasOwnProperty(target)) {
-        const child = obj[target];
-        if (child.length > 0) {
-          searchForChildren(obj[target], target, result);
-        } else {
-        }
-      }
-      return foundChildren;
-    };
-    // searchForChildren(treeStructure, 'children');
   };
 
   const { onDebounce } = useDebounce(onDragEnter, 300);

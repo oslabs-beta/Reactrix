@@ -84,8 +84,6 @@ export default function Main() {
     setHook(event.target.value);
   };
 
-  console.log('componentTreeData that is being passed all the way back from rendernode', componentTreeData);
-
   return (
     <div>
       <Navbar />

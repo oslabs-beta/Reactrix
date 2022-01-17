@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography, withStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,7 +28,9 @@ const SaveButton = withStyles({
 
 export default function ComponentDetails(props: any) {
   const classes = useStyles();
-  const { label, url, state, hook, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
+  const { label, url, state, hook, componentTreeData, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
+
+  console.log('componentTreeData', componentTreeData);
 
   return (
     <div>

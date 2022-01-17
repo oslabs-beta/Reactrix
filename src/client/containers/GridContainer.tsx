@@ -52,8 +52,9 @@ export default function GridContainer(props: any) {
     handleOnChangeHook
   } = props;
 
-  const [firstSnapshot, setFirstSnapshot] = useState(true);
-  const [checked, setChecked] = useState(false);
+  const [firstSnapshot, setFirstSnapshot] = useState<boolean>(true);
+  const [newSnapshot, setNewSnapshot] = useState({});
+  const [checked, setChecked] = useState<boolean>(false);
   const [isProfiling, setIsProfiling] = useState<boolean>(false);
 
   function handleFirstCheck() {
@@ -74,9 +75,15 @@ export default function GridContainer(props: any) {
     }
   }
 
+  function handleNewSnapshot(currentTree: any) {
+    setNewSnapshot(currentTree);
+  }
+
   if (checked) {
     const newDummyData = handleUpdateData();
   }
+
+  console.log('this is the latest snapshot: ', newSnapshot);
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
@@ -88,7 +95,9 @@ export default function GridContainer(props: any) {
             <DemoButton variant="outlined" onClick={handleProfiling}>
               Start Demo
             </DemoButton>
-            <SnapshotButton variant="outlined">Take Snapshot</SnapshotButton>
+            <SnapshotButton variant="outlined" onClick={() => handleNewSnapshot(componentTreeData)}>
+              Take Snapshot
+            </SnapshotButton>
           </ButtonGroup>
         </Grid>
         <Grid item xs={4} className={containerRight}>
@@ -97,6 +106,7 @@ export default function GridContainer(props: any) {
             url={url}
             state={state}
             hook={hook}
+            componentTreeData={componentTreeData}
             handleSetDetails={handleSetDetails}
             handleOnChangeLabel={handleOnChangeLabel}
             handleOnChangeUrl={handleOnChangeUrl}
