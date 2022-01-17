@@ -1,20 +1,26 @@
 import * as React from 'react';
 import OrgTreeComponent, { useTree } from '../tree';
+import { Grid, Typography } from '@material-ui/core';
 
-let data = {
+const rootComponent = {
   id: 1,
   label: 'App',
-  children: [],
+  children: []
 };
 
 export default function ComponentTree(props: any): any {
   const { treeRef } = useTree();
 
   return (
-    <div>
-      <div>
-        <OrgTreeComponent data={data} ref={treeRef} horizontal />
-      </div>
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={8} sm container>
+        <Grid item xs container direction="column" spacing={2}>
+          <Grid item xs>
+            <Typography variant="h6">Component Tree</Typography>
+            <OrgTreeComponent data={rootComponent} ref={treeRef} horizontal />
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }

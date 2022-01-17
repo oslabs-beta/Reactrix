@@ -21,7 +21,7 @@ interface ICardCard {
 }
 export const RenderLabel = styled.div<ICardCard>`
   background-color: white;
-  cursor: grab;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,17 +32,17 @@ export const RenderLabel = styled.div<ICardCard>`
   text-align: center;
   color: black;
   position: relative;
-  // box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   border: 1px solid lightgrey;
+  &:hover {
+    border: 1px solid #2196f3;
+  }
+  transition: 0.3s;
 
   // no break line
   white-space: nowrap;
   text-overflow: ellipsis;
-
-  &.mock_card {
-    border: 1px solid #7de874;
-  }
 
   ${(props) =>
     props.isDragging &&
@@ -51,12 +51,8 @@ export const RenderLabel = styled.div<ICardCard>`
     `}
 `;
 
-export const RenderCarPersonal = styled.div`
+export const RenderCardPersonal = styled.div`
   position: relative;
-
-  &.mock_card {
-    border: 1px solid #7de874;
-  }
 `;
 
 export const StyledLabel = styled.div`

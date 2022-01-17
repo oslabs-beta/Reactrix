@@ -13,14 +13,12 @@ export interface IRenderChildren {
   list: INestedObject[];
   data: INestedObject;
   prop: IOrgTreeNodeProps;
-  mock?: boolean;
 }
 
 export interface IRender {
   data: INestedObject;
   prop: IOrgTreeNodeProps;
   first?: boolean;
-  mock?: boolean;
 }
 
 export interface IRenderCard {
@@ -28,5 +26,4 @@ export interface IRenderCard {
   prop: IOrgTreeNodeProps;
   expand?: boolean;
   setExpand: Dispatch<SetStateAction<boolean>>;
-  mock?: boolean;
 }
