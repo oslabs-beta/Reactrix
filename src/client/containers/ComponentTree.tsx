@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Grid, Typography } from '@material-ui/core';
+import { useAppSelector } from '../hooks';
+import { selectProfilerData } from '../slices/profilerSlice';
 
 import OrgTreeComponent, { useTree } from '../tree';
 import { useTreeContext } from './GridContainer';

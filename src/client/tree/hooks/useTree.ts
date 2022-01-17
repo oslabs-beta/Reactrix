@@ -1,6 +1,6 @@
 import { RefObject, useRef } from "react";
 
-import { ITreeRefProps } from "../interfaces";
+import { ITreeRefProps } from "../../../interfaces";
 
 // interface ITreeProps extends ITreeRefProps {
 interface ITreeProps {

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { INestedObject, IOrgTreeNodeProps } from '../../interfaces';
+import { INestedObject, IOrgTreeNodeProps } from '../../../../interfaces';
 
 export interface ITreeOptions {
   horizontal?: boolean;

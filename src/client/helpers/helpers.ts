@@ -1,3 +1,6 @@
+// import { useProfilerData } from "../ProfilerContext";
+import { useAppDispatch } from '../hooks'
+
 export function handleUpdateData() {
   const labels = ['First Contentful Paint (FCP)', 'Largest Contentful Paint (LCP)', 'First Input Delay (FID)', 'Time to Interactive (TTI)', 'Total Blocking Time (TBT)'];
   const data = {
@@ -36,8 +39,8 @@ export function handleInitialData() {
   return data;
 }
 
-export function sendProfilerData(
-  id: any, // the "id" prop of the Profiler tree that has just committed
+export function useSendProfilerData(
+  id: string, // the "id" prop of the Profiler tree that has just committed
   phase: string, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
   actualDuration: number, // time spent rendering the committed update
   baseDuration: number, // estimated time to render the entire subtree without memoization
@@ -45,6 +48,8 @@ export function sendProfilerData(
   commitTime: number // when React committed this update
 ) {
   // Aggregate or log render timings...
+  const dispatch = useAppDispatch();
+  dispatch({type: 'storeProfilerData', payload: {id, phase, actualDuration}});
   console.log('this is id', id);
   console.log('this is phase', phase);
   console.log('this is actualDuration', actualDuration);
