@@ -25,14 +25,7 @@ export const RenderNode = ({ data, prop, first }: IRender) => {
   if (first) cls.push('org-tree-node-first');
 
   return (
-    <OrgTreeNode
-      id={`node-tree-${data.id}`}
-      horizontal={prop.horizontal}
-      className={cls.join(' ')}
-      strokeColor={prop.strokeColor}
-      strokeWidth={prop.strokeWidth}
-      onClick={() => console.log('onClick from OrgTreeNode (data): ', data)}
-    >
+    <OrgTreeNode id={`node-tree-${data.id}`} horizontal={prop.horizontal} className={cls.join(' ')} strokeColor={prop.strokeColor} strokeWidth={prop.strokeWidth}>
       <RenderCard setExpand={setExpand} expand={expand} data={data} prop={prop} />
       {(!prop.collapsable || expand) && <RenderChildren data={data} list={data.children} prop={prop} />}
     </OrgTreeNode>

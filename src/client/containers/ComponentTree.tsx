@@ -1,5 +1,6 @@
 import * as React from 'react';
 import OrgTreeComponent, { useTree } from '../tree';
+import { useTreeContext } from './GridContainer';
 import { Grid, Typography } from '@material-ui/core';
 
 const rootComponent = {
@@ -10,6 +11,7 @@ const rootComponent = {
 
 export default function ComponentTree(props: any): any {
   const { treeRef } = useTree();
+  const TreeData = useTreeContext();
 
   return (
     <Grid container spacing={2}>
@@ -17,7 +19,7 @@ export default function ComponentTree(props: any): any {
         <Grid item xs container direction="column" spacing={2}>
           <Grid item xs>
             <Typography variant="h6">Component Tree</Typography>
-            <OrgTreeComponent data={rootComponent} ref={treeRef} horizontal />
+            <OrgTreeComponent data={rootComponent} ref={treeRef} getData={TreeData} horizontal />
           </Grid>
         </Grid>
       </Grid>

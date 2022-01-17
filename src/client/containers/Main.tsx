@@ -41,10 +41,15 @@ export default function Main() {
     children: []
   });
   const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
+  const [componentTreeData, setComponentTreeData] = useState<Array<any>>([]);
 
   useEffect(() => {
     setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
   }, [componentDetails]);
+
+  const getComponentTreeData = (data: any) => {
+    setComponentTreeData(data);
+  };
 
   const handleSetDetails = (label?: any, url?: any, state?: any, hook?: any, children?: any) => {
     if (label) {
@@ -62,11 +67,7 @@ export default function Main() {
     }
   };
 
-  // const handleAddToReusableComponents = (component: any) => {
-  //     setReusableComponents((reusableComponents) => [...reusableComponents, component]);
-  // };
-
-  // TODO: event handlers below are currently triggering re-renders of whole app
+  // TODO: event handlers below seem to be triggering re-renders of whole app
   const handleOnChangeLabel = (event: any) => {
     setLabel(event.target.value);
   };
@@ -83,6 +84,8 @@ export default function Main() {
     setHook(event.target.value);
   };
 
+  console.log('componentTreeData that is being passed all the way back from rendernode', componentTreeData);
+
   return (
     <div>
       <Navbar />
@@ -95,6 +98,8 @@ export default function Main() {
           url={url}
           state={state}
           hook={hook}
+          componentTreeData={componentTreeData}
+          getComponentTreeData={getComponentTreeData}
           handleSetDetails={handleSetDetails}
           handleOnChangeLabel={handleOnChangeLabel}
           handleOnChangeUrl={handleOnChangeUrl}

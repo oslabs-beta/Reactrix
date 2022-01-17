@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItem, Typography } from '@material-ui/core';
+import { ListItem } from '@material-ui/core';
 
 import SingleReusableComponent from '../components/SingleReusableComponent';
 

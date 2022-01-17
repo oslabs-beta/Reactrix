@@ -24,6 +24,7 @@ interface IRenderCard {
 
 export interface IOrgTreeProps {
   data: INestedObject;
+  getData: any;
   horizontal?: boolean;
   collapsable?: boolean;
   expandAll?: boolean;

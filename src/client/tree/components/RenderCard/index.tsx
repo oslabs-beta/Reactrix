@@ -17,6 +17,7 @@ export const RenderCard = ({ data, setExpand, expand, prop: { renderCard, ...pro
   const node = prop.node;
   const label = data[node.label];
   const clx = ['org-tree-node-label-inner'];
+  const getHierarchyTreeData = prop.getData;
 
   const [{ isDragging }, drag] = useDrag(
     () => ({
@@ -110,19 +111,15 @@ export const RenderCard = ({ data, setExpand, expand, prop: { renderCard, ...pro
     }
 
     //! traverse component hierarchy tree and search for children
-    const treeStructure = hierarchyRef.current;
-    console.log('THIS IS THE FULL TREE', treeStructure);
+    getHierarchyTreeData(hierarchyRef.current);
 
     const searchForChildren = (obj: any, target: string, result = []) => {
       const foundChildren = result;
-      console.log('current obj', obj);
       if (obj.hasOwnProperty(target)) {
         const child = obj[target];
         if (child.length > 0) {
-          console.log('this component has a child');
           searchForChildren(obj[target], target, result);
         } else {
-          console.log('this child has no children');
         }
       }
       return foundChildren;

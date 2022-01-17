@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { AppBar, Toolbar, CssBaseline, Typography, createStyles, makeStyles, Theme } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {

@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import { Box, Button, ButtonGroup, Grid, Toolbar, withStyles } from '@material-ui/core';
+
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
 import Snapshots from '../components/Snapshots';
 import { handleInitialData, handleUpdateData } from '../helpers/helpers';
+
+// import { useHierarchyData } from '../tree/context/HierarchyContextProvider';
 
 const DemoButton = withStyles({
   root: {
@@ -30,9 +33,24 @@ const SnapshotButton = withStyles({
   }
 })(Button);
 
-const GridContainer = (props: any) => {
-  const { containerLeft, containerRight, label, url, state, hook, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
+export default function GridContainer(props: any) {
   let navigate = useNavigate();
+
+  const {
+    containerLeft,
+    containerRight,
+    label,
+    url,
+    state,
+    hook,
+    componentTreeData,
+    getComponentTreeData,
+    handleSetDetails,
+    handleOnChangeLabel,
+    handleOnChangeUrl,
+    handleOnChangeState,
+    handleOnChangeHook
+  } = props;
 
   const [firstSnapshot, setFirstSnapshot] = useState(true);
   const [checked, setChecked] = useState(false);
@@ -65,7 +83,7 @@ const GridContainer = (props: any) => {
       <Toolbar />
       <Grid container spacing={4}>
         <Grid item xs={8} className={containerLeft}>
-          <Outlet />
+          <Outlet context={getComponentTreeData} />
           <ButtonGroup variant="outlined" aria-label="outlined primary button group">
             <DemoButton variant="outlined" onClick={handleProfiling}>
               Start Demo
@@ -95,6 +113,8 @@ const GridContainer = (props: any) => {
       </Grid>
     </Box>
   );
-};
+}
 
-export default GridContainer;
+export function useTreeContext() {
+  return useOutletContext();
+}
