@@ -13,7 +13,7 @@ import UserContext from "./UserContext";
 import Tutorial from './containers/ComponentTutorial';
 
 const App = () => {
-    const [user, setUser] = useState (null);
+    const [user, setUser] = useState (false);
 
     const providerUser = useMemo(() => ({ user, setUser }), [user, setUser])
         useEffect(()=> {
@@ -35,7 +35,7 @@ const App = () => {
                     throw new Error ("authentication has been failed!")
                 }).then(resObject=> {
                     // setUser(true)
-                    setUser(resObject.user)
+                    setUser(resObject.isLoggedIn)
                 }).then(err => {
                     console.log('error from main page', err);
                 })
@@ -43,7 +43,7 @@ const App = () => {
             getUser();
         }, []);
 
-    console.log( 'line 201 from App.tsx', user );
+    console.log( 'line 46 from App.tsx', user );
 // use context API;
     return (
         <Router>

@@ -105,9 +105,14 @@ app.get('/', (req: any, res: any) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
+app.get('/*', (req: any, res: any) => {
+  return res.redirect ('http://localhost:3000/');
+});
 
 // catch-all route handler for any requests to an unknown route
-app.use((req: any, res: any) => res.sendStatus(404));
+app.use((req: any, res: any) => {
+  res.sendStatus(404)
+})
 
 // express error handler
 // app.use((err: any, req: any, res: any, next: any) => {
