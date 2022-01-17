@@ -41,7 +41,7 @@ export default function Main() {
     children: []
   });
   const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
-  const [componentTreeData, setComponentTreeData] = useState<null>(null);
+  const [componentTreeData, setComponentTreeData] = useState<object>({});
 
   useEffect(() => {
     setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);

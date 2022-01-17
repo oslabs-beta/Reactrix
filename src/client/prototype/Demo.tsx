@@ -33,29 +33,29 @@ export default function Demo() {
     </React.Fragment>
   );
 
-  const detailCard = (
-    <React.Fragment>
-      <CardContent>
-        <Typography variant="caption">Reusable Component</Typography>
-        <Typography variant="h3">Name: {formatComponentName(rootNode.label)}</Typography>
-      </CardContent>
-      <CardActions>
-        {rootNode.url ? (
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() => {
-              handleRequest(rootNode.url);
-            }}
-          >
-            API Call
-          </Button>
-        ) : null}
-        {rootNode.state ? <Typography variant="body2">State: {rootNode.state}</Typography> : null}
-        {rootNode.hook ? <Typography variant="body2">Hook: {rootNode.hook}</Typography> : null}
-      </CardActions>
-    </React.Fragment>
-  );
+  // const detailCard = (
+  //   <React.Fragment>
+  //     <CardContent>
+  //       <Typography variant="caption">Reusable Component</Typography>
+  //       <Typography variant="h3">Name: {formatComponentName(rootNode.label)}</Typography>
+  //     </CardContent>
+  //     <CardActions>
+  //       {rootNode.url ? (
+  //         <Button
+  //           variant="outlined"
+  //           size="small"
+  //           onClick={() => {
+  //             handleRequest(rootNode.url);
+  //           }}
+  //         >
+  //           API Call
+  //         </Button>
+  //       ) : null}
+  //       {rootNode.state ? <Typography variant="body2">State: {rootNode.state}</Typography> : null}
+  //       {rootNode.hook ? <Typography variant="body2">Hook: {rootNode.hook}</Typography> : null}
+  //     </CardActions>
+  //   </React.Fragment>
+  // );
 
   return (
     <Grid container spacing={2}>
@@ -64,7 +64,7 @@ export default function Demo() {
           <Grid item xs>
             <Typography variant="h6">Demo</Typography>
             <Box sx={{ minWidth: 275, maxWidth: 550, p: 2 }}>
-              <Card variant="outlined">{detailCard}</Card>
+              <Card variant="outlined">{emptyCard}</Card>
             </Box>
           </Grid>
         </Grid>

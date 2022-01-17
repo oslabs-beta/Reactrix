@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import { Box, Button, ButtonGroup, Grid, Toolbar, withStyles } from '@material-ui/core';
 
+import { ITreeContext } from '../../interfaces/index';
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
 import Snapshots from '../components/Snapshots';
@@ -133,5 +134,5 @@ export default function GridContainer(props: any) {
 }
 
 export function useTreeContext() {
-  return useOutletContext();
+  return useOutletContext<ITreeContext>();
 }
