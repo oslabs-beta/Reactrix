@@ -12,7 +12,7 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    snapshots: {
+    projects: {
       marginTop: 20
     },
     form: {
@@ -39,7 +39,7 @@ const SaveButton = withStyles({
   }
 })(Button);
 
-export default function Snapshots({ handleFirstCheck, handleCheck }: Props) {
+export default function Projects({ handleFirstCheck, handleCheck }: Props) {
   const classes = useStyles();
 
   return (
@@ -49,7 +49,7 @@ export default function Snapshots({ handleFirstCheck, handleCheck }: Props) {
         aria-label="file system navigator"
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
-        className={classes.snapshots}
+        className={classes.projects}
         sx={{
           height: 300,
           flexGrow: 1,
@@ -60,19 +60,6 @@ export default function Snapshots({ handleFirstCheck, handleCheck }: Props) {
       >
         <TreeItem nodeId="1" label="Project 1">
           <FormControlLabel value="start" control={<Checkbox />} onClick={handleCheck} label="01/04/2022 Snapshot 1" />
-        </TreeItem>
-        <TreeItem nodeId="5" label="Project 2">
-          <FormControlLabel value="start" control={<Checkbox />} onClick={handleCheck} label="12/28/2021 Snapshot 3" />
-          <FormControlLabel value="start" control={<Checkbox />} onChange={handleFirstCheck} label="11/11/2021 Snapshot 2" />
-          <FormControlLabel value="start" control={<Checkbox />} onClick={handleCheck} label="11/09/2021 Snapshot 1" />
-        </TreeItem>
-        <TreeItem nodeId="3" label="Project 3">
-          <FormControlLabel value="start" control={<Checkbox />} onClick={handleCheck} label="10/23/2021 Snapshot 2" />
-          <FormControlLabel value="start" control={<Checkbox />} onClick={handleCheck} label="10/22/2021 Snapshot 1" />
-        </TreeItem>
-        <TreeItem nodeId="4" label="Project 4">
-          <FormControlLabel value="start" control={<Checkbox />} onClick={handleCheck} label="10/03/2021 Snapshot 2" />
-          <FormControlLabel value="start" control={<Checkbox />} onClick={handleCheck} label="09/18/2021 Snapshot 1" />
         </TreeItem>
       </TreeView>
       <Box className={classes.form} component="form" m={2}>

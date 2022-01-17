@@ -43,6 +43,8 @@ export default function Main() {
   const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
   const [componentTreeData, setComponentTreeData] = useState<object>({});
 
+  console.log('latest hierarchy tree obj returned from updating component tree: ', componentTreeData);
+
   useEffect(() => {
     setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
   }, [componentDetails]);

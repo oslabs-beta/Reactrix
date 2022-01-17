@@ -5,7 +5,7 @@ import { Box, Button, ButtonGroup, Grid, Toolbar, withStyles } from '@material-u
 import { ITreeContext } from '../../interfaces/index';
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
-import Snapshots from '../components/Snapshots';
+import Projects from '../components/Projects';
 import { handleInitialData, handleUpdateData } from '../helpers/helpers';
 
 const DemoButton = withStyles({
@@ -52,10 +52,14 @@ export default function GridContainer(props: any) {
   } = props;
 
   const [firstSnapshot, setFirstSnapshot] = useState<boolean>(true);
-  const [newSnapshot, setNewSnapshot] = useState({});
   const [checked, setChecked] = useState<boolean>(false);
   const [isProfiling, setIsProfiling] = useState<boolean>(false);
   const [startStop, setStartStop] = useState('Start');
+
+  const [userProjects, setUserProjects] = useState([]);
+  const [newSnapshot, setNewSnapshot] = useState({});
+
+  console.log('snapshot of hierarchy tree obj sent back from button click: ', newSnapshot);
 
   function handleFirstCheck() {
     setFirstSnapshot(!firstSnapshot);
@@ -126,7 +130,7 @@ export default function GridContainer(props: any) {
           <PerformanceMetrics checked={checked} firstSnapshot={firstSnapshot} handleCheck={handleCheck} />
         </Grid>
         <Grid item xs={4} className={containerRight}>
-          <Snapshots handleCheck={handleCheck} handleFirstCheck={handleFirstCheck} />
+          <Projects handleCheck={handleCheck} handleFirstCheck={handleFirstCheck} />
         </Grid>
       </Grid>
     </Box>
