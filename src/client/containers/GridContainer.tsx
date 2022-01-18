@@ -53,6 +53,9 @@ export default function GridContainer(props: any) {
     handleOnChangeHook
   } = props;
 
+  const [firstSnapshot, setFirstSnapshot] = useState<boolean>(true);
+  const [checked, setChecked] = useState<boolean>(false);
+
   const [allSnapshots, setAllSnapshots] = useState<Array<any>>([]);
   const [newSnapshot, setNewSnapshot] = useState({});
 
@@ -62,6 +65,14 @@ export default function GridContainer(props: any) {
   useEffect(() => {
     setAllSnapshots((allSnapshots) => [...allSnapshots, newSnapshot]);
   }, [newSnapshot]);
+
+  function handleFirstCheck() {
+    setFirstSnapshot(!firstSnapshot);
+  }
+
+  function handleCheck() {
+    setChecked(!checked);
+  }
 
   const handleNewSnapshot = (currentTree: any) => {
     setNewSnapshot(currentTree);
@@ -118,7 +129,7 @@ export default function GridContainer(props: any) {
           />
         </Grid>
         <Grid item xs={8} className={containerLeft}>
-          <PerformanceMetrics />
+          <PerformanceMetrics checked={checked} firstSnapshot={firstSnapshot} handleCheck={handleCheck} />
         </Grid>
         <Grid item xs={4} className={containerRight}>
           <Snapshots allSnapshots={allSnapshots} />
