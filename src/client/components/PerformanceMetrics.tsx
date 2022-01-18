@@ -1,7 +1,7 @@
 import React from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 
 import { useAppSelector } from '../hooks';
 import { selectProfilerData } from '../slices/profilerSlice';
@@ -28,7 +28,7 @@ export const options = {
 };
 
 export default function PerformanceMetrics(props: any) {
-  const {checked, allSnapshots} = props;
+  const { checked, allSnapshots } = props;
   const profilerData = useAppSelector(selectProfilerData);
 
   const labels = [],
@@ -38,10 +38,12 @@ export default function PerformanceMetrics(props: any) {
     datasetData.push(profilerData[i].actualDuration);
   }
 
-  const random_rgba = () => {
-    var o = Math.round, r = Math.random, s = 255;
-    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-}
+  const generateLightColorRgb = () => {
+    const red = Math.floor(((1 + Math.random()) * 256) / 2);
+    const green = Math.floor(((1 + Math.random()) * 256) / 2);
+    const blue = Math.floor(((1 + Math.random()) * 256) / 2);
+    return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+  };
 
   const data = {
     labels,
@@ -64,26 +66,25 @@ export default function PerformanceMetrics(props: any) {
       const checkedData = {
         label: `Snapshot ${index + 1}`,
         data: checkedSetData,
-        borderColor: random_rgba(),
-        backgroundColor: random_rgba()
-      }
-      data.datasets = [
-        ...data.datasets,
-        checkedData
-      ]
+        borderColor: generateLightColorRgb(),
+        backgroundColor: generateLightColorRgb()
+      };
+      data.datasets = [...data.datasets, checkedData];
     }
   }
 
   return (
     <div>
       <Typography variant="h6">Performance Metrics</Typography>
-      <Bar
-        options={options}
-        data={data}
-        style={{
-          maxHeight: '500px'
-        }}
-      />
+      <Box m={2} mt={5}>
+        <Bar
+          options={options}
+          data={data}
+          style={{
+            maxHeight: '500px'
+          }}
+        />
+      </Box>
     </div>
   );
 }
