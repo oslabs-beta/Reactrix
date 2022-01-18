@@ -26,18 +26,7 @@ export default function Snapshots(props: any) {
   const classes = useStyles();
 
   const { allSnapshots, handleToggle, checked } = props;
-  // console.log('all props inside Snapshots', props);
-
-  // TODO: this needs to be fixed, currently new timestamp overrides old one set for past snapshots
-  // const setTimestamp = () => {
-  //   const today = new Date();
-  //   const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-  //   const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  //   const dateTime = date + ' ' + time;
-
-  //   return `Snapshot (${dateTime})`;
-  // };
-
+  
   return (
     <div>
       <Typography variant="h6">Snapshots</Typography>

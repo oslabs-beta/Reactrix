@@ -1,6 +1,11 @@
 import { withThemeCreator } from '@material-ui/styles';
 import React, { Profiler } from 'react';
-import { useSendProfilerData } from '../helpers/helpers';
+import { useAppDispatch } from '../hooks';
+
+const dispatch = useAppDispatch();
+const useSendProfilerData = (id: string, phase: string, actualDuration: number) => {
+  dispatch({ type: 'profiler/storeProfilerData', payload: { id, phase, actualDuration } });
+};
 
 export default function Prototype() {
   return (

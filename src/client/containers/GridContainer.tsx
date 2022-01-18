@@ -63,10 +63,6 @@ export default function GridContainer(props: any) {
 
   const profilingData = useAppSelector(selectProfilerData);
 
-  // useEffect(() => {
-  //   setAllSnapshots((allSnapshots) => [...allSnapshots, newSnapshot]);
-  // }, [newSnapshot]);
-
   const handleToggle = (value: number) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
