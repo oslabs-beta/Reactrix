@@ -59,10 +59,11 @@ export default function ComponentDetails(props: any) {
               onChange={handleOnChangeUrl}
             />
           </FormControl>
-          <FormControl className={classes.form} variant="outlined">
-            <FormHelperText id="outlined-weight-helper-text">State (Optional)</FormHelperText>
+          <FormControl className={classes.form} variant="filled">
+            <FormHelperText id="outlined-weight-helper-text">State (Disabled)</FormHelperText>
             <OutlinedInput
-              id="outlined-adornment-weight"
+              disabled
+              id="filled-disabled"
               aria-describedby="outlined-weight-helper-text"
               placeholder="Set state"
               inputProps={{
@@ -71,10 +72,11 @@ export default function ComponentDetails(props: any) {
               onChange={handleOnChangeState}
             />
           </FormControl>
-          <FormControl className={classes.form} variant="outlined">
-            <FormHelperText id="outlined-weight-helper-text">Hooks (Optional)</FormHelperText>
+          <FormControl className={classes.form} variant="filled">
+            <FormHelperText id="outlined-weight-helper-text">Hooks (Disabled)</FormHelperText>
             <OutlinedInput
-              id="outlined-adornment-weight"
+              disabled
+              id="filled-disabled"
               aria-describedby="outlined-weight-helper-text"
               placeholder="Add a hook"
               inputProps={{

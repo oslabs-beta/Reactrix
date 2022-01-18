@@ -53,7 +53,6 @@ export default function GridContainer(props: any) {
 
   const [projectId, setProjectId] = useState('0');
   const [projectName, setProjectName] = useState('');
-  const [snapshots, setSnapshots] = useState([]);
 
   const [allProjects, setAllProjects] = useState<Array<any>>([]);
   const [newProject, setNewProject] = useState({
@@ -61,6 +60,7 @@ export default function GridContainer(props: any) {
     projectName: 'New Project',
     snapshots: []
   });
+  const [allSnapshots, setAllSnapshots] = useState<Array<any>>([]);
   const [newSnapshot, setNewSnapshot] = useState({});
 
   const [isProfiling, setIsProfiling] = useState<boolean>(false);
@@ -70,9 +70,9 @@ export default function GridContainer(props: any) {
     setAllProjects((allProjects) => [...allProjects, newProject]);
   }, [newProject]);
 
-  // const handleAddNewProjectToAllProjects = () => {
-  //   setAllProjects((allProjects) => [...allProjects, newProject]);
-  // };
+  useEffect(() => {
+    setAllSnapshots((allSnapshots) => [...allSnapshots, newSnapshot]);
+  }, [newSnapshot]);
 
   const handleSaveNewProject = (projectId: string, projectName: string, snapshots: []) => {
     setNewProject({ projectId: nanoid(), projectName: projectName, snapshots: snapshots });
@@ -145,9 +145,9 @@ export default function GridContainer(props: any) {
             newSnapshot={newSnapshot}
             projectId={projectId}
             projectName={projectName}
-            snapshots={snapshots}
+            allSnapshots={allSnapshots}
             setNewProject={setNewProject}
-            // handleAddNewProjectToAllProjects={handleAddNewProjectToAllProjects}
+            setSnapshots={setAllSnapshots}
             handleSaveNewProject={handleSaveNewProject}
             handleOnChangeProjectName={handleOnChangeProjectName}
           />

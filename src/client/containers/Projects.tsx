@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography, withStyles } from '@material-ui/core';
 import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -36,7 +36,18 @@ const SaveButton = withStyles({
 export default function Projects(props: any) {
   const classes = useStyles();
 
-  const { allProjects, newProject, newSnapshot, projectId, projectName, snapshots, setNewProject, handleAddNewProjectToAllProjects, handleSaveNewProject, handleOnChangeProjectName } = props;
+  const { allProjects, newProject, newSnapshot, projectId, projectName, allSnapshots, setNewProject, setAllSnapshots, handleSaveNewProject, handleOnChangeProjectName } = props;
+
+  console.log('props inside projects container: ', props);
+
+  const setTimestamp = () => {
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const dateTime = date + ' ' + time;
+
+    return `Snapshot (${dateTime})`;
+  };
 
   return (
     <div>
@@ -49,15 +60,17 @@ export default function Projects(props: any) {
         sx={{
           height: 300,
           flexGrow: 1,
-          maxWidth: 400,
+          maxWidth: 300,
           overflowY: 'auto',
           marginTop: 2
         }}
       >
-        {Object.values(allProjects.slice(1)).map((ele: any, key: any) => {
+        {Object.values(allProjects.slice(1)).map((project: any, key: any) => {
           return (
-            <TreeItem nodeId={ele.projectId} label={ele.projectName}>
-              <FormControlLabel value="start" control={<Checkbox />} label={ele.projectName} key={ele.projectId} />
+            <TreeItem nodeId={project.projectId} label={project.projectName}>
+              {allSnapshots.slice(1).map((snapshot: any) => {
+                return snapshot.label !== 'undefined' ? <FormControlLabel value="start" control={<Checkbox />} label={'Snapshot'} key={snapshot.id} /> : null;
+              })}
             </TreeItem>
           );
         })}
@@ -79,8 +92,7 @@ export default function Projects(props: any) {
           variant="outlined"
           className={classes.save}
           onClick={() => {
-            handleSaveNewProject(projectId, projectName, snapshots);
-            // handleAddNewProjectToAllProjects(newProject);
+            handleSaveNewProject(projectId, projectName, allSnapshots);
           }}
         >
           Save Project
