@@ -72,9 +72,6 @@ export default function Demo() {
                 id="Card"
                 onRender={(id: string, phase: string, actualDuration: number) => {
                   dispatch({ type: 'profiler/storeProfilerData', payload: { id, phase, actualDuration } });
-                  console.log('this is id', id);
-                  console.log('this is phase', phase);
-                  console.log('this is actualDuration', actualDuration);
                 }}
               >
                 <Card variant="outlined">{emptyCard}</Card>
