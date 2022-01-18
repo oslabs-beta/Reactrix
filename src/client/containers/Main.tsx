@@ -60,7 +60,7 @@ export default function Main() {
 
   const handleSetDetails = (label?: any, url?: any, state?: any, hook?: any, children?: any) => {
     console.log('Main.tsx', reusableComponents);
-    function checkDuplicate(input: string) {
+    function checkDuplicate(input: any) {
       console.log(input)
       let result;
       for (let i= 0; i< reusableComponents.length; i++){

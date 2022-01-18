@@ -1,8 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import { Box, Card, CardActions, CardContent, Grid, Typography} from '@material-ui/core';
+import { Box, Button, Card, CardActions, CardContent, Grid, Typography } from '@material-ui/core';
 
-export default function Demo(props: any) {
+import { useTreeContext } from '../containers/GridContainer';
+
+export default function Demo() {
+  const TreeContext = useTreeContext();
+  const rootNode = TreeContext[0];
+
+  console.log('rootNode', rootNode);
+
   const handleRequest = (url: string) => {
     axios.get(`${url}`).then((res) => console.log(res));
   };
@@ -19,8 +26,8 @@ export default function Demo(props: any) {
   const emptyCard = (
     <React.Fragment>
       <CardContent>
-        <Typography variant="caption">Default Empty Component</Typography>
-        <Typography variant="h3">Name: </Typography>
+        <Typography variant="caption">Default Component</Typography>
+        <Typography variant="h3">Name: Default</Typography>
       </CardContent>
       <CardActions></CardActions>
     </React.Fragment>
@@ -29,22 +36,23 @@ export default function Demo(props: any) {
   // const detailCard = (
   //   <React.Fragment>
   //     <CardContent>
-  //       <Typography variant="h3">Name: {formatComponentName(label)}</Typography>
+  //       <Typography variant="caption">Reusable Component</Typography>
+  //       <Typography variant="h3">Name: {formatComponentName(rootNode.label)}</Typography>
   //     </CardContent>
   //     <CardActions>
-  //       {url ? (
+  //       {rootNode.url ? (
   //         <Button
   //           variant="outlined"
   //           size="small"
   //           onClick={() => {
-  //             handleRequest(url);
+  //             handleRequest(rootNode.url);
   //           }}
   //         >
   //           API Call
   //         </Button>
   //       ) : null}
-  //       {state ? <Typography variant="body2">State: {state}</Typography> : null}
-  //       {hook ? <Typography variant="body2">Hook: {hook}</Typography> : null}
+  //       {rootNode.state ? <Typography variant="body2">State: {rootNode.state}</Typography> : null}
+  //       {rootNode.hook ? <Typography variant="body2">Hook: {rootNode.hook}</Typography> : null}
   //     </CardActions>
   //   </React.Fragment>
   // );
@@ -55,7 +63,7 @@ export default function Demo(props: any) {
         <Grid item xs container direction="column" spacing={2}>
           <Grid item xs>
             <Typography variant="h6">Demo</Typography>
-            <Box sx={{ minWidth: 275, maxWidth: 550 }}>
+            <Box sx={{ minWidth: 275, maxWidth: 550, p: 2 }}>
               <Card variant="outlined">{emptyCard}</Card>
             </Box>
           </Grid>

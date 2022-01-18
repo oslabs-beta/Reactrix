@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Box, Button, FormControl, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography, withStyles } from '@material-ui/core';
-
-// import GenerateComponent from './GenerateComponent';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     form: {
       width: 300,
       flexShrink: 2,
-
       ['& .MuiTextField-root']: { m: 1, width: '25ch' }
     },
     save: {
@@ -31,16 +28,11 @@ const SaveButton = withStyles({
 
 export default function ComponentDetails(props: any) {
   const classes = useStyles();
-  const { label, url, state, hook, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
-
-  /*
-    https://jsonplaceholder.typicode.com/todos/1
-    */
+  const { label, url, state, hook, componentTreeData, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
 
   return (
     <div>
       <Typography variant="h6">Component Details</Typography>
-      {/* <GenerateComponent componentDetails={componentDetails} reusableComponents={reusableComponents} /> */}
       <Box className={classes.form} component="form" m={2} mt={5}>
         <div>
           <FormControl className={classes.form} variant="outlined">
@@ -98,7 +90,7 @@ export default function ComponentDetails(props: any) {
               handleSetDetails(label, url, state, hook);
             }}
           >
-            Save
+            Save Details
           </SaveButton>
         </div>
       </Box>

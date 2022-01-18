@@ -14,13 +14,7 @@ const createUser = 'INSERT into users (provider, username) VALUES ($1, $2);';
 
 // for getReusableComponent:
 const findReusableComponents = 'SELECT * FROM users RIGHT JOIN reusable_components ON users._id = reusable_components.users_id WHERE users.username = $1;';
-// 'SELECT * FROM reusable_components JOIN users ON users._id = reusable_components.users_id WHERE users._id = users_id'
-// for updateReusableComponent:
-// _id
-//component name: label
-// API CALL URL: url
-// STATE: state
-//USERS_id: users_id
+
 const findUserName = 'SELECT _id FROM users WHERE username = $1;';
 const insertReusableComponents = 'INSERT INTO reusable_components (label, url, state, hook, users_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;'
 const checkReusableComponents = 'SELECT label FROM reusable_components WHERE users_id = $1;'
@@ -30,7 +24,7 @@ const dbController = {
   handleLogin: async (req: any, res?: any, next?: any): Promise<any> => {
     // const user = req;
     // seems like all of req is the object with user info
-    // console.log('handleLogin', req.user)
+    console.log('handleLogin', req.user)
     const params = [req.user.provider, req.user.username];
     const userData: any = await db.query(findUserQueryString, [params[1]]);
     // console.log('this is the userData from handleLogin', userData);
