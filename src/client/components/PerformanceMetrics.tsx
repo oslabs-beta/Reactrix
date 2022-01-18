@@ -8,9 +8,8 @@ import { useAppSelector } from '../hooks';
 import { selectProfilerData } from '../slices/profilerSlice';
 
 type Props = {
-  firstSnapshot: boolean;
-  checked: boolean;
-  handleCheck: any;
+  checked: number[];
+  allSnapshots: any;
 };
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -48,9 +47,11 @@ export const options = {
 //   ]
 // };
 
-export default function PerformanceMetrics({ firstSnapshot, checked }: Props) {
+export default function PerformanceMetrics(props: any) {
+  const {checked, allSnapshots} = props;
   const profilerData = useAppSelector(selectProfilerData);
   console.log('this is Profiler Data', profilerData);
+  console.log('allSnapshots', allSnapshots);
 
   const labels = [],
     datasetData = [];
@@ -64,13 +65,24 @@ export default function PerformanceMetrics({ firstSnapshot, checked }: Props) {
     labels,
     datasets: [
       {
-        label: 'Snapshot 1',
+        label: 'Current Snapshot',
         data: datasetData,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)'
       }
     ]
   };
+
+  if (checked) {
+    for (const index of checked) {
+      console.log(`allSnapshots[${index}]`, allSnapshots[index]);
+      // data.datasets = {
+      //   ...data.datasets,
+      //   // some kind of new data derived from checked
+      //   allSnapshots[index]
+      // }
+    }
+  }
 
   return (
     <div>

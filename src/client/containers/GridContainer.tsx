@@ -7,7 +7,8 @@ import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
 import Snapshots from './Snapshots';
 import { handleInitialData, handleUpdateData } from '../helpers/helpers';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { selectProfilerData } from '../slices/profilerSlice';
 
 const DemoButton = withStyles({
   root: {
@@ -53,30 +54,37 @@ export default function GridContainer(props: any) {
     handleOnChangeHook
   } = props;
 
-  const [firstSnapshot, setFirstSnapshot] = useState<boolean>(true);
-  const [checked, setChecked] = useState<boolean>(false);
-
   const [allSnapshots, setAllSnapshots] = useState<Array<any>>([]);
   const [newSnapshot, setNewSnapshot] = useState({});
 
   const [isProfiling, setIsProfiling] = useState<boolean>(false);
   const [startStop, setStartStop] = useState('Start');
 
-  useEffect(() => {
-    setAllSnapshots((allSnapshots) => [...allSnapshots, newSnapshot]);
-  }, [newSnapshot]);
+  const [checked, setChecked] = React.useState<Array<any>>([]);
 
-  function handleFirstCheck() {
-    setFirstSnapshot(!firstSnapshot);
-  }
+  const profilingData = useAppSelector(selectProfilerData);
 
-  function handleCheck() {
-    setChecked(!checked);
-  }
+  // useEffect(() => {
+  //   setAllSnapshots((allSnapshots) => [...allSnapshots, newSnapshot]);
+  // }, [newSnapshot]);
+
+  const handleToggle = (value: number) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    setChecked(newChecked);
+  };
 
   const handleNewSnapshot = (currentTree: any) => {
     if (!isProfiling) {
+      currentTree.profilingData = profilingData;
       setNewSnapshot(currentTree);
+      setAllSnapshots((allSnapshots) => [...allSnapshots, currentTree])
     } else {
       // don't do anything for now
     }
@@ -133,10 +141,10 @@ export default function GridContainer(props: any) {
           />
         </Grid>
         <Grid item xs={8} className={containerLeft}>
-          <PerformanceMetrics checked={checked} firstSnapshot={firstSnapshot} handleCheck={handleCheck} />
+          <PerformanceMetrics checked={checked} allSnapshots={allSnapshots}/>
         </Grid>
         <Grid item xs={4} className={containerRight}>
-          <Snapshots allSnapshots={allSnapshots} />
+          <Snapshots allSnapshots={allSnapshots} checked={checked} handleToggle={handleToggle}/>
         </Grid>
       </Grid>
     </Box>

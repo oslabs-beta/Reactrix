@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Checkbox, FormControlLabel, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Button, Checkbox, List, ListItem, ListItemIcon, ListItemText, FormControlLabel, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { ListItemButton } from '@mui/material';
 import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -7,8 +8,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     snapshots: {
-      marginTop: 20,
-      marginLeft: 10
+      marginTop: 5,
+      paddingLeft: 10
     },
     form: {
       width: 300,
@@ -24,40 +25,35 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Snapshots(props: any) {
   const classes = useStyles();
 
-  const { allSnapshots } = props;
+  const { allSnapshots, handleToggle, checked } = props;
+  // console.log('all props inside Snapshots', props);
 
   // TODO: this needs to be fixed, currently new timestamp overrides old one set for past snapshots
-  const setTimestamp = () => {
-    const today = new Date();
-    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const dateTime = date + ' ' + time;
+  // const setTimestamp = () => {
+  //   const today = new Date();
+  //   const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  //   const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  //   const dateTime = date + ' ' + time;
 
-    return `Snapshot (${dateTime})`;
-  };
+  //   return `Snapshot (${dateTime})`;
+  // };
 
   return (
     <div>
       <Typography variant="h6">Snapshots</Typography>
-      <TreeView
-        aria-label="file system navigator"
-        defaultCollapseIcon={<ExpandMoreIcon />}
-        defaultExpandIcon={<ChevronRightIcon />}
-        className={classes.snapshots}
-        sx={{
-          height: 300,
-          flexGrow: 1,
-          maxWidth: 300,
-          overflowY: 'auto',
-          marginTop: 2
-        }}
-      >
-        <TreeItem nodeId="1" label="Applications">
-        {allSnapshots.slice(1).map((snapshot: any, index: any) => {
-          return snapshot.label !== 'undefined' ? <FormControlLabel value="start" control={<Checkbox />} label={setTimestamp()} key={index} /> : null;
-        })}
-        </TreeItem>
-      </TreeView>
+      {allSnapshots.map((snapshot: any, index: any) => {
+        console.log('index of each snapshot inside allsnapshots array', index)
+        return snapshot.label !== 'undefined' ? (
+          <ListItem key={index} className={classes.snapshots}>
+            <ListItemButton role={undefined} onClick={handleToggle(index)} dense disableRipple>
+              <ListItemIcon>
+                <Checkbox edge="end" checked={checked.indexOf(index) !== -1} tabIndex={-1} disableRipple inputProps={{ 'aria-labelledby': 'Snapshot' }} />
+              </ListItemIcon>
+              <ListItemText id={'Snapshot'} primary={`Snapshot ${index + 1}`} />
+            </ListItemButton>
+          </ListItem>
+        ) : null;
+      })}
     </div>
   );
 }
