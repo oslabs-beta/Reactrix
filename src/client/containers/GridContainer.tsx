@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import { Box, Button, ButtonGroup, Grid, Toolbar, withStyles } from '@material-ui/core';
-import { nanoid } from 'nanoid';
 
 import { ITreeContext } from '../../interfaces/index';
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
-import Projects from './Projects';
+import Snapshots from './Snapshots';
 import { handleInitialData, handleUpdateData } from '../helpers/helpers';
 import { useAppDispatch } from '../hooks';
 
@@ -54,15 +53,6 @@ export default function GridContainer(props: any) {
     handleOnChangeHook
   } = props;
 
-  const [projectId, setProjectId] = useState('0');
-  const [projectName, setProjectName] = useState('');
-
-  const [allProjects, setAllProjects] = useState<Array<any>>([]);
-  const [newProject, setNewProject] = useState({
-    projectId: '1',
-    projectName: 'New Project',
-    snapshots: []
-  });
   const [allSnapshots, setAllSnapshots] = useState<Array<any>>([]);
   const [newSnapshot, setNewSnapshot] = useState({});
 
@@ -70,20 +60,8 @@ export default function GridContainer(props: any) {
   const [startStop, setStartStop] = useState('Start');
 
   useEffect(() => {
-    setAllProjects((allProjects) => [...allProjects, newProject]);
-  }, [newProject]);
-
-  useEffect(() => {
     setAllSnapshots((allSnapshots) => [...allSnapshots, newSnapshot]);
   }, [newSnapshot]);
-
-  const handleSaveNewProject = (projectId: string, projectName: string, snapshots: []) => {
-    setNewProject({ projectId: nanoid(), projectName: projectName, snapshots: snapshots });
-  };
-
-  const handleOnChangeProjectName = (event: any) => {
-    setProjectName(event.target.value);
-  };
 
   const handleNewSnapshot = (currentTree: any) => {
     setNewSnapshot(currentTree);
@@ -143,18 +121,7 @@ export default function GridContainer(props: any) {
           <PerformanceMetrics />
         </Grid>
         <Grid item xs={4} className={containerRight}>
-          <Projects
-            allProjects={allProjects}
-            newProject={newProject}
-            newSnapshot={newSnapshot}
-            projectId={projectId}
-            projectName={projectName}
-            allSnapshots={allSnapshots}
-            setNewProject={setNewProject}
-            setSnapshots={setAllSnapshots}
-            handleSaveNewProject={handleSaveNewProject}
-            handleOnChangeProjectName={handleOnChangeProjectName}
-          />
+          <Snapshots allSnapshots={allSnapshots} />
         </Grid>
       </Grid>
     </Box>

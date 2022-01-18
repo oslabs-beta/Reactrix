@@ -64,7 +64,6 @@ export const RenderCard = ({ data, setExpand, expand, prop: { renderCard, ...pro
 
     // grab details for the item currently begin dragged to component tree
     const { label, url, state, hook } = drag;
-
     const dropItem = data;
 
     // finds original parent of the drag item if the drag item already existed
@@ -107,6 +106,7 @@ export const RenderCard = ({ data, setExpand, expand, prop: { renderCard, ...pro
 
       // update context with new DragItemHierarchy
       setHierarchy(addedNewDragItemHierarchy);
+      console.log('hierarchyRef logged from rendercard', hierarchyRef.current);
       hierarchyRef.current = addedNewDragItemHierarchy;
     }
 

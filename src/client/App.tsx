@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { hot } from 'react-hot-loader/root';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { theme } from './styles/theme';
 import { ThemeProvider } from '@material-ui/core';
+import { theme } from './styles/theme';
 
 import './styles/styles.css';
 
@@ -12,7 +12,6 @@ import Main from './containers/Main';
 import SignIn from './components/SignIn';
 import Demo from './prototype/Demo';
 import ComponentTree from './containers/ComponentTree';
-// import { useSendProfilerData } from './helpers/helpers';
 import { UserContext } from './contexts/UserContext';
 import { useAppDispatch } from './hooks';
 

@@ -1,14 +1,11 @@
-import * as React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 
 import OrgTreeComponent, { useTree } from '../tree';
 import { useTreeContext } from './GridContainer';
-import { useAppSelector } from '../hooks';
-import { selectProfilerData } from '../slices/profilerSlice';
 
 export default function ComponentTree(): any {
   const { treeRef } = useTree();
-  console.log('this is Profiler Data', useAppSelector(selectProfilerData))
   const TreeContext = useTreeContext();
   const getTreeData = TreeContext[1];
 
