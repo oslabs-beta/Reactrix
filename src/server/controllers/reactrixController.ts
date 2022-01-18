@@ -2,12 +2,6 @@ import { networkInterfaces } from 'os';
 import db from '../models/reactrixModels';
 //query for all of a users info
 
-//for all of a reusable component's details?
-
-// grabs all information (users.id, users.username, users.password, snapshots_id) from users table and adds in snapshots where snapshots_id = snapshots.id
-// "SELECT users.id, users.username, users.password, snapshots_id FROM users RIGHT OUTER JOIN snapshots ON snapshots_id = snapshots.id;"
-
-
 // for handleLogin:
 const findUserQueryString = 'SELECT * FROM users WHERE username = $1;';
 const createUser = 'INSERT into users (provider, username) VALUES ($1, $2);';
@@ -19,6 +13,7 @@ const findUserName = 'SELECT _id FROM users WHERE username = $1;';
 const insertReusableComponents = 'INSERT INTO reusable_components (label, url, state, hook, users_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;'
 const checkReusableComponents = 'SELECT label FROM reusable_components WHERE users_id = $1;'
 // const updateReusableComponents = 'UPDATE reusable_components SET component_name = $1, api_call_url = $2, state = $3, users_id = $4'
+const deleteReusableComponentQuery = 'DELETE FROM reusable_components WHERE users_id = $1 AND label = $2;';
 
 const dbController = {
   handleLogin: async (req: any, res?: any, next?: any): Promise<any> => {
@@ -61,14 +56,17 @@ const dbController = {
   },
 
   insertReusableComponents: async (req: any, res?: any, next?: any): Promise<any> => {
-    console.log('this is req.body from insertReusableComponents', req.body);
+
+    // insertReusableComponents: async (req: any, res?: any, next?: any): Promise<any> => {
+      // console.log('this is req.body from insertReusableComponents', req.body);
     if(req.body.reusableComponents.length < 1){
+      res.locals.message = 'Hello'
       return next();
     };
     const userId: any = await db.query(findUserName, [req.body.user]);
     const realID = userId.rows[0]?._id;
     const doesExist: any = await db.query(checkReusableComponents, [realID]);
-    console.log(doesExist);
+    // console.log(doesExist);
     for (let i= 0; i< doesExist.rows.length; i++ ){
       if (doesExist.rows[i].label === req.body.reusableComponents[req.body.reusableComponents.length-1].label){
         res.locals.message = `the label ${req.body.reusableComponents[req.body.reusableComponents.length-1].label} already exists`;
@@ -85,31 +83,38 @@ const dbController = {
       console.log('error during inserting reusable components')
       return next();
     }
-    // // console.log('reactrixController insertReusableComponents', res.req.body);
-    // const userId: any = await db.query(findUserName, [res.req.user.username]);
-    // const realID= userId.rows[0]._id;
-    // const params = [req.body];
-    // const newReusableComponents: any = await db.query(insertReusableComponents, [params[params.length-1].label, params[params.length-1].url, params[params.length-1].state, realID]);
-    // if (newReusableComponents) {
-    //   console.log('insertReusableComponents working')
-    //   // count ++;
-    //   return next();
-    // } else {
-    //   console.log (`getReusableComponents error`)
-    //   return next();
-    // }
   },
+
+  //const findUserName = 'SELECT _id FROM users WHERE username = $1;'
+  //const checkReusableComponents = 'SELECT label FROM reusable_components WHERE users_id = $1;'
+  // const deleteReusableComponentQuery = 'DELETE FROM reusable_components WHERE users_id = $1 & label = $2;';
+  deleteReusableComponents: async (req: any, res?: any, next?: any): Promise<any> => {
+    // console.log('this is req.body from deleteReusableComponents', req.body);
+    // if(req.body.reusableComponents.length < 1){
+    //   res.locals.message = 'Hello'
+    //   return next();
+    // };
+    // find userId
+    const userId: any = await db.query(findUserName, [req.body.user]);
+    const realID = userId.rows[0]?._id;
+    // check if the reusable component where id = the queried id 
+    const doesExist: any = await db.query(checkReusableComponents, [realID]);
+    // console.log(doesExist);
+
+    // const params = [req.body.reusableComponents[req.body.reusableComponents.length-1].label, req.body.reusableComponents[req.body.reusableComponents.length-1].url, req.body.reusableComponents[req.body.reusableComponents.length-1].state, req.body.reusableComponents[req.body.reusableComponents.length-1].hook, realID];
+    const params = [req.body.reusableComponents[req.body.reusableComponents.length-1]._id, req.body.reusableComponents[req.body.reusableComponents.length-1].label]
+    const deleteReusableComponents: any = await db.query(deleteReusableComponentQuery, params);
+    if (deleteReusableComponents){
+      res.locals.message = 'successfully deleted!'
+      return next();
+    } else {
+      console.log('error during deleting reusable components')
+      return next();
+    }
+  }
 
 };
 
 export default dbController;
 
-// private getPostById = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
-//     const id = request.params.id;
-//     const post = await this.postRepository.findOne(id);
-//     if (post) {
-//       response.send(post);
-//     } else {
-//       next(new PostNotFoundException(id));
-//     }
-//   }
+

@@ -44,16 +44,20 @@ export default function Main() {
     hook: '',
     children: []
   });
+
   let { reusableComponents, setReusableComponents } = useContext(UserContext);
 
   // const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
-  
+  const [componentTreeData, setComponentTreeData] = useState<object>({});
   useEffect(() => {
     console.log('Main useEffect line 52', componentDetails)
 
     setReusableComponents((reusableComponents: any) => [...reusableComponents, componentDetails]);
   }, [componentDetails]);
 
+  const getComponentTreeData = (data: any) => {
+    setComponentTreeData(data);
+  };
   // useEffect(() => {
   //   setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
   // }, [componentDetails]);
@@ -112,6 +116,29 @@ export default function Main() {
     setHook(event.target.value);
   };
 
+  const handleDeleteComponent = (event: any) => {
+    console.log(event.target.value);
+        fetch('http://localhost:3000/reusablecomponents/delete', {
+          method: 'DELETE',
+          credentials: 'include',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials': 'true'
+          },
+          body:
+            JSON.stringify(event.target.value),
+        })
+          .then((response) => {
+            if (response.status === 200) return response.json();
+            throw new Error('authentication has been failed!');
+          })
+          .then((err) => {
+            console.log('error from main page', err);
+          });
+  };
+  
+
   return (
     <div>
       <Navbar />
@@ -124,11 +151,14 @@ export default function Main() {
           url={url}
           state={state}
           hook={hook}
+          componentTreeData={componentTreeData}
+          getComponentTreeData={getComponentTreeData}
           handleSetDetails={handleSetDetails}
           handleOnChangeLabel={handleOnChangeLabel}
           handleOnChangeUrl={handleOnChangeUrl}
           handleOnChangeState={handleOnChangeState}
           handleOnChangeHook={handleOnChangeHook}
+          handleDeleteComponent={handleDeleteComponent}
         />
       </Box>
     </div>

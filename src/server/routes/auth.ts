@@ -5,7 +5,7 @@ import { treeItemClasses } from '@mui/lab';
 import dbController from '../controllers/reactrixController'
 const router = express.Router();
 
-router.get("/github", passport.authenticate("github", {scope: [ `user: username`] }),
+router.get("/github", passport.authenticate("github", {scope: [ `provider: provider`] }),
     function(req, res){
     // The request will be redirected to GitHub for authentication, so this
     // function will not be called.

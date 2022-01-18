@@ -104,12 +104,13 @@ app.get('/', (req: any, res: any) => {
 // app.get('/*', (req: any, res: any) => {
 //   return res.redirect ('http://localhost:3000/');
 // });
-
 app.post('/reusablecomponents/insert', dbController.insertReusableComponents, (req: any, res: any) => {
-  return res.status(200).send(res.locals.message);
+  return res.status(200);
 })
 
-
+app.delete('/reusablecomponents/delete', dbController.deleteReusableComponents, (req: any, res: any) => {
+  return res.status(200);
+})
 // catch-all route handler for any requests to an unknown route
 app.use((req: any, res: any) => {
   res.sendStatus(404)
