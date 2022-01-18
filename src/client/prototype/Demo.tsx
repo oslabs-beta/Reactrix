@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Profiler } from 'react';
 import axios from 'axios';
-import { Box, Card, CardActions, CardContent, Grid, Typography} from '@material-ui/core';
-import { useAppSelector } from '../hooks';
+import { Box, Card, CardActions, CardContent, Grid, Typography } from '@material-ui/core';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectProfilerData } from '../slices/profilerSlice';
 
 import { useTreeContext } from '../containers/GridContainer';
@@ -58,7 +58,8 @@ export default function Demo() {
   //     </CardActions>
   //   </React.Fragment>
   // );
-  console.log('Profiler Data should updated', useAppSelector(selectProfilerData));
+  console.log('Profiler Data should be updated', useAppSelector(selectProfilerData));
+  const dispatch = useAppDispatch();
 
   return (
     <Grid container spacing={2}>
@@ -67,7 +68,17 @@ export default function Demo() {
           <Grid item xs>
             <Typography variant="h6">Demo</Typography>
             <Box sx={{ minWidth: 275, maxWidth: 550, p: 2 }}>
-              <Card variant="outlined">{emptyCard}</Card>
+              <Profiler
+                id="Card"
+                onRender={(id: string, phase: string, actualDuration: number) => {
+                  dispatch({ type: 'profiler/storeProfilerData', payload: { id, phase, actualDuration } });
+                  console.log('this is id', id);
+                  console.log('this is phase', phase);
+                  console.log('this is actualDuration', actualDuration);
+                }}
+              >
+                <Card variant="outlined">{emptyCard}</Card>
+              </Profiler>
             </Box>
           </Grid>
         </Grid>
