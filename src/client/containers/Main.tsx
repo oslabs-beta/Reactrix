@@ -68,7 +68,6 @@ export default function Main() {
     }
   };
 
-  // setting individual component details
   const handleOnChangeLabel = (event: any) => {
     setLabel(event.target.value);
   };
