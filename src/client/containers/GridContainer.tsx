@@ -7,6 +7,7 @@ import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
 import Snapshots from '../components/Snapshots';
 import { handleInitialData, handleUpdateData } from '../helpers/helpers';
+import { useAppDispatch } from '../hooks';
 
 const DemoButton = withStyles({
   root: {
@@ -34,6 +35,7 @@ const SnapshotButton = withStyles({
 
 export default function GridContainer(props: any) {
   let navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     containerLeft,
@@ -72,6 +74,7 @@ export default function GridContainer(props: any) {
       navigate('demo');
     } else {
       setIsProfiling(false);
+      dispatch({ type: 'profiler/clearProfilerData' })
       setStartStop('Start');
       navigate('');
     }
