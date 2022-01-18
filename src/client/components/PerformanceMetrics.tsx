@@ -51,17 +51,20 @@ export const options = {
 export default function PerformanceMetrics({ firstSnapshot, checked }: Props) {
   const profilerData = useAppSelector(selectProfilerData);
   console.log('this is Profiler Data', profilerData);
-  // console.log('this is Profiler Data entries', Object.entries(profilerData));
 
-  const labels = profilerData.map((obj) => obj.id);
-  console.log('this is labels', labels);
+  const labels = [], datasetData = [];
+  for (let i = profilerData.length - 1; i > -1; i--) {
+    labels.push(profilerData[i].id);
+    datasetData.push(profilerData[i].actualDuration);
+  }
+  console.log('labels & datasetData', labels, datasetData);
 
   const data = {
     labels,
     datasets: [
       {
         label: 'Snapshot 1',
-        data: profilerData.map((obj) => obj.actualDuration),
+        data: datasetData,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)'
       }
