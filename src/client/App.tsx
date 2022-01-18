@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useMemo, Profiler } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { theme } from './styles/theme';
 import { ThemeProvider } from '@material-ui/core';
+import { theme } from './styles/theme';
 
 import './styles/styles.css';
 
 import Main from './containers/Main';
 import SignIn from './components/SignIn';
-import { UserContext } from './contexts/UserContext';
 import Demo from './prototype/Demo';
 import ComponentTree from './containers/ComponentTree';
-// import { useSendProfilerData } from './helpers/helpers';
+import { UserContext } from './contexts/UserContext';
 import { useAppDispatch } from './hooks';
 import { isAnyOf } from '@reduxjs/toolkit';
 
@@ -111,16 +110,12 @@ const App = () => {
                       id="Demo"
                       onRender={(id: string, phase: string, actualDuration: number) => {
                         dispatch({ type: 'profiler/storeProfilerData', payload: { id, phase, actualDuration } });
-                        console.log('this is id', id);
-                        console.log('this is phase', phase);
-                        console.log('this is actualDuration', actualDuration);
                       }}
                     >
                       <Demo />
                     </Profiler>
                   }
                 />
-                {/* <Route path="demo" element={<Profiler id='Demo' onRender={useSendProfilerData}><Demo /></Profiler>} /> */}
               </Route>
             </Routes>
           </ThemeProvider>

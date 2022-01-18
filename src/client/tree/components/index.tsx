@@ -12,7 +12,7 @@ export const isLastNode = (data: any, prop: IOrgTreeNodeProps) => {
 };
 
 export const TreeNode = (props: IOrgTreeNodeProps) => {
-  const { hierarchy } = useHierarchyData();
+  const { hierarchy, removeById } = useHierarchyData();
   return (
     <DndProvider backend={HTML5Backend}>
       <RenderNode data={hierarchy} prop={props} first />

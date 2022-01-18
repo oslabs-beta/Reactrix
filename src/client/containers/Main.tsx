@@ -32,7 +32,6 @@ const useStyles = makeStyles(() =>
 export default function Main() {
   const { drawer, containerLeft, containerRight } = useStyles();
 
-  // const [id, setId] = useState('');
   const [label, setLabel] = useState('');
   const [url, setUrl] = useState('');
   const [state, setState] = useState('');
@@ -50,6 +49,8 @@ export default function Main() {
 
   // const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
   const [componentTreeData, setComponentTreeData] = useState<object>({});
+  console.log('latest hierarchy tree obj returned from updating component tree: ', componentTreeData);
+
   useEffect(() => {
     console.log('Main useEffect line 52', componentDetails)
 

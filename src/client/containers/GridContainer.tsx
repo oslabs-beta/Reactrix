@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import { Box, Button, ButtonGroup, Grid, Toolbar, withStyles } from '@material-ui/core';
 
 import { ITreeContext } from '../../interfaces/index';
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
-import Snapshots from '../components/Snapshots';
-import { handleInitialData, handleUpdateData } from '../helpers/helpers';
+import Snapshots from './Snapshots';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { selectProfilerData } from '../slices/profilerSlice';
 
 const DemoButton = withStyles({
   root: {
@@ -34,6 +35,7 @@ const SnapshotButton = withStyles({
 
 export default function GridContainer(props: any) {
   let navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     containerLeft,
@@ -52,22 +54,41 @@ export default function GridContainer(props: any) {
     handleDeleteComponent
   } = props;
 
-  const [firstSnapshot, setFirstSnapshot] = useState<boolean>(true);
+  const [allSnapshots, setAllSnapshots] = useState<Array<any>>([]);
   const [newSnapshot, setNewSnapshot] = useState({});
-  const [checked, setChecked] = useState<boolean>(false);
+
   const [isProfiling, setIsProfiling] = useState<boolean>(false);
   const [startStop, setStartStop] = useState('Start');
 
-  function handleFirstCheck() {
-    setFirstSnapshot(!firstSnapshot);
-  }
+  const [checked, setChecked] = React.useState<Array<any>>([]);
 
-  function handleCheck() {
-    setChecked(!checked);
-  }
+  const profilingData = useAppSelector(selectProfilerData);
 
-  function handleProfiling() {
+  const handleToggle = (value: number) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    setChecked(newChecked);
+  };
+
+  const handleNewSnapshot = (currentTree: any) => {
     if (!isProfiling) {
+      currentTree.profilingData = profilingData;
+      setNewSnapshot(currentTree);
+      setAllSnapshots((allSnapshots) => [...allSnapshots, currentTree])
+    } else {
+      // don't do anything for now
+    }
+  };
+
+  const handleProfiling = () => {
+    if (!isProfiling) {
+      dispatch({ type: 'profiler/clearProfilerData' });
       setIsProfiling(true);
       setStartStop('Stop');
       navigate('demo');
@@ -76,15 +97,7 @@ export default function GridContainer(props: any) {
       setStartStop('Start');
       navigate('');
     }
-  }
-
-  function handleNewSnapshot(currentTree: any) {
-    setNewSnapshot(currentTree);
-  }
-
-  if (checked) {
-    const newDummyData = handleUpdateData();
-  }
+  };
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
@@ -125,10 +138,10 @@ export default function GridContainer(props: any) {
           />
         </Grid>
         <Grid item xs={8} className={containerLeft}>
-          <PerformanceMetrics checked={checked} firstSnapshot={firstSnapshot} handleCheck={handleCheck} />
+          <PerformanceMetrics checked={checked} allSnapshots={allSnapshots}/>
         </Grid>
         <Grid item xs={4} className={containerRight}>
-          <Snapshots handleCheck={handleCheck} handleFirstCheck={handleFirstCheck} />
+          <Snapshots allSnapshots={allSnapshots} checked={checked} handleToggle={handleToggle}/>
         </Grid>
       </Grid>
     </Box>
