@@ -1,13 +1,14 @@
 import React from 'react';
 import { Button, Checkbox, FormControlLabel, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import { TreeView } from '@mui/lab';
+import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     snapshots: {
-      marginTop: 20
+      marginTop: 20,
+      marginLeft: 10
     },
     form: {
       width: 300,
@@ -25,6 +26,7 @@ export default function Snapshots(props: any) {
 
   const { allSnapshots } = props;
 
+  // TODO: this needs to be fixed, currently new timestamp overrides old one set for past snapshots
   const setTimestamp = () => {
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -50,9 +52,11 @@ export default function Snapshots(props: any) {
           marginTop: 2
         }}
       >
+        <TreeItem nodeId="1" label="Applications">
         {allSnapshots.slice(1).map((snapshot: any, index: any) => {
           return snapshot.label !== 'undefined' ? <FormControlLabel value="start" control={<Checkbox />} label={setTimestamp()} key={index} /> : null;
         })}
+        </TreeItem>
       </TreeView>
     </div>
   );

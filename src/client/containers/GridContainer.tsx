@@ -75,17 +75,21 @@ export default function GridContainer(props: any) {
   }
 
   const handleNewSnapshot = (currentTree: any) => {
-    setNewSnapshot(currentTree);
+    if (!isProfiling) {
+      setNewSnapshot(currentTree);
+    } else {
+      // don't do anything for now
+    }
   };
 
   const handleProfiling = () => {
     if (!isProfiling) {
+      dispatch({ type: 'profiler/clearProfilerData' });
       setIsProfiling(true);
       setStartStop('Stop');
       navigate('demo');
     } else {
       setIsProfiling(false);
-      dispatch({ type: 'profiler/clearProfilerData' });
       setStartStop('Start');
       navigate('');
     }
