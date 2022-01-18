@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormHelperText, OutlinedInput, createStyles, makeStyles, Theme, Typography, withStyles } from '@material-ui/core';
 import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -37,8 +37,6 @@ export default function Projects(props: any) {
   const classes = useStyles();
 
   const { allProjects, newProject, newSnapshot, projectId, projectName, allSnapshots, setNewProject, setAllSnapshots, handleSaveNewProject, handleOnChangeProjectName } = props;
-
-  console.log('props inside projects container: ', props);
 
   const setTimestamp = () => {
     const today = new Date();
