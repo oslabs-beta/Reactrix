@@ -18,6 +18,14 @@ export interface IProfilingData {
   commitTime?: number;
 }
 
+export interface IProfilingDataStore {
+  [id: string]: IProfilingDataEntry;
+}
+
+export interface IProfilingDataEntry {
+  phase: string | null;
+  actualDuration: number | null;
+}
 // end of new code
 
 export interface INestedObject extends Record<string, any> {

@@ -7,6 +7,8 @@ import { ITreeContext } from '../../interfaces/index';
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
 import Projects from './Projects';
+import { handleInitialData, handleUpdateData } from '../helpers/helpers';
+import { useAppDispatch } from '../hooks';
 
 const DemoButton = withStyles({
   root: {
@@ -34,6 +36,7 @@ const SnapshotButton = withStyles({
 
 export default function GridContainer(props: any) {
   let navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     containerLeft,
@@ -93,6 +96,7 @@ export default function GridContainer(props: any) {
       navigate('demo');
     } else {
       setIsProfiling(false);
+      dispatch({ type: 'profiler/clearProfilerData' });
       setStartStop('Start');
       navigate('');
     }
