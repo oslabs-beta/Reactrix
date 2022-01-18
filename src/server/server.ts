@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import authRoute from "./routes/auth";
-import db from "./models/reactrixModels";
 import dbController from "./controllers/reactrixController"
 
 dotenv.config();
@@ -65,25 +64,22 @@ passport.use(
     callbackURL: `${process.env.GH_CALLBACK_URL}`,
     },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
-    // console.log('profile line 68 in server.t: ',profile);
-    // console.log('this is done', done);
-    // const user = {
-    //   username: profile.login,
-    //   avatar: profile.avatar_url
-    // }
 
     process.nextTick(
       
       function () {
-        const userProf = {};
-        dbController.handleLogin(profile, userProf);
+        
+        // const userProf = {};
+        // dbController.handleLogin(profile);
+        // dbController.getReusableComponents(profile, userProf);
+        // console.log('server.ts, line 75,', profile);
     //   // To keep the example simple, the user's GitHub profile is returned to
     //   // represent the logged-in user.  In a typical application, you would want
     //   // to associate the GitHub account with a user record in your database,
     //   // and return that user instead.
     //   console.log('process next tick is running');
-      // return done(null, profile);
-      return done(null, userProf);
+      return done(null, profile);
+      // return done(null, userProf);
     }
     );
   }
@@ -105,9 +101,14 @@ app.get('/', (req: any, res: any) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
-app.get('/*', (req: any, res: any) => {
-  return res.redirect ('http://localhost:3000/');
-});
+// app.get('/*', (req: any, res: any) => {
+//   return res.redirect ('http://localhost:3000/');
+// });
+
+app.post('/reusablecomponents/insert', dbController.insertReusableComponents, (req: any, res: any) => {
+  return res.status(200).send(res.locals.message);
+})
+
 
 // catch-all route handler for any requests to an unknown route
 app.use((req: any, res: any) => {

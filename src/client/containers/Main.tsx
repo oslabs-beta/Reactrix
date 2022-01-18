@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Box, createStyles, makeStyles } from '@material-ui/core';
 
 import Navbar from '../components/Navbar';
 import GridContainer from './GridContainer';
 import ComponentLibrary from './ComponentLibrary';
+import { response } from 'express';
+
+
+import { UserContext } from '../contexts/UserContext';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -40,14 +44,39 @@ export default function Main() {
     hook: '',
     children: []
   });
-  const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
+  let { reusableComponents, setReusableComponents } = useContext(UserContext);
 
+  // const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
+  
   useEffect(() => {
-    setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
+    console.log('Main useEffect line 52', componentDetails)
+
+    setReusableComponents((reusableComponents: any) => [...reusableComponents, componentDetails]);
   }, [componentDetails]);
 
+  // useEffect(() => {
+  //   setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
+  // }, [componentDetails]);
+
   const handleSetDetails = (label?: any, url?: any, state?: any, hook?: any, children?: any) => {
-    if (label) {
+    console.log('Main.tsx', reusableComponents);
+    function checkDuplicate(input: string) {
+      console.log(input)
+      let result;
+      for (let i= 0; i< reusableComponents.length; i++){
+        if (reusableComponents[i].label === input){
+          alert('The component name cannot be a duplicate')
+          return false;
+
+        }
+        console.log('youre good')
+        result = true;
+      }
+      return result;
+    }
+    const check = checkDuplicate(label);
+    console.log(check);
+    if (label && check) {
       const newComponentDetails = {
         ...componentDetails,
         label: label,

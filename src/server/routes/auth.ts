@@ -2,7 +2,6 @@ import express, { Router } from 'express';
 import passport from 'passport';
 import { BrowserRouter } from 'react-router-dom';
 import { treeItemClasses } from '@mui/lab';
-// import { Redirect } from 'react-router-dom';
 import dbController from '../controllers/reactrixController'
 const router = express.Router();
 
@@ -13,23 +12,20 @@ router.get("/github", passport.authenticate("github", {scope: [ `user: username`
     console.log('app.get(/auth/github) is working')
     return;
     });
-// (req, res) => {
-//     return res.status(200).json({ ...res.locals.access_token });
-//   });
-// router.get('/api/login', controller.login);
-// // router.post('/api/login/callback', controller.login);
-// router.get('/api/login/callback', controller.login);
 
-router.get("/login/success", (req, res) => {
-    // console.log('req in auth.ts line 24: ', req)
+router.get("/login/success", dbController.handleLogin, dbController.getReusableComponents, (req, res) => {
+    // console.log('req in auth.ts line 24: ', res.locals)
     if(req.user){
+        console.log('auth.ts, line 19', res.locals)
         res.status(200)
         .json({
             success: true,
             message: "successful",
-            user: req.user,
-            cookies: req.cookies,
+            user: res.locals.username,
+            // cookies: res.cookies,
             isLoggedIn: true,
+            // user_id: res.locals.user_id,
+            userReusableComponents: res.locals.reusableComponents,
         })
     }
 });
