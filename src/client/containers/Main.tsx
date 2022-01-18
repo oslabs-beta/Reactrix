@@ -8,6 +8,7 @@ import { response } from 'express';
 
 
 import { UserContext } from '../contexts/UserContext';
+import { json } from 'body-parser';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -45,7 +46,7 @@ export default function Main() {
     children: []
   });
 
-  let { reusableComponents, setReusableComponents } = useContext(UserContext);
+  let { user, setUser, reusableComponents, setReusableComponents } = useContext(UserContext);
 
   // const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
   const [componentTreeData, setComponentTreeData] = useState<object>({});
@@ -116,22 +117,25 @@ export default function Main() {
     setHook(event.target.value);
   };
 
-  const handleDeleteComponent = (event: any) => {
-    console.log(event.target.value);
-        fetch('http://localhost:3000/reusablecomponents/delete', {
+  const handleDeleteComponent = (label: any) => {
+          console.log('handleDeleteComponent', label)
+          fetch('/reusablecomponents/delete', {
           method: 'DELETE',
-          credentials: 'include',
+          // credentials: 'include',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Credentials': 'true'
+            // 'Access-Control-Allow-Credentials': 'true'
           },
           body:
-            JSON.stringify(event.target.value),
+            JSON.stringify({label: label, user: user}),
         })
           .then((response) => {
             if (response.status === 200) return response.json();
             throw new Error('authentication has been failed!');
+          })
+          .then((data) => {
+            setReusableComponents(data);
           })
           .then((err) => {
             console.log('error from main page', err);
@@ -143,7 +147,7 @@ export default function Main() {
     <div>
       <Navbar />
       <Box sx={{ display: 'flex' }}>
-        <ComponentLibrary drawer={drawer} reusableComponents={reusableComponents} />
+        <ComponentLibrary drawer={drawer} reusableComponents={reusableComponents} handleDeleteComponent={handleDeleteComponent} />
         <GridContainer
           containerLeft={containerLeft}
           containerRight={containerRight}

@@ -15,13 +15,13 @@ const app = express();
 const PORT = 3000;
 
 // // enable all CORS requests
-app.use(cors({
+app.use(cors(
+  {
   origin: "http://localhost:3000",
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 }
 ));
-
 // parse incoming requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -64,11 +64,9 @@ passport.use(
     callbackURL: `${process.env.GH_CALLBACK_URL}`,
     },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
-
     process.nextTick(
       
-      function () {
-        
+      function (req: any, res: any) {
         // const userProf = {};
         // dbController.handleLogin(profile);
         // dbController.getReusableComponents(profile, userProf);
@@ -96,7 +94,6 @@ app.use("/auth", authRoute);
 app.use('/', express.static(path.join(__dirname, 'static')))
 
 
-
 app.get('/', (req: any, res: any) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
@@ -109,7 +106,7 @@ app.post('/reusablecomponents/insert', dbController.insertReusableComponents, (r
 })
 
 app.delete('/reusablecomponents/delete', dbController.deleteReusableComponents, (req: any, res: any) => {
-  return res.status(200);
+  return res.status(200).send(res.locals.reusableComponents);
 })
 // catch-all route handler for any requests to an unknown route
 app.use((req: any, res: any) => {
@@ -132,7 +129,7 @@ app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
 
-function res(profile: any, res: any, done: any): Function {
-  throw new Error('Function not implemented.');
-}
+// function res(profile: any, res: any, done: any): Function {
+//   throw new Error('Function not implemented.');
+// }
 

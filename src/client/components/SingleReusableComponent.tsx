@@ -40,7 +40,9 @@ export default function SingleReusableComponent(props: any) {
       <StyledButton variant="outlined" size="large" key={label}>
         {label}
       </StyledButton>
-        <button onClick={handleDeleteComponent}>X</button>
+        <button onClick={()=> {
+          return handleDeleteComponent(label)
+        }} >X</button>
     </div>
   );
 }

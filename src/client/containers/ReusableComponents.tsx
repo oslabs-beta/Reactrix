@@ -4,12 +4,12 @@ import { ListItem } from '@material-ui/core';
 import SingleReusableComponent from '../components/SingleReusableComponent';
 
 export default function ReusableComponent(props: any) {
-  const { reusableComponents } = props;
+  const { reusableComponents, handleDeleteComponent,  } = props;
 
   return (
     <div>
       {reusableComponents.map((ele: any, key: any) => (
-        <ListItem>{ele.label !== 'App' && <SingleReusableComponent details={ele} key={key} />}</ListItem>
+        <ListItem>{ele.label !== 'App' && <SingleReusableComponent details={ele} key={key} handleDeleteComponent={handleDeleteComponent} />}</ListItem>
         ))}
     </div>
   );

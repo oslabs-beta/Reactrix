@@ -5,7 +5,7 @@ import NewComponent from '../components/NewComponent';
 import ReusableComponents from './ReusableComponents';
 
 export default function ComponentLibrary(props: any): any {
-  const { reusableComponents } = props;
+  const { reusableComponents,handleDeleteComponent } = props;
 
   return (
     <Drawer variant="permanent" className={props.drawer}>
@@ -24,7 +24,7 @@ export default function ComponentLibrary(props: any): any {
           <ListItem>
             <Typography variant="subtitle1">Reusable Components</Typography>
           </ListItem>
-          <ReusableComponents reusableComponents={reusableComponents} />
+          <ReusableComponents reusableComponents={reusableComponents} handleDeleteComponent={handleDeleteComponent} />
         </List>
       </Box>
     </Drawer>

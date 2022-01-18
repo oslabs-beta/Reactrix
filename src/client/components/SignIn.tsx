@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
 import Button, { ButtonProps } from '@mui/material/Button';
@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import { UserContext } from '../contexts/UserContext';
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText(grey[800]),
@@ -29,10 +30,25 @@ function Copyright(props: any) {
 }
 
 export default function SignIn() {
-  const oAuth = () => {
+
+  let { user, setUser, reusableComponents, setReusableComponents } = useContext(UserContext);
+
+  const oAuth = async () => {
     // event.preventDefault();
     window.open('http://localhost:3000/auth/github', '_self');
-  };
+    await fetch('http://localhost:3000/auth/login/success')
+    .then((response) => {
+      if (response.status === 200) return response.json();
+      throw new Error('authentication has been failed!');
+      })
+      .then((resObject) => {
+          setUser(resObject);
+          setReusableComponents(resObject.userReusableComponents);
+        })
+        .then((err) => {
+          console.log('error from main page', err);
+        });
+    };
 
   // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   //   event.preventDefault();

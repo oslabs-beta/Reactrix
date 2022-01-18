@@ -15,6 +15,7 @@ import Demo from './prototype/Demo';
 import ComponentTree from './containers/ComponentTree';
 // import { useSendProfilerData } from './helpers/helpers';
 import { useAppDispatch } from './hooks';
+import { isAnyOf } from '@reduxjs/toolkit';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -22,9 +23,9 @@ const App = () => {
 
   const providerUser = useMemo(() => ({ user, setUser, reusableComponents, setReusableComponents }), [user, setUser, reusableComponents, setReusableComponents]);
 
-  useEffect(() => {
+  useEffect( () => {
     const getUser = async () => {
-      fetch('http://localhost:3000/auth/login/success', {
+      await fetch('/auth/login/success', {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -39,7 +40,7 @@ const App = () => {
         })
         .then((resObject) => {
           console.log('App.tsx, line 41', resObject);
-          setUser(resObject.user);
+          setUser(resObject);
           setReusableComponents(resObject.userReusableComponents);
         })
         .then((err) => {
@@ -50,9 +51,9 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log('reusablecomponents useeffect')
+    // console.log('reusablecomponents useeffect')
     const insertReusableComponents = async () => {
-      fetch('http://localhost:3000/reusablecomponents/insert', {
+      await fetch('/reusablecomponents/insert', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -74,24 +75,24 @@ const App = () => {
     insertReusableComponents();
   }, [reusableComponents]);
 
-  const sendProfilerData = (
-    id: string, // the "id" prop of the Profiler tree that has just committed
-    phase: string, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
-    actualDuration: number, // time spent rendering the committed update
-    baseDuration: number, // estimated time to render the entire subtree without memoization
-    startTime: number, // when React began rendering this update
-    commitTime: number // when React committed this update
-  ) => {
-    // Aggregate or log render timings...
-    // const dispatch = useAppDispatch();
-    // dispatch({type: 'storeProfilerData', payload: {id, phase, actualDuration}});
-    console.log('this is id', id);
-    console.log('this is phase', phase);
-    console.log('this is actualDuration', actualDuration);
-    console.log('this is baseDuration', baseDuration);
-    console.log('this is startTime', startTime);
-    console.log('this is commitTime', commitTime);
-  };
+  // const sendProfilerData = (
+  //   id: string, // the "id" prop of the Profiler tree that has just committed
+  //   phase: string, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+  //   actualDuration: number, // time spent rendering the committed update
+  //   baseDuration: number, // estimated time to render the entire subtree without memoization
+  //   startTime: number, // when React began rendering this update
+  //   commitTime: number // when React committed this update
+  // ) => {
+  //   // Aggregate or log render timings...
+  //   // const dispatch = useAppDispatch();
+  //   // dispatch({type: 'storeProfilerData', payload: {id, phase, actualDuration}});
+  //   console.log('this is id', id);
+  //   console.log('this is phase', phase);
+  //   console.log('this is actualDuration', actualDuration);
+  //   console.log('this is baseDuration', baseDuration);
+  //   console.log('this is startTime', startTime);
+  //   console.log('this is commitTime', commitTime);
+  // };
   const dispatch = useAppDispatch();
 
   return (
