@@ -43,7 +43,7 @@ export default function Snapshots(props: any) {
       <Typography variant="h6">Snapshots</Typography>
       {allSnapshots.map((snapshot: any, index: any) => {
         console.log('index of each snapshot inside allsnapshots array', index)
-        return snapshot.label !== 'undefined' ? (
+        return  (
           <ListItem key={index} className={classes.snapshots}>
             <ListItemButton role={undefined} onClick={handleToggle(index)} dense disableRipple>
               <ListItemIcon>
@@ -52,7 +52,7 @@ export default function Snapshots(props: any) {
               <ListItemText id={'Snapshot'} primary={`Snapshot ${index + 1}`} />
             </ListItemButton>
           </ListItem>
-        ) : null;
+        )
       })}
     </div>
   );

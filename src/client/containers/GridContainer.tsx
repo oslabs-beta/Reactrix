@@ -6,7 +6,6 @@ import { ITreeContext } from '../../interfaces/index';
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
 import Snapshots from './Snapshots';
-import { handleInitialData, handleUpdateData } from '../helpers/helpers';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectProfilerData } from '../slices/profilerSlice';
 

@@ -3,14 +3,8 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 import { Bar } from 'react-chartjs-2';
 import { Typography } from '@material-ui/core';
 
-import { handleInitialData, handleUpdateData } from '../helpers/helpers';
 import { useAppSelector } from '../hooks';
 import { selectProfilerData } from '../slices/profilerSlice';
-
-type Props = {
-  checked: number[];
-  allSnapshots: any;
-};
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -76,11 +70,21 @@ export default function PerformanceMetrics(props: any) {
   if (checked) {
     for (const index of checked) {
       console.log(`allSnapshots[${index}]`, allSnapshots[index]);
-      // data.datasets = {
-      //   ...data.datasets,
-      //   // some kind of new data derived from checked
-      //   allSnapshots[index]
-      // }
+      const checkedSetData = [];
+      for (let i = allSnapshots[index].profilingData.length - 1; i > -1; i--) {
+        checkedSetData.push(allSnapshots[index].profilingData[i].actualDuration);
+      }
+      const checkedData = {
+        label: `Snapshot ${index + 1}`,
+        data: checkedSetData,
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)'
+      }
+      data.datasets = [
+        ...data.datasets,
+        // some kind of new data derived from checked
+        checkedData
+      ]
     }
   }
 
