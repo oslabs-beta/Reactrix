@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import { Box, Button, ButtonGroup, Grid, Toolbar, withStyles } from '@material-ui/core';
 
 import { ITreeContext } from '../../interfaces/index';
 import PerformanceMetrics from '../components/PerformanceMetrics';
 import ComponentDetails from '../components/ComponentDetails';
-import Snapshots from '../components/Snapshots';
+import Snapshots from './Snapshots';
 import { handleInitialData, handleUpdateData } from '../helpers/helpers';
 import { useAppDispatch } from '../hooks';
 
@@ -54,10 +54,17 @@ export default function GridContainer(props: any) {
   } = props;
 
   const [firstSnapshot, setFirstSnapshot] = useState<boolean>(true);
-  const [newSnapshot, setNewSnapshot] = useState({});
   const [checked, setChecked] = useState<boolean>(false);
+
+  const [allSnapshots, setAllSnapshots] = useState<Array<any>>([]);
+  const [newSnapshot, setNewSnapshot] = useState({});
+
   const [isProfiling, setIsProfiling] = useState<boolean>(false);
   const [startStop, setStartStop] = useState('Start');
+
+  useEffect(() => {
+    setAllSnapshots((allSnapshots) => [...allSnapshots, newSnapshot]);
+  }, [newSnapshot]);
 
   function handleFirstCheck() {
     setFirstSnapshot(!firstSnapshot);
@@ -67,26 +74,22 @@ export default function GridContainer(props: any) {
     setChecked(!checked);
   }
 
-  function handleProfiling() {
+  const handleNewSnapshot = (currentTree: any) => {
+    setNewSnapshot(currentTree);
+  };
+
+  const handleProfiling = () => {
     if (!isProfiling) {
       setIsProfiling(true);
       setStartStop('Stop');
       navigate('demo');
     } else {
       setIsProfiling(false);
-      dispatch({ type: 'profiler/clearProfilerData' })
+      dispatch({ type: 'profiler/clearProfilerData' });
       setStartStop('Start');
       navigate('');
     }
-  }
-
-  function handleNewSnapshot(currentTree: any) {
-    setNewSnapshot(currentTree);
-  }
-
-  if (checked) {
-    const newDummyData = handleUpdateData();
-  }
+  };
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
@@ -129,7 +132,7 @@ export default function GridContainer(props: any) {
           <PerformanceMetrics checked={checked} firstSnapshot={firstSnapshot} handleCheck={handleCheck} />
         </Grid>
         <Grid item xs={4} className={containerRight}>
-          <Snapshots handleCheck={handleCheck} handleFirstCheck={handleFirstCheck} />
+          <Snapshots allSnapshots={allSnapshots} />
         </Grid>
       </Grid>
     </Box>

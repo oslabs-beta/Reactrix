@@ -27,7 +27,6 @@ const useStyles = makeStyles(() =>
 export default function Main() {
   const { drawer, containerLeft, containerRight } = useStyles();
 
-  // const [id, setId] = useState('');
   const [label, setLabel] = useState('');
   const [url, setUrl] = useState('');
   const [state, setState] = useState('');
@@ -42,6 +41,8 @@ export default function Main() {
   });
   const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
   const [componentTreeData, setComponentTreeData] = useState<object>({});
+
+  console.log('latest hierarchy tree obj returned from updating component tree: ', componentTreeData);
 
   useEffect(() => {
     setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
@@ -67,7 +68,7 @@ export default function Main() {
     }
   };
 
-  // TODO: event handlers below seem to be triggering re-renders of whole app
+  // setting individual component details
   const handleOnChangeLabel = (event: any) => {
     setLabel(event.target.value);
   };

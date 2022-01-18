@@ -52,7 +52,8 @@ export default function PerformanceMetrics({ firstSnapshot, checked }: Props) {
   const profilerData = useAppSelector(selectProfilerData);
   console.log('this is Profiler Data', profilerData);
 
-  const labels = [], datasetData = [];
+  const labels = [],
+    datasetData = [];
   for (let i = profilerData.length - 1; i > -1; i--) {
     labels.push(profilerData[i].id);
     datasetData.push(profilerData[i].actualDuration);
