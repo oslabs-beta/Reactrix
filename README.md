@@ -44,10 +44,10 @@ Getting Started!
 
 Contributors:
 
-Jonathan Tam @jktam336
+Kevin Chung [@kevhjc](https://github.com/kevhjc)
 
-Jay Heo @heojay0309
+Jay Heo [@heojay0309](https://github.com/heojay0309)
 
-Kevin Chung @kevhjc
+Jonathan Tam [@jktam336](https://github.com/jktam336)
 
-Tychicus Lee @tychicuslee
+Tychicus Lee [@tychicuslee](https://github.com/tychicuslee)
