@@ -81,8 +81,6 @@ export default function GridContainer(props: any) {
       currentTree.profilingData = profilingData;
       setNewSnapshot(currentTree);
       setAllSnapshots((allSnapshots) => [...allSnapshots, currentTree])
-    } else {
-      // don't do anything for now
     }
   };
 

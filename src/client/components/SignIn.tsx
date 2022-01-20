@@ -34,7 +34,6 @@ export default function SignIn() {
   let { user, setUser, reusableComponents, setReusableComponents } = useContext(UserContext);
 
   const oAuth = async () => {
-    // event.preventDefault();
     window.open('http://localhost:3000/auth/github', '_self');
     await fetch('http://localhost:3000/auth/login/success')
     .then((response) => {
@@ -49,16 +48,6 @@ export default function SignIn() {
           console.log('error from main page', err);
         });
     };
-
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   // eslint-disable-next-line no-console
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password')
-  //   });
-  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -103,5 +92,3 @@ export default function SignIn() {
     </Container>
   );
 }
-
-// href="/auth/github"

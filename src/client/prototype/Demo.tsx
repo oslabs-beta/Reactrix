@@ -10,8 +10,6 @@ export default function Demo() {
   const TreeContext = useTreeContext();
   const rootNode = TreeContext[0];
 
-  console.log('rootNode', rootNode);
-
   const handleRequest = (url: string) => {
     axios.get(`${url}`).then((res) => console.log(res));
   };
@@ -35,6 +33,7 @@ export default function Demo() {
     </React.Fragment>
   );
 
+  // TODO: Implement generation of component based on details
   // const detailCard = (
   //   <React.Fragment>
   //     <CardContent>
@@ -58,7 +57,7 @@ export default function Demo() {
   //     </CardActions>
   //   </React.Fragment>
   // );
-  console.log('Profiler Data should be updated', useAppSelector(selectProfilerData));
+
   const dispatch = useAppDispatch();
 
   return (

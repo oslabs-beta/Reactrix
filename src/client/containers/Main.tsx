@@ -45,43 +45,31 @@ export default function Main() {
     children: []
   });
 
-  let { user, setUser, reusableComponents, setReusableComponents } = useContext(UserContext);
+  const { user, setUser, reusableComponents, setReusableComponents } = useContext(UserContext);
 
-  // const [reusableComponents, setReusableComponents] = useState<Array<any>>([]);
   const [componentTreeData, setComponentTreeData] = useState<object>({});
-  console.log('latest hierarchy tree obj returned from updating component tree: ', componentTreeData);
 
   useEffect(() => {
-    console.log('Main useEffect line 52', componentDetails)
-
     setReusableComponents((reusableComponents: any) => [...reusableComponents, componentDetails]);
   }, [componentDetails]);
 
   const getComponentTreeData = (data: any) => {
     setComponentTreeData(data);
   };
-  // useEffect(() => {
-  //   setReusableComponents((reusableComponents) => [...reusableComponents, componentDetails]);
-  // }, [componentDetails]);
 
   const handleSetDetails = (label?: any, url?: any, state?: any, hook?: any, children?: any) => {
-    console.log('Main.tsx', reusableComponents);
     function checkDuplicate(input: any) {
-      console.log(input)
       let result;
       for (let i= 0; i< reusableComponents.length; i++){
         if (reusableComponents[i].label === input){
-          alert('The component name cannot be a duplicate')
+          alert('Component name already exists')
           return false;
-
         }
-        console.log('youre good')
         result = true;
       }
       return result;
     }
     const check = checkDuplicate(label);
-    console.log(check);
     if (label && check) {
       const newComponentDetails = {
         ...componentDetails,
@@ -97,11 +85,6 @@ export default function Main() {
     }
   };
 
-  // const handleAddToReusableComponents = (component: any) => {
-  //     setReusableComponents((reusableComponents) => [...reusableComponents, component]);
-  // };
-
-  // TODO: event handlers below are currently triggering re-renders of whole app
   const handleOnChangeLabel = (event: any) => {
     setLabel(event.target.value);
   };
@@ -118,37 +101,11 @@ export default function Main() {
     setHook(event.target.value);
   };
 
-  const handleDeleteComponent = (label: any) => {
-          console.log('handleDeleteComponent', label)
-          fetch('/reusablecomponents/delete', {
-          method: 'DELETE',
-          // credentials: 'include',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            // 'Access-Control-Allow-Credentials': 'true'
-          },
-          body:
-            JSON.stringify({label: label, user: user}),
-        })
-          .then((response) => {
-            if (response.status === 200) return response.json();
-            throw new Error('authentication has been failed!');
-          })
-          .then((data) => {
-            setReusableComponents(data);
-          })
-          .then((err) => {
-            console.log('error from main page', err);
-          });
-  };
-  
-
   return (
     <div>
       <Navbar />
       <Box sx={{ display: 'flex' }}>
-        <ComponentLibrary drawer={drawer} reusableComponents={reusableComponents} handleDeleteComponent={handleDeleteComponent} />
+        <ComponentLibrary drawer={drawer} reusableComponents={reusableComponents}/>
         <GridContainer
           containerLeft={containerLeft}
           containerRight={containerRight}
@@ -163,7 +120,6 @@ export default function Main() {
           handleOnChangeUrl={handleOnChangeUrl}
           handleOnChangeState={handleOnChangeState}
           handleOnChangeHook={handleOnChangeHook}
-          handleDeleteComponent={handleDeleteComponent}
         />
       </Box>
     </div>
