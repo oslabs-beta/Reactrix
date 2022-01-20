@@ -1,4 +1,5 @@
 # Reactrix
+![0_f8MwyXeJyta2ZzMn](https://user-images.githubusercontent.com/93226840/150414276-df31169d-d6cc-43b7-8b3d-a09ff868c454.png)
 
 Reactrix is an analytical prototyping tool for developers to not only rapidly produce React component trees, but to also determine what structures may lead to the most optimal performance.
 
@@ -19,7 +20,7 @@ View the performance data of your parent and children components displayed as a 
 * **Snapshots 📷**<br>
 Save and compare performance metrics of your previously saved snapshots.
 
-![](https://github.com/oslabs-beta/Reactrix/blob/readMe-gif/demo.gif)
+![](https://github.com/oslabs-beta/Reactrix/blob/demo-gif/demo.gif)
 
 ### Getting Started!
 1. Simply **clone** the repo to your local machine 
