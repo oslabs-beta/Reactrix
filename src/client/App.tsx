@@ -75,26 +75,6 @@ const App = () => {
     insertReusableComponents();
   }, [reusableComponents]);
 
-  // const sendProfilerData = (
-  //   id: string, // the "id" prop of the Profiler tree that has just committed
-  //   phase: string, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
-  //   actualDuration: number, // time spent rendering the committed update
-  //   baseDuration: number, // estimated time to render the entire subtree without memoization
-  //   startTime: number, // when React began rendering this update
-  //   commitTime: number // when React committed this update
-  // ) => {
-  //   // Aggregate or log render timings...
-  //   // const dispatch = useAppDispatch();
-  //   // dispatch({type: 'storeProfilerData', payload: {id, phase, actualDuration}});
-  //   console.log('this is id', id);
-  //   console.log('this is phase', phase);
-  //   console.log('this is actualDuration', actualDuration);
-  //   console.log('this is baseDuration', baseDuration);
-  //   console.log('this is startTime', startTime);
-  //   console.log('this is commitTime', commitTime);
-  // };
-  const dispatch = useAppDispatch();
-
   return (
     <Router>
       <UserContext.Provider value={providerUser}>
