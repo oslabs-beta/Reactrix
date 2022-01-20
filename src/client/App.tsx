@@ -17,6 +17,7 @@ import { useAppDispatch } from './hooks';
 import { isAnyOf } from '@reduxjs/toolkit';
 
 const App = () => {
+  const dispatch = useAppDispatch();
   const [user, setUser] = useState(null);
   const [reusableComponents, setReusableComponents] = useState([]);
 

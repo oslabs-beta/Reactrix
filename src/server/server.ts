@@ -5,24 +5,21 @@ import cors from "cors";
 import dotenv from "dotenv";
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
+
 import authRoute from "./routes/auth";
 import dbController from "./controllers/reactrixController"
 
 dotenv.config();
 
-// node dev.js
 const app = express();
 const PORT = 3000;
 
-// // enable all CORS requests
-app.use(cors(
-  {
+app.use(cors({
   origin: "http://localhost:3000",
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 }
 ));
-// parse incoming requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -40,9 +37,7 @@ app.use(passport.session());
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
 //   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing.  However, since this example does not
-//   have a database of user records, the complete GitHub profile is serialized
-//   and deserialized.
+//   the user by ID when deserializing.
 passport.serializeUser(function(user: any, done: any) {
   done(null, user);
 });
@@ -55,7 +50,6 @@ passport.deserializeUser(function(obj:any , done: any) {
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and GitHub
 //   profile), and invoke a callback with a user object.
-
 passport.use(
   new GitHubStrategy(
     {
@@ -85,14 +79,10 @@ passport.use(
 
 app.use("/auth", authRoute);
 
-
 // -------------------------- GITHUB -------------------------------//
-
-
 // statically serve everything in the build folder on the route '/dist'
 // app.use('/dist', express.static(path.join(__dirname, '../../dist')));
 app.use('/', express.static(path.join(__dirname, 'static')))
-
 
 app.get('/', (req: any, res: any) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
@@ -126,7 +116,4 @@ app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
 
-// function res(profile: any, res: any, done: any): Function {
-//   throw new Error('Function not implemented.');
-// }
 
