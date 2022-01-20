@@ -1,18 +1,15 @@
-import postgress from 'pg';
+import pg from 'pg';
 import dotenv from 'dotenv'
-const {Pool} = postgress;
+const {Pool} = pg;
 
 dotenv.config()
 
-const PG_URI = process.env.PG_URI
-
 const pool = new Pool({
-  connectionString: PG_URI
+  connectionString: process.env.PG_URI
 });
 
  export default {
   query: (text: string, params?: any, callback?: any) => {
-    console.log('executed query', text);
     return pool.query(text, params, callback);
   }
 };

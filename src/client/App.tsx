@@ -39,11 +39,10 @@ const App = () => {
           throw new Error('authentication has been failed!');
         })
         .then((resObject) => {
-          console.log('App.tsx, line 41', resObject);
           setUser(resObject);
           setReusableComponents(resObject.userReusableComponents);
         })
-        .then((err) => {
+        .catch((err) => {
           console.log('error from main page', err);
         });
     };
@@ -51,7 +50,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // console.log('reusablecomponents useeffect')
     const insertReusableComponents = async () => {
       await fetch('/reusablecomponents/insert', {
         method: 'POST',
@@ -68,7 +66,7 @@ const App = () => {
           if (response.status === 200) return response.json();
           throw new Error('authentication has been failed!');
         })
-        .then((err) => {
+        .catch((err) => {
           console.log('error from main page', err);
         });
     };

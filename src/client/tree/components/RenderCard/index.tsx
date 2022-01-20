@@ -106,7 +106,6 @@ export const RenderCard = ({ data, setExpand, expand, prop: { renderCard, ...pro
 
       // update context with new DragItemHierarchy
       setHierarchy(addedNewDragItemHierarchy);
-      console.log('hierarchyRef logged from rendercard', hierarchyRef.current);
       hierarchyRef.current = addedNewDragItemHierarchy;
     }
 

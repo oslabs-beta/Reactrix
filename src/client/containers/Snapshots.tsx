@@ -31,7 +31,6 @@ export default function Snapshots(props: any) {
     <div>
       <Typography variant="h6">Snapshots</Typography>
       {allSnapshots.map((snapshot: any, index: any) => {
-        console.log('index of each snapshot inside allsnapshots array', index)
         return  (
           <ListItem key={index} className={classes.snapshots}>
             <ListItemButton role={undefined} onClick={handleToggle(index)} dense disableRipple>
