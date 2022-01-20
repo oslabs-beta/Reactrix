@@ -13,9 +13,9 @@ Create and save reusable components and store them across sessions.
 * **Preview / Demo 🪄**<br>
 Render your component tree as a preview with full interactions based on details.
 * **Profiling 🔎**<br>
-Profile the intital render performance of your current component tree.
+Profile the initial render performance of your current component tree.
 * **Performance Metrics 📊**<br>
-View the performance data of your parent and children componenets displayed as a bar graph.
+View the performance data of your parent and children components displayed as a bar graph.
 * **Snapshots 📷**<br>
 Save and compare performance metrics of your previously saved snapshots.
 
