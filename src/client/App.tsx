@@ -16,9 +16,10 @@ import { UserContext } from './contexts/UserContext';
 import { useAppDispatch } from './hooks';
 
 const App = () => {
+  const dispatch = useAppDispatch();
   const [user, setUser] = useState(null);
-
   const providerUser = useMemo(() => ({ user, setUser }), [user, setUser]);
+
   useEffect(() => {
     const getUser = async () => {
       fetch('http://localhost:3000/auth/login/success', {
@@ -43,8 +44,6 @@ const App = () => {
     };
     getUser();
   }, []);
-
-  const dispatch = useAppDispatch();
 
   return (
     <Router>

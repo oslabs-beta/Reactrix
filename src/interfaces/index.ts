@@ -1,13 +1,4 @@
-import { MouseEvent } from 'react';
-
-import { CSSProperties, Dispatch, MutableRefObject, ReactNode, SetStateAction, ForwardedRef } from 'react';
-
-// start of new code
-export interface IProfilerContextData {
-  profilingData: IProfilingData;
-  // setProfilingData: Dispatch<SetStateAction<IProfilingData>>;
-  setProfilingData: (profilingData: IProfilingData) => void;
-}
+import { CSSProperties, Dispatch, MouseEvent, MutableRefObject, ReactNode, SetStateAction, ForwardedRef } from 'react';
 
 export interface IProfilingData {
   id: string | null;
@@ -26,7 +17,6 @@ export interface IProfilingDataEntry {
   phase: string | null;
   actualDuration: number | null;
 }
-// end of new code
 
 export interface INestedObject extends Record<string, any> {
   id: string | number;
@@ -99,7 +89,6 @@ export interface IHierarchyContextData {
   removeById: (id: number | string, idsToRemove: Array<number | string>, nestedObject?: INestedObject) => INestedObject;
   findParentByChildId: (id: number | string, nestedObject?: INestedObject) => { parent: INestedObject | null; path: Array<number | string> };
   findById: (
-    // nestedObject: INestedObject,
     id: number | string,
     nestedObject?: INestedObject
   ) => INestedObject | null;
