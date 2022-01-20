@@ -105,9 +105,6 @@ app.post('/reusablecomponents/insert', dbController.insertReusableComponents, (r
   return res.status(200);
 })
 
-app.delete('/reusablecomponents/delete', dbController.deleteReusableComponents, (req: any, res: any) => {
-  return res.status(200).send(res.locals.reusableComponents);
-})
 // catch-all route handler for any requests to an unknown route
 app.use((req: any, res: any) => {
   res.sendStatus(404)
