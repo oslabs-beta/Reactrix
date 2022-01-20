@@ -48,26 +48,6 @@ const config = {
       },
     ],
   },
-  // devServer: {
-  //   host: 'localhost',
-  //   port: 8080,
-  //   proxy: {
-  //     '/': 'http://localhost:3000',
-  //   },
-  //   static: {
-  //     directory: './dist',
-  //   },
-  // },
-  // devtool: 'source-map',
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     templateContent: ({ htmlWebpackPlugin }) =>
-  //       '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' +
-  //       htmlWebpackPlugin.options.title +
-  //       '</title></head><body><div id="app"></div></body></html>',
-  //     filename: 'index.html',
-  //   }),
-  // ],
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({

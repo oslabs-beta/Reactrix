@@ -28,7 +28,7 @@ const SaveButton = withStyles({
 
 export default function ComponentDetails(props: any) {
   const classes = useStyles();
-  const { label, url, state, hook, componentTreeData, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
+  const { label, url, state, hook, handleSetDetails, handleOnChangeLabel, handleOnChangeUrl, handleOnChangeState, handleOnChangeHook } = props;
 
   return (
     <div>

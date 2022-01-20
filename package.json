@@ -1,10 +1,9 @@
 {
   "name": "reactrix",
   "version": "1.0.0",
-  "description": "",
+  "description": "Analyticial Prototyping Tool for React",
   "main": "./src/index.tsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build:client": "webpack --config webpack.config.client.js",
     "build:server": "webpack --config webpack.config.server.js",
     "start": "node ./dist/main.js"
@@ -14,7 +13,7 @@
     "url": "git+https://github.com/oslabs-beta/Reactrix.git"
   },
   "keywords": [],
-  "author": "Jay Heo, Tyke Lee, Jonathan Tam, Kevin Chung",
+  "author": "Kevin Chung, Jay Heo, Tychicus Lee, Jonathan Tam",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/oslabs-beta/Reactrix/issues"
@@ -44,9 +43,7 @@
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
     "react-redux": "^7.2.6",
-    "react-router-dom": "^6.2.1",
-    "sass": "^1.45.1",
-    "sass-loader": "^12.4.0"
+    "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.1+4.13.0",
@@ -70,7 +67,6 @@
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^6.4.0",
-    "copy-webpack-plugin": "^10.2.0",
     "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
     "css-loader": "^6.5.1",

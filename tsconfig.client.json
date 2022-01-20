@@ -1,20 +1,4 @@
 {
-  // "compilerOptions": {
-  //     "module": "es6",
-  //     "target": "es5",
-  //     "jsx": "react",
-  //     "allowSyntheticDefaultImports": true,
-  //     "moduleResolution": "node",
-  //     "strict": true,
-  //     "noImplicitAny": true,
-  //     "outDir": "./dist/",
-  //     "sourceMap": true,
-  //     "noImplicitReturns": true,
-  //     "allowJs": true,
-  // },
-  // "include": [
-  //     "./src/**/*"
-  // ]
   "include": ["src/client"],
   "compilerOptions": {
     "lib": ["es6", "dom"],
