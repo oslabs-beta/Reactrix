@@ -20,7 +20,7 @@ View the performance data of your parent and children components displayed as a 
 * **Snapshots 📷**<br>
 Save and compare performance metrics of your previously saved snapshots.
 
-![](https://github.com/oslabs-beta/Reactrix/blob/demo-gif/demo.gif)
+![](https://github.com/oslabs-beta/Reactrix/blob/main/demo.gif)
 
 ### Getting Started!
 1. Simply **clone** the repo to your local machine 
