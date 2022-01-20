@@ -34,7 +34,7 @@ Save and compare performance metrics of your previously saved snapshots.
 
         node dev.js
 
-4. Sign-in with either GitHub or continue as guest
+4. Continue as guest to demo the app. For future collaborators, create a .env file and access the secrets stored in GitHub ([reference documentation](https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow))
 
 <br><br>
 
