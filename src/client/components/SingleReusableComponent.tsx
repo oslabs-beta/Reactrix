@@ -15,7 +15,6 @@ const StyledButton = withStyles({
 })(Button);
 
 export default function SingleReusableComponent(props: any) {
-  const { handleDeleteComponent } = props;
   const { label, url, state, hook, children } = props.details;
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'box',
@@ -40,9 +39,6 @@ export default function SingleReusableComponent(props: any) {
       <StyledButton variant="outlined" size="large" key={label}>
         {label}
       </StyledButton>
-        <button onClick={()=> {
-          return handleDeleteComponent(label)
-        }} >X</button>
     </div>
   );
 }
