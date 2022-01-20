@@ -1,8 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './client/App';
+import { store } from './client/store';
 
-import App from './App';
-import './styles.css';
-
-var mountNode = document.getElementById('app');
-ReactDOM.render(<App name='Jane' />, mountNode);
+const root = document.getElementById('root');
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  root
+);
