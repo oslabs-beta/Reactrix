@@ -14,15 +14,18 @@ import Demo from './prototype/Demo';
 import ComponentTree from './containers/ComponentTree';
 import { UserContext } from './contexts/UserContext';
 import { useAppDispatch } from './hooks';
+import { isAnyOf } from '@reduxjs/toolkit';
 
 const App = () => {
   const dispatch = useAppDispatch();
   const [user, setUser] = useState(null);
-  const providerUser = useMemo(() => ({ user, setUser }), [user, setUser]);
+  const [reusableComponents, setReusableComponents] = useState([]);
 
-  useEffect(() => {
+  const providerUser = useMemo(() => ({ user, setUser, reusableComponents, setReusableComponents }), [user, setUser, reusableComponents, setReusableComponents]);
+
+  useEffect( () => {
     const getUser = async () => {
-      fetch('http://localhost:3000/auth/login/success', {
+      await fetch('/auth/login/success', {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -36,7 +39,9 @@ const App = () => {
           throw new Error('authentication has been failed!');
         })
         .then((resObject) => {
-          setUser(resObject.user);
+          console.log('App.tsx, line 41', resObject);
+          setUser(resObject);
+          setReusableComponents(resObject.userReusableComponents);
         })
         .then((err) => {
           console.log('error from main page', err);
@@ -44,6 +49,31 @@ const App = () => {
     };
     getUser();
   }, []);
+
+  useEffect(() => {
+    // console.log('reusablecomponents useeffect')
+    const insertReusableComponents = async () => {
+      await fetch('/reusablecomponents/insert', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': 'true'
+        },
+        body:
+          JSON.stringify({ reusableComponents: reusableComponents, user: user }),
+      })
+        .then((response) => {
+          if (response.status === 200) return response.json();
+          throw new Error('authentication has been failed!');
+        })
+        .then((err) => {
+          console.log('error from main page', err);
+        });
+    };
+    insertReusableComponents();
+  }, [reusableComponents]);
 
   return (
     <Router>

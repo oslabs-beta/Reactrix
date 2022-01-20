@@ -50,7 +50,8 @@ export default function GridContainer(props: any) {
     handleOnChangeLabel,
     handleOnChangeUrl,
     handleOnChangeState,
-    handleOnChangeHook
+    handleOnChangeHook,
+    handleDeleteComponent
   } = props;
 
   const [allSnapshots, setAllSnapshots] = useState<Array<any>>([]);
@@ -133,6 +134,7 @@ export default function GridContainer(props: any) {
             handleOnChangeUrl={handleOnChangeUrl}
             handleOnChangeState={handleOnChangeState}
             handleOnChangeHook={handleOnChangeHook}
+            handleDeleteComponent={handleDeleteComponent}
           />
         </Grid>
         <Grid item xs={8} className={containerLeft}>

@@ -7,7 +7,6 @@ import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 
 import authRoute from "./routes/auth";
-import db from "./models/reactrixModels";
 import dbController from "./controllers/reactrixController"
 
 dotenv.config();
@@ -21,7 +20,6 @@ app.use(cors({
   credentials: true,
 }
 ));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -61,10 +59,19 @@ passport.use(
     },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
     process.nextTick(
-      function () {
-        const userProf = {};
-        dbController.handleLogin(profile, userProf);
-      return done(null, userProf);
+      
+      function (req: any, res: any) {
+        // const userProf = {};
+        // dbController.handleLogin(profile);
+        // dbController.getReusableComponents(profile, userProf);
+        // console.log('server.ts, line 75,', profile);
+    //   // To keep the example simple, the user's GitHub profile is returned to
+    //   // represent the logged-in user.  In a typical application, you would want
+    //   // to associate the GitHub account with a user record in your database,
+    //   // and return that user instead.
+    //   console.log('process next tick is running');
+      return done(null, profile);
+      // return done(null, userProf);
     }
     );
   }
@@ -81,8 +88,17 @@ app.get('/', (req: any, res: any) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
+// app.get('/*', (req: any, res: any) => {
+//   return res.redirect ('http://localhost:3000/');
+// });
+app.post('/reusablecomponents/insert', dbController.insertReusableComponents, (req: any, res: any) => {
+  return res.status(200);
+})
+
 // catch-all route handler for any requests to an unknown route
-app.use((req: any, res: any) => res.sendStatus(404));
+app.use((req: any, res: any) => {
+  res.sendStatus(404)
+})
 
 // express error handler
 // app.use((err: any, req: any, res: any, next: any) => {
@@ -100,6 +116,4 @@ app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
 
-function res(profile: any, res: any, done: any): Function {
-  throw new Error('Function not implemented.');
-}
+
