@@ -85,27 +85,27 @@ const dbController = {
     }
   },
 
-  deleteReusableComponents: async (req: any, res?: any, next?: any): Promise<any> => {
-    // console.log('this is req.body from deleteReusableComponents', req.body);
-    // find userId
+  // deleteReusableComponents: async (req: any, res?: any, next?: any): Promise<any> => {
+  //   // console.log('this is req.body from deleteReusableComponents', req.body);
+  //   // find userId
     
-    const userId: any = await db.query(findUserName, [req.body.user]);
-    const realID = userId.rows[0]?._id;
-    // check if the reusable component where id = the queried id 
-    // const doesExist: any = await db.query(checkReusableComponents, [realID]);
-    // console.log(doesExist);
+  //   const userId: any = await db.query(findUserName, [req.body.user]);
+  //   const realID = userId.rows[0]?._id;
+  //   // check if the reusable component where id = the queried id 
+  //   // const doesExist: any = await db.query(checkReusableComponents, [realID]);
+  //   // console.log(doesExist);
 
-    // const params = [req.body.reusableComponents[req.body.reusableComponents.length-1].label, req.body.reusableComponents[req.body.reusableComponents.length-1].url, req.body.reusableComponents[req.body.reusableComponents.length-1].state, req.body.reusableComponents[req.body.reusableComponents.length-1].hook, realID];
-    const params = [realID, req.body.label]
-    const deleteReusableComponents: any = await db.query(deleteReusableComponentQuery, params);
-    if (deleteReusableComponents){
-      res.locals.reusableComponents = deleteReusableComponents;
-      return next();
-    } else {
-      console.log('error during deleting reusable components')
-      return next();
-    }
-  }
+  //   // const params = [req.body.reusableComponents[req.body.reusableComponents.length-1].label, req.body.reusableComponents[req.body.reusableComponents.length-1].url, req.body.reusableComponents[req.body.reusableComponents.length-1].state, req.body.reusableComponents[req.body.reusableComponents.length-1].hook, realID];
+  //   const params = [realID, req.body.label]
+  //   const deleteReusableComponents: any = await db.query(deleteReusableComponentQuery, params);
+  //   if (deleteReusableComponents){
+  //     res.locals.reusableComponents = deleteReusableComponents;
+  //     return next();
+  //   } else {
+  //     console.log('error during deleting reusable components')
+  //     return next();
+  //   }
+  // }
 
 };
 
