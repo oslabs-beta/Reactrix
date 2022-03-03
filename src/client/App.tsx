@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, Profiler } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link, useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
@@ -7,7 +7,7 @@ import { ThemeProvider } from '@material-ui/core';
 import { theme } from './styles/theme';
 
 import './styles/styles.css';
-
+import Guest from './containers/Guest';
 import Main from './containers/Main';
 import SignIn from './components/SignIn';
 import Demo from './prototype/Demo';
@@ -43,7 +43,7 @@ const App = () => {
           setReusableComponents(resObject.userReusableComponents);
         })
         .catch((err) => {
-          console.log('error from main page', err);
+          console.log('error from main page getUser', err);
         });
     };
     getUser();
@@ -51,6 +51,7 @@ const App = () => {
 
   useEffect(() => {
     const insertReusableComponents = async () => {
+      console.log('this is invoking')
       await fetch('/reusablecomponents/insert', {
         method: 'POST',
         credentials: 'include',
@@ -67,7 +68,7 @@ const App = () => {
           throw new Error('authentication has been failed!');
         })
         .catch((err) => {
-          console.log('error from main page', err);
+          console.log('error from main page insertReusable', err);
         });
     };
     insertReusableComponents();
@@ -79,17 +80,34 @@ const App = () => {
         <DndProvider backend={HTML5Backend}>
           <ThemeProvider theme={theme}>
             <Routes>
-              <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
-              <Route path="/dashboard" element={<Main />}>
+              <Route path="/" element={user ? <Navigate to="dashboard" /> : <SignIn />} />
+              <Route path="/*" element={user ? <Navigate to="dashboard" /> : <SignIn />} />
+              <Route path="dashboard" element={<Main />}>
                 <Route index element={<ComponentTree />} />
                 <Route
                   path="demo"
                   element={
                     <Profiler
-                      id="Demo"
-                      onRender={(id: string, phase: string, actualDuration: number) => {
-                        dispatch({ type: 'profiler/storeProfilerData', payload: { id, phase, actualDuration } });
-                      }}
+                    id="Demo"
+                    onRender={(id: string, phase: string, actualDuration: number) => {
+                      dispatch({ type: 'profiler/storeProfilerData', payload: { id, phase, actualDuration } });
+                    }}
+                    >
+                      <Demo />
+                    </Profiler>
+                  }
+                />
+              </Route>
+              <Route path="guest" element={<Guest />}>
+                <Route index element={<ComponentTree />} />
+                <Route
+                  path="demo"
+                  element={
+                    <Profiler
+                    id="Demo"
+                    onRender={(id: string, phase: string, actualDuration: number) => {
+                      dispatch({ type: 'profiler/storeProfilerData', payload: { id, phase, actualDuration } });
+                    }}
                     >
                       <Demo />
                     </Profiler>

@@ -33,20 +33,9 @@ export default function SignIn() {
 
   let { user, setUser, reusableComponents, setReusableComponents } = useContext(UserContext);
 
-  const oAuth = async () => {
+  const oAuth = () => {
+    // initiate the authentication
     window.open('http://localhost:3000/auth/github', '_self');
-    await fetch('http://localhost:3000/auth/login/success')
-    .then((response) => {
-      if (response.status === 200) return response.json();
-      throw new Error('authentication has been failed!');
-      })
-      .then((resObject) => {
-          setUser(resObject);
-          setReusableComponents(resObject.userReusableComponents);
-        })
-        .then((err) => {
-          console.log('error from main page', err);
-        });
     };
 
   return (
@@ -83,7 +72,7 @@ export default function SignIn() {
         </ColorButton>
 
         <Grid item>
-          <Link className="signin" to="/dashboard">
+          <Link className="signin" to="/guest" >
             {'Continue as Guest'}
           </Link>
         </Grid>

@@ -58,7 +58,7 @@ passport.use(
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
     process.nextTick(
       function (req: any, res: any) {
-      return done(null, profile);
+        return done(profile.user, profile);
     }
     );
   }
@@ -74,7 +74,15 @@ app.get('/', (req: any, res: any) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
+app.get('/*', (req: any, res: any) => {
+  return res.redirect('/');
+});
+
 app.post('/reusablecomponents/insert', dbController.insertReusableComponents, (req: any, res: any) => {
+  return res.status(200);
+})
+
+app.post('/reusablecomponents/delete', dbController.deleteReusableComponents, (req: any, res: any) => {
   return res.status(200);
 })
 

@@ -44,34 +44,6 @@ export default function Main() {
     children: []
   });
 
-  const handleDeleteReusableComponents = async (selectedComponent: any) => {
-    if (selectedComponent === null) return;
-    await fetch('/reusablecomponents/delete', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': 'true'
-      },
-      body:
-      JSON.stringify({ reusableComponents: selectedComponent, user: user }),
-    })
-    .then((response) => {
-      response.json();
-    })
-    .then((data) => {
-      // updated Array after deleting the slectedComponent
-      const newReusable = reusableComponents.slice(0,selectedComponent).concat(reusableComponents.slice(selectedComponent + 1, reusableComponents.length));
-      console.log('line 80 from main', newReusable)
-      setReusableComponents(newReusable);
-      return;
-    })
-    .catch((err) => {
-      console.log('error from main page deleteReusable', err);
-    });
-  };
-
   const { user, setUser, reusableComponents, setReusableComponents } = useContext(UserContext);
 
   const [componentTreeData, setComponentTreeData] = useState<object>({});
@@ -85,7 +57,7 @@ export default function Main() {
   const getComponentTreeData = (data: any) => {
     setComponentTreeData(data);
   };
-
+  
   const handleSetDetails = (label?: any, url?: any, state?: any, hook?: any, children?: any) => {
     function checkDuplicate(input: any) {
       let result;
@@ -134,7 +106,7 @@ export default function Main() {
     <div>
       <Navbar />
       <Box sx={{ display: 'flex' }}>
-        <ComponentLibrary drawer={drawer} reusableComponents={reusableComponents} handleDeleteReusableComponents={handleDeleteReusableComponents}/>
+        <ComponentLibrary drawer={drawer} reusableComponents={reusableComponents}/>
         <GridContainer
           containerLeft={containerLeft}
           containerRight={containerRight}

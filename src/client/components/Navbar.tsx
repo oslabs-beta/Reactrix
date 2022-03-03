@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { AppBar, Toolbar, CssBaseline, Typography, createStyles, makeStyles, Theme } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { truncateSync } from 'fs';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     link: {
       textDecoration: 'none',
-      color: 'white',
+      color: 'black',
       fontSize: '14px',
       marginLeft: theme.spacing(3)
     }
@@ -30,8 +31,26 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Navbar(): any {
+
   const classes = useStyles();
   let { user, setUser }: any = useContext(UserContext);
+  let navigate = useNavigate();
+  const logOut = async () => {
+    await fetch('/auth/logout', {
+    method: 'POST',
+    })
+    .then((data) => {
+      return data.json();
+    })
+    .then((response) => {
+      setUser(null);
+      navigate('/', { replace: true })
+    })
+    .catch((err) => {
+      console.log('error from main page', err);
+    });
+  }
+
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <CssBaseline />
@@ -40,11 +59,15 @@ export default function Navbar(): any {
           Reactrix
         </Typography>
         <div className={classes.navLinks}>
-          <Link to="/" onClick={() => setUser(null)} className={classes.link}>
-            {'Log out'}
-          </Link>
+          <button onClick={() => logOut()} className={classes.link}>
+            SignOut
+          </button>
         </div>
       </Toolbar>
     </AppBar>
   );
 }
+function redirect() {
+  throw new Error('Function not implemented.');
+}
+
